@@ -1,8 +1,5 @@
 package com.javase.execise;
 
-import static org.junit.Assert.*;
-
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
