@@ -7,9 +7,11 @@
   	<version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>javase-common</artifactId>
-  
-  <dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-  </dependency>
+  <dependencies>
+	  <dependency>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>4.12</version>
+	  </dependency>
+  </dependencies>
 </project>
