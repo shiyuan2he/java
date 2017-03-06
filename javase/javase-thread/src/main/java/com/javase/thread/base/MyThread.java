@@ -1,4 +1,4 @@
-package com.javase.thread;
+package com.javase.thread.base;
 /**
  * @description <p>继承Thread的线程</p>
  * @path javase-thread/com.javase.thread
@@ -11,11 +11,12 @@ package com.javase.thread;
  */
 public class MyThread extends Thread{
 	/**
-	 * <p></p>
+	 * @description <p></p>
 	 */
 	@Override
 	public void run() {
-		
+		for (int i=0;i<50;i++) {
+			System.out.println("Thread线程："+ Thread.currentThread().getName()+ "~" +i);
+		}
 	}
 }
-
