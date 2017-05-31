@@ -1,4 +1,4 @@
-package com.javase.util;
+package com.javase.utils;
 
 import java.util.HashMap;
 import java.util.Map;

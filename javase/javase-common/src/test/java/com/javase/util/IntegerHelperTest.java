@@ -1,5 +1,6 @@
 package com.javase.util;
 
+import com.javase.utils.IntegerHelper;
 import org.junit.Test;
 
 /**

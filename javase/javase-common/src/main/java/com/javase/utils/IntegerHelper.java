@@ -1,4 +1,4 @@
-package com.javase.util;
+package com.javase.utils;
 /**
  * @description <p>Integer帮助工具类</p>
  * @author heshiyuan @date 2017年3月9日 下午3:27:33

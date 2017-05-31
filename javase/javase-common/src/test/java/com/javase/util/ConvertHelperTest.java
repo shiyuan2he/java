@@ -2,6 +2,7 @@ package com.javase.util;
 
 import java.util.Map;
 
+import com.javase.utils.ConvertHelper;
 import org.junit.Test;
 
 import com.javase.bean.User;

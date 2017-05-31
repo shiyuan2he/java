@@ -1,22 +1,17 @@
-package com.javase.util;
+/**
+ * @path paac-core/com.codelibrary.javaee.utils/DateHelper.java	
+ * @time May 2, 2016 10:25:31 AM
+ * @githob 
+ *     http://githob.com/shiyuan2he
+ * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
+ */
+package com.javase.utils;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
-/**
- * @description <p>日期帮助类</p>
- * @author heshiyuan @date 2017年3月9日 下午6:58:44
- * @path: javase-common/com.javase.util/DateHelper.java
- * @price ￥：5元
- * @copyright 如有复制粘贴请通知本人或者捐赠，微信号：hewei1109
- * @email heshiyuan@chtwm.com
- * @callnumber 15910868535
- */
 public class DateHelper {
-	private DateHelper(){}
-	/**
+	//**
 	 * @description <p>将时间转化成指定格式的字符串时间</p>
 	 * @param now		需要格式化的时间
 	 * @param formate	格式化类型
@@ -87,5 +82,22 @@ public class DateHelper {
 			return false ;
 		}
 	}
+	/**
+	 * @description 
+	 *		<p></p>
+	 * @time 2016年10月16日 下午9:23:02
+	 * @github 
+	 * 		http://github.com/shiyuan2he
+	 * @author shiyuan2he
+	 * @email shiyuan4work@sina.com
+	 * @returnType String
+	 * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
+	 */
+	public static String dateToString(Date time){ 
+	    SimpleDateFormat formatter; 
+	    formatter = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss"); 
+	    String ctime = formatter.format(time); 
+	    return ctime; 
+	} 
 }
 

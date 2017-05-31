@@ -1,4 +1,4 @@
-package com.javase.util;
+package com.javase.bean;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.javase.util;
+package com.javase.utils;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -21,7 +21,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 public class ConvertHelper {
 	private ConvertHelper(){}
 	
-	public static Map<String,Object> mapToBean(Object... object){
+	public static Map<String,Object> beanToMap(Object... object){
 		Map<String,Object> returnMap = new HashMap<>() ;
 		try {
 			for(Object obj : object){

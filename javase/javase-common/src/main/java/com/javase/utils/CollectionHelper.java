@@ -1,4 +1,6 @@
-package com.javase.util;
+package com.javase.utils;
+
+import com.javase.bean.BeanHelper;
 
 import java.util.ArrayList;
 import java.util.HashSet;
