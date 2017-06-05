@@ -1,5 +1,4 @@
-package com.hsy.codebase.utils.javase.secure;
-
+package com.javase.secure ;
 import java.io.UnsupportedEncodingException;
 
 import sun.misc.BASE64Decoder;
@@ -17,8 +16,8 @@ import sun.misc.BASE64Encoder;
  * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
  */
 public class Base64Helper {
-	
-	
+	private final static String CHARSET = "utf-8" ;
+
 	/**
 	 * 
 	 * @description <p>base64加密/p>
@@ -38,7 +37,7 @@ public class Base64Helper {
 		byte[] b = null;
 		String s = null;
 		try {
-			b = str.getBytes("utf-8");
+			b = str.getBytes(CHARSET);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
@@ -70,7 +69,7 @@ public class Base64Helper {
 			BASE64Decoder decoder = new BASE64Decoder();
 			try {
 				b = decoder.decodeBuffer(s);
-				result = new String(b, "utf-8");
+				result = new String(b, CHARSET);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
