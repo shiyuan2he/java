@@ -8,10 +8,11 @@
 package com.javase.utils;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DateHelper {
-	//**
+	/**
 	 * @description <p>将时间转化成指定格式的字符串时间</p>
 	 * @param now		需要格式化的时间
 	 * @param formate	格式化类型

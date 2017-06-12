@@ -4,7 +4,7 @@
  * @date 2015年11月2日 下午9:43:26
  * @version 1.0 create at 2015年11月2日 下午9:43:26 by 何世远
  */
-package com.hsy.codebase.utils.javase.exception;
+package com.javase.exception;
 
 import com.hsy.codebase.utils.javase.logger.LoggerEx;
 
@@ -30,7 +30,7 @@ public class ExceptionTest {
 	public static void run(){
 		try {
 			testException01()  ;
-		} catch (MyException e) {
+		} catch (com.hsy.codebase.utils.javase.exception.MyException e) {
 			logger.error("e.getMessage()==" + e.getMessage());
 			logger.error("--------------");
 			logger.error("e.getMessage()==" + e.getMessage());
@@ -55,8 +55,8 @@ public class ExceptionTest {
 	 * @Description 模拟抛出异常的方法
 	 * @date 2015年11月4日 下午10:35:21
 	 */
-	private static void testException01() throws MyException{
-		throw new MyException("testException01 抛出的异常") ;
+	private static void testException01() throws com.hsy.codebase.utils.javase.exception.MyException {
+		throw new com.hsy.codebase.utils.javase.exception.MyException("testException01 抛出的异常") ;
 	}
 	/**
 	 * 
@@ -74,8 +74,8 @@ public class ExceptionTest {
 			//e.printStackTrace();// 默认打印到错误输出流
 			e.printStackTrace(System.out);
 			try {
-				throw new MyException("除数不能为0") ;
-			} catch (MyException e1) {
+				throw new com.hsy.codebase.utils.javase.exception.MyException("除数不能为0") ;
+			} catch (com.hsy.codebase.utils.javase.exception.MyException e1) {
 				e1.printStackTrace();
 			}
 		}

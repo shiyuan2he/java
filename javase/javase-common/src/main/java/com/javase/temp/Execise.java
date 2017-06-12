@@ -1,3 +1,4 @@
+package com.javase.temp;
 /**
  * @description <p>请在此处输入类的描述</p>
  * @path javase-common/

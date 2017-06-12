@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.array;
+package com.javase.array;
 /**
  * 
  * @description 

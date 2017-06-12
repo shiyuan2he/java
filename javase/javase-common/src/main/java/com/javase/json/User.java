@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.json;
+package com.javase.json;
 
 import java.util.Date;
 

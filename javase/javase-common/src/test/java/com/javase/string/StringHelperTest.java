@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.string;
+package com.javase.string;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;

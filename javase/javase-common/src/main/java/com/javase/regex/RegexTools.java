@@ -4,7 +4,7 @@
  * @date 2015年11月14日 下午4:05:38
  * @version 1.0 create at 2015年11月14日 下午4:05:38 by 何世远
  */
-package com.hsy.codebase.utils.javase.regex;
+package com.javase.regex;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

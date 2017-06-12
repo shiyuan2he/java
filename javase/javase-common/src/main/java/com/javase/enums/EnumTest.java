@@ -4,7 +4,7 @@
  * @date 2015年10月27日 下午9:28:57
  * @version 1.0 create at 2015年10月27日 下午9:28:57 by 何世远
  */
-package com.hsy.codebase.utils.javase.enums;
+package com.javase.enums;
 
 import com.hsy.codebase.utils.javase.logger.LoggerEx;
 

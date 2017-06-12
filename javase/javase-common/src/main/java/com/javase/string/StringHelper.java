@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.string;
+package com.javase.string;
 
 import java.util.Arrays;
 import java.util.Date;

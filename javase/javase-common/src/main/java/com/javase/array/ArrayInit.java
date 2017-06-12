@@ -4,13 +4,12 @@
  * @date 2015年10月27日 下午8:50:22
  * @version 1.0 create at 2015年10月27日 下午8:50:22 by 何世远
  */
-package com.hsy.codebase.utils.javase.array;
+package com.javase.array;
 
+import com.javase.logger.LoggerEx;
 
 import java.util.Arrays;
 import java.util.Random;
-
-import com.hsy.codebase.utils.javase.logger.LoggerEx;
 
 /**
  * @author 何世远	shiyuan4work@sina.com

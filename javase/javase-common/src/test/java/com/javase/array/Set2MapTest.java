@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.array;
+package com.ßjavase.array;
 
 import org.junit.Test;
 

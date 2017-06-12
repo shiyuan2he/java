@@ -4,7 +4,7 @@
  * @date 2015年11月14日 下午8:32:44
  * @version 1.0 create at 2015年11月14日 下午8:32:44 by 何世远
  */
-package com.hsy.codebase.utils.javase.clazz;
+package com.javase.clazz;
 
 import com.hsy.codebase.utils.javase.logger.LoggerEx;
 

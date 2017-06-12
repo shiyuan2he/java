@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.collection;
+package com.javase.collection;
 
 import java.util.*;
 /**

@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.logger;
+package com.javase.logger;
 import java.util.HashMap;
 import java.util.Map;
 

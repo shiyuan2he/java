@@ -4,7 +4,7 @@
  * @date 2015年11月2日 下午9:37:44
  * @version 1.0 create at 2015年11月2日 下午9:37:44 by 何世远
  */
-package com.hsy.codebase.utils.javase.exception;
+package com.javase.exception;
 
 
 /**
