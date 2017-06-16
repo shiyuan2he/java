@@ -1,6 +1,8 @@
-*/*/*.classpath
-*/*/*.gitignore
-*/*/*.project
-*/*/.settings/*
-*/*/target/classes/*
-*/devTools/*
+javase/.idea/libraries/*.xml
+javase/.idea/workspace.xml
+javase/*/target/*
+
+javaee/*/target/*
+*/*/target/*
+
+*/redis/*
