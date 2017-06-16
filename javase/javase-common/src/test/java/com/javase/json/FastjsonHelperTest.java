@@ -1,15 +1,10 @@
 package com.javase.json;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.alibaba.fastjson.JSON;
+import com.javase.logger.SystemLogger;
 import org.junit.Test;
 
-import com.alibaba.fastjson.JSON;
-import com.hsy.codebase.utils.javase.logger.SystemLogger;
+import java.util.*;
 
 public class FastjsonHelperTest {
 	/****************************	起始符	*******************************/

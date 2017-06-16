@@ -7,6 +7,7 @@
  */
 package com.javase.utils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,7 +15,6 @@ import java.util.Date;
 public class DateHelper {
 	/**
 	 * @description <p>将时间转化成指定格式的字符串时间</p>
-	 * @param now		需要格式化的时间
 	 * @param formate	格式化类型
 	 * @return			格式化之后的时间
 	 * @returnType String
@@ -59,8 +59,9 @@ public class DateHelper {
 		try {
 			return sdf.parse(strTime) ;
 		} catch (ParseException e) {
-			return new Date() ;
+			e.printStackTrace();
 		}
+		return null ;
 	}
 	/**
 	 * @description <p>判断日期是不是周末</p>

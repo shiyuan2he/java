@@ -1,7 +1,7 @@
 package com.javase.util.bean;
 
-import com.hsy.codebase.utils.javase.logger.SystemLogger;
 import com.javase.bean.BeanHelper;
+import com.javase.logger.SystemLogger;
 import org.junit.Test;
 
 import java.util.HashMap;

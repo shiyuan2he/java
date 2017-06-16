@@ -1,13 +1,12 @@
 package com.javase.string;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
 
 /**
  * @description <p>字符串帮助类，基于java8-92版本和commons-lang3 jar包</p>
@@ -20,7 +19,7 @@ import org.apache.log4j.Logger;
  * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
  */
 public class StringHelper extends StringUtils{
-	private static Logger _logger = Logger.getLogger(StringHelper.class) ;
+	//private static Logger _logger = Logger.getLogger(StringHelper.class) ;
 	/**
 	 * 
 	 * @description 
@@ -115,7 +114,7 @@ public class StringHelper extends StringUtils{
 	 */
 	public static String cutSpace(String str){
 		if(isNullOrEmpty(str)){
-			_logger.error("this str is null!");
+			//_logger.error("this str is null!");
 			return "" ;
 		}
 		return str.trim() ;
