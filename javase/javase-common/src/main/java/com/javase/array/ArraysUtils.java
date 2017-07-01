@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.array;
+package com.javase.array;
 
 import java.util.Arrays;
 import java.util.function.IntBinaryOperator;
@@ -15,8 +15,7 @@ public class ArraysUtils {
 	 * 
 	 * @author shiyuan2he shiyuan4work@sina.com
 	 * @github https://github.com/shiyuan2he
-	 * @see javase-base com.hsy.codebase.utils.javase.array ArraysUtils.java
-	 * @description 
+	 * @description
 	 *     <p>Arrays老方法</p>
 	 * @time 2016年4月10日 下午9:49:55
 	 * @return_type void
@@ -38,8 +37,7 @@ public class ArraysUtils {
 	 * 
 	 * @author shiyuan2he shiyuan4work@sina.com
 	 * @github https://github.com/shiyuan2he
-	 * @see javase-base com.hsy.codebase.utils.javase.array ArraysUtils.java
-	 * @description 
+	 * @description
 	 *     <p>Java8对Array新增的并行处理</p>
 	 * @time 2016年4月10日 下午9:54:28
 	 * @return_type void
@@ -73,8 +71,7 @@ public class ArraysUtils {
 	 * 
 	 * @author shiyuan2he shiyuan4work@sina.com
 	 * @github https://github.com/shiyuan2he
-	 * @see javase-base com.hsy.codebase.utils.javase.array ArraysUtils.java
-	 * @description 
+	 * @description
 	 *     <p>测试Arrays工具类</p>
 	 * @time 2016年4月9日 上午12:35:20
 	 * @return_type void

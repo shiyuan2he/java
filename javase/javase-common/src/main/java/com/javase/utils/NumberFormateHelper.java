@@ -100,6 +100,21 @@ public class NumberFormateHelper {
 		}
 		return code[0] + "." + sb.reverse().toString() ;
 	}
+	/**
+	 *
+	 * @author shiyuan2he shiyuan4work@sina.com
+	 * @github https://github.com/shiyuan2he
+	 * @description
+	 *     <p>把一个浮点数分解成整数部分和浮点部分</p>
+	 * @time 2016年4月10日 下午10:58:49
+	 * @return_type String[]
+	 * @param
+	 */
+	public static String[] divide(double num){
+		long zheng = (long) num ;
+		long xiao = Math.round((num - zheng) * 100);
+		return new String[]{String.valueOf(zheng),String.valueOf(xiao)} ;
+	}
 	public static void main(String[] args){
 		System.out.println(parseMoneyToWan(1499999));  //149.9999万
 		System.out.println(parseMoneyToWan(1500000));  //150万

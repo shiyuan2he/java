@@ -4,17 +4,11 @@
  * @date 2015年12月13日 下午2:03:27
  * @version 1.0 create at 2015年12月13日 下午2:03:27 by 何世远
  */
-package com.hsy.codebase.utils.javase.array;
+package com.javase.array;
 
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import com.hsy.codebase.utils.javase.logger.LoggerEx;
+import org.junit.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author 何世远	shiyuan4work@sina.com
@@ -22,29 +16,8 @@ import com.hsy.codebase.utils.javase.logger.LoggerEx;
  * @date 2015年12月13日 下午2:03:27
  */
 public class ArrayInitTest {
-	private static LoggerEx logger = LoggerEx.getInstance(ArrayInit.class.getName()) ;
-	
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 	ArrayInit arrayInit = new ArrayInit() ;
-	/**
-	 * @author 何世远	shiyuan4work@sina.com
-	 * @Description 单元测试类加载前调用此方法
-	 * @date 2015年12月13日 下午2:03:27
-	 */
-	@BeforeClass
-	public static void setUpBeforeClass() {
-		logger.info("单元测试类加载前调用此方法");
-	}
-
-	/**
-	 * @author 何世远	shiyuan4work@sina.com
-	 * @Description 单元测试类加载后调用此方法
-	 * @date 2015年12月13日 下午2:03:27
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() {
-		logger.info("单元测试类加载后调用此方法");
-	}
-
 	/**
 	 * @author 何世远	shiyuan4work@sina.com
 	 * @Description 单元测试方法执行前调用此方法
@@ -65,9 +38,6 @@ public class ArrayInitTest {
 		logger.info("单元测试方法执行后调用此方法");
 	}
 
-	/**
-	 * Test method for {@link com.hsy.codebase.utils.javase.array.ArrayInit#init()}.
-	 */
 	@Test
 	public void testInit() {
 		Assert.assertNotNull(arrayInit);

@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.logger;
+package com.javase.logger;
 
 /**
  * @see 系统日志输出

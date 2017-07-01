@@ -1,8 +1,8 @@
-package com.hsy.codebase.utils.javase.array;
+package com.javase.array;
 
+import com.javase.collection.Set2Map;
 import org.junit.Test;
 
-import com.hsy.codebase.utils.javase.collection.Set2Map;
 
 public class Set2MapTest {
 

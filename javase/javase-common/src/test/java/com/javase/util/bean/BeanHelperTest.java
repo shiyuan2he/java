@@ -1,11 +1,11 @@
-package com.hsy.codebase.utils.javase.bean;
+package com.javase.util.bean;
+
+import com.javase.bean.BeanHelper;
+import com.javase.logger.SystemLogger;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import org.junit.Test;
-
-import com.hsy.codebase.utils.javase.logger.SystemLogger;
 
 public class BeanHelperTest {
 	@Test

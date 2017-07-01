@@ -1,6 +1,5 @@
-package com.hsy.codebase.utils.javase.string;
+package com.javase.string;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
 
 /**
@@ -14,19 +13,19 @@ import org.junit.Test;
  * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
  */
 public class StringHelperTest {
-	private Logger  _logger = Logger.getLogger(StringHelperTest.class) ;
+	//private Logger  _logger = Logger.getLogger(StringHelperTest.class) ;
 	@Test
 	public void testIsNullOrEmpty() {
-		_logger.info("\"\":"+StringHelper.isNullOrEmpty(""));
-		_logger.info("\" \":"+StringHelper.isNullOrEmpty(" "));
-		_logger.info("null:"+StringHelper.isNullOrEmpty(null));
+		//_logger.info("\"\":"+StringHelper.isNullOrEmpty(""));
+		//_logger.info("\" \":"+StringHelper.isNullOrEmpty(" "));
+		//_logger.info("null:"+StringHelper.isNullOrEmpty(null));
 	}
 	
 	@Test
 	public void testIsNotNullOrEmpty() {
-		_logger.info("\"\":"+StringHelper.isNotNullOrEmpty(""));
-		_logger.info("\" \":"+StringHelper.isNotNullOrEmpty(" "));
-		_logger.info("null:"+StringHelper.isNotNullOrEmpty(null));
+		//_logger.info("\"\":"+StringHelper.isNotNullOrEmpty(""));
+		//_logger.info("\" \":"+StringHelper.isNotNullOrEmpty(" "));
+		//_logger.info("null:"+StringHelper.isNotNullOrEmpty(null));
 	}
 	@Test
 	public void testSplitToList(){

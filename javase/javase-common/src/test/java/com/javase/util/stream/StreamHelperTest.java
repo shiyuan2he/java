@@ -1,15 +1,6 @@
-package com.hsy.codebase.utils.javase.stream;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
+package com.javase.util.stream;
 import org.junit.Test;
-
-import com.hsy.codebase.utils.javase.logger.SystemLogger;
-
 public class StreamHelperTest {
-
 	@Test
 	public void test() {
 		/*List<Integer> numbersList = Arrays.asList(1,2,3,null,9,3,1,null,0) ;

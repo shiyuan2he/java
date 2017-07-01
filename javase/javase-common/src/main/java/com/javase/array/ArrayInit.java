@@ -4,13 +4,13 @@
  * @date 2015年10月27日 下午8:50:22
  * @version 1.0 create at 2015年10月27日 下午8:50:22 by 何世远
  */
-package com.hsy.codebase.utils.javase.array;
+package com.javase.array;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Random;
-
-import com.hsy.codebase.utils.javase.logger.LoggerEx;
 
 /**
  * @author 何世远	shiyuan4work@sina.com
@@ -18,7 +18,7 @@ import com.hsy.codebase.utils.javase.logger.LoggerEx;
  * @date 2015年10月27日 下午8:50:22
  */
 public class ArrayInit {
-	private static LoggerEx logger = LoggerEx.getInstance(ArrayInit.class.getName()) ;
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 	public void init(){
 		Integer[] a = {
 				new Integer(0),

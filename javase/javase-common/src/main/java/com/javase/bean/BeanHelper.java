@@ -6,7 +6,6 @@ import java.util.Map;
 
 /**
  * @description <p>请在此处输入类的描述</p>
- * @path javase-base/com.hsy.codebase.utils.javase.bean
  * @time 2016年7月27日 下午8:32:42
  * @github 
  *     http://github.com/shiyuan2he

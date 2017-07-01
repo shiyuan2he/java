@@ -4,12 +4,11 @@
  * @date 2015年11月14日 下午4:05:38
  * @version 1.0 create at 2015年11月14日 下午4:05:38 by 何世远
  */
-package com.hsy.codebase.utils.javase.regex;
+package com.javase.regex;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.hsy.codebase.utils.javase.logger.LoggerEx;
 
 /**
  * @author 何世远	shiyuan4work@sina.com
@@ -17,7 +16,7 @@ import com.hsy.codebase.utils.javase.logger.LoggerEx;
  * @date 2015年11月14日 下午4:05:38
  */
 public class RegexTools {
-	private static LoggerEx logger = LoggerEx.getInstance(RegexTools.class.getName()) ;
+	//private static LoggerEx logger = LoggerEx.getInstance(RegexTools.class.getName()) ;
 	/**
 	 * @author 何世远	shiyuan4work@sina.com
 	 * @Description 请输入此方法描述信息
@@ -35,7 +34,7 @@ public class RegexTools {
 			//logger.info(matcher.group());	
 			// 功能通上面注释部分
 			for (int i = 0; i <=matcher.groupCount(); i++) {
-				logger.info(matcher.group(i));
+				//logger.info(matcher.group(i));
 			}
 		}
 	}
@@ -51,20 +50,20 @@ public class RegexTools {
 				logger.info(m.group() + "；起始位置：" + m.start() + ";结束位置：" + m.end());
 			}*/
 			if(m.matches()){
-				logger.info(m.group() + "；起始位置：" + m.start() + ";结束位置：" + m.end());
+				//logger.info(m.group() + "；起始位置：" + m.start() + ";结束位置：" + m.end());
 			}
 		}
 	
 	}
 	private static class Display{
-		private static LoggerEx logger = LoggerEx.getInstance(Display.class.getName()) ;
+		//private static LoggerEx logger = LoggerEx.getInstance(Display.class.getName()) ;
 		private boolean regexPrinted = false ;
 		private String regex ;
 		Display(String regex){this.regex = regex ;}
 		void display(String message){
-			logger.info("要匹配的字符串：" + message);
+			//logger.info("要匹配的字符串：" + message);
 			if(!regexPrinted){
-				logger.info("匹配的正则表达式：" +regex);
+				//logger.info("匹配的正则表达式：" +regex);
 				regexPrinted = true ;
 			}
 		}

@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.enums;
+package com.javase.enums;
 /**
  * @description <p>系统全局枚举code代码</p>
  * @path javase-base/com.hsy.codebase.utils.javase.enums

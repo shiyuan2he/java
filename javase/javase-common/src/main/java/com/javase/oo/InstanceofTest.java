@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.oo;
+package com.javase.oo;
 
 /**
  * 

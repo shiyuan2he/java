@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.clazz;
+package com.javase.clazz;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

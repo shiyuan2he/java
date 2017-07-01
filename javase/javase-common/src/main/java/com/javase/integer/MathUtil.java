@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.integer;
+package com.javase.integer;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

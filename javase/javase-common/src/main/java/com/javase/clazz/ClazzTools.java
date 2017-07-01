@@ -4,10 +4,7 @@
  * @date 2015年11月14日 下午8:32:44
  * @version 1.0 create at 2015年11月14日 下午8:32:44 by 何世远
  */
-package com.hsy.codebase.utils.javase.clazz;
-
-import com.hsy.codebase.utils.javase.logger.LoggerEx;
-
+package com.javase.clazz;
 
 interface A{}
 interface B{}
@@ -20,7 +17,7 @@ class BB extends AA implements A,B,C{}
  * @date 2015年11月14日 下午8:32:44
  */
 public class ClazzTools {
-	private static LoggerEx logger = LoggerEx.getInstance(ClazzTools.class.getName()) ;
+	//private static LoggerEx logger = LoggerEx.getInstance(ClazzTools.class.getName()) ;
 	/**
 	 * @author 何世远	shiyuan4work@sina.com
 	 * @Description 请输入此方法描述信息
@@ -34,7 +31,7 @@ public class ClazzTools {
 			e.printStackTrace();
 		}
 		for (Class<?> c : clazz.getInterfaces()) {
-			logger.info(c);
+			//logger.info(c);
 			Class<?> superClass = c.getSuperclass() ;
 			Object object = null ;
 			try {
@@ -44,7 +41,7 @@ public class ClazzTools {
 			} catch (IllegalAccessException e) {
 				e.printStackTrace();
 			}
-			logger.info(object.getClass());
+			//logger.info(object.getClass());
 		}
 	}
 }

@@ -11,3 +11,11 @@ redis/redis-jedis/target
 */*/target
 */target
 
+javase/.idea/libraries/*.xml
+javase/.idea/workspace.xml
+javase/*/target/*
+
+javaee/*/target/*
+*/*/target/*
+
+*/redis/*

@@ -4,7 +4,7 @@
  * @date 2015年11月1日 下午7:33:36
  * @version 1.0 create at 2015年11月1日 下午7:33:36 by 何世远
  */
-package com.hsy.codebase.utils.javase.collection;
+package com.javase.collection;
 
 /**
  * @author 何世远	shiyuan4work@sina.com

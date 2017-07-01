@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.secure;
+package com.javase.secure;
 
 import java.security.MessageDigest;
 

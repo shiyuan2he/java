@@ -1,4 +1,4 @@
-package com.hsy.codebase.utils.javase.temp;
+package com.javase.temp;
 /**
  * 
  * @description <p>
