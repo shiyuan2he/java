@@ -4,3 +4,10 @@
 */*/.settings/*
 */*/target/classes/*
 */devTools/*
+.idea
+*/*/*.iml
+*/*.iml
+redis/redis-jedis/target
+*/*/target
+*/target
+
