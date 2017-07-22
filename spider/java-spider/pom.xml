@@ -5,7 +5,7 @@
   <artifactId>java-spider</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>java-spider Maven Webapp</name>
+  <name>java-spider</name>
   <url>http://maven.apache.org</url>
   
   <properties>

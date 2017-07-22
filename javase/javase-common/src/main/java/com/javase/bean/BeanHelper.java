@@ -1,6 +1,11 @@
 package com.javase.bean;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,7 +74,6 @@ public class BeanHelper{
 	 */
 	public static <T> Map<String, String> compare(T obj1, T Obj2) throws Exception {
         Map<String, String> result = new HashMap<String, String>();
-
         Field[] fs = obj1.getClass().getDeclaredFields();
         for (Field f : fs) {
             f.setAccessible(true);
@@ -132,6 +136,48 @@ public class BeanHelper{
 			returnObj = getMethod.invoke(obj) ;
 		}
 		return returnObj ;
+	}
+	/**
+	 *
+	 * @description <p></p>
+	 * @returnType Map<String,Object>
+	 * 方法名:
+	 * 类名:BeanHelper
+	 * @author heshiyuan
+	 * @email shiyuan4work@sina.com
+	 * @date 2017/7/6 13:27
+	 * @price ￥:5毛
+	 * @copyright	此方法版权归本人所有，复制或者剪切请通知本人或者捐赠 通知方式：shiyuan4work@sina.com
+	 * @callnumber 15910868535
+	 */
+	public static Map<String,Object> mapToBean(Object obj){
+		if(obj == null) return null;
+		HashMap map = new HashMap();
+		try {
+			BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
+			PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+			PropertyDescriptor[] var4 = propertyDescriptors;
+			int var5 = propertyDescriptors.length;
+			for(int var6 = 0; var6 < var5; ++var6) {
+				PropertyDescriptor property = var4[var6];
+				String key = property.getName();
+				if(!key.equals("class")) {
+					Method getter = property.getReadMethod();
+					Object value = getter.invoke(obj, new Object[0]);
+					String valueStr = null;
+					if(value != null) {
+						valueStr = value.toString();
+					} else {
+						valueStr = "";
+					}
+
+					map.put(key, valueStr);
+				}
+			}
+			return map;
+		} catch (Exception var12) {
+			throw new RuntimeException(var12);
+		}
 	}
 }
 

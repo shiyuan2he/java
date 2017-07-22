@@ -5,6 +5,9 @@
 */*/target/classes/*
 */devTools/*
 .idea
+.idea/*
+.idea/*.xml
+.idea/*/*.xml
 */*/*.iml
 */*.iml
 redis/redis-jedis/target
