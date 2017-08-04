@@ -5,6 +5,7 @@
 */*/target/classes/*
 */devTools/*
 .idea
+.idea/*
 */*/*.iml
 */*.iml
 redis/redis-jedis/target
@@ -19,3 +20,6 @@ javaee/*/target/*
 */*/target/*
 
 */redis/*
+*/.idea
+*/*/*.iml
+
