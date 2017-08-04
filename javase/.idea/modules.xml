@@ -3,10 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/javase-common/javase-common.iml" filepath="$PROJECT_DIR$/javase-common/javase-common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/javase-common/javase-common.iml" filepath="$PROJECT_DIR$/javase-common/javase-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/javase-parent/javase-parent.iml" filepath="$PROJECT_DIR$/javase-parent/javase-parent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/javase-parent/javase-parent.iml" filepath="$PROJECT_DIR$/javase-parent/javase-parent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/javase-thread/javase-thread.iml" filepath="$PROJECT_DIR$/javase-thread/javase-thread.iml" />
       <module fileurl="file://$PROJECT_DIR$/javase-thread/javase-thread.iml" filepath="$PROJECT_DIR$/javase-thread/javase-thread.iml" />
     </modules>
   </component>
