@@ -12,6 +12,7 @@
         <collections.version>3.2.2</collections.version>
         <slf4j.version>1.7.25</slf4j.version>
         <logback.version>1.2.3</logback.version>
+        <protostuff.version>1.0.8</protostuff.version>
     </properties>
 
     <dependencies>
@@ -57,6 +58,17 @@
             <version>${logback.version}</version>
         </dependency>
         <!-- logback + slf4j end -->
+        <!--序列化，反序列化工具包-->
+        <dependency>
+            <groupId>com.dyuproject.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>${protostuff.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dyuproject.protostuff</groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <version>${protostuff.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
