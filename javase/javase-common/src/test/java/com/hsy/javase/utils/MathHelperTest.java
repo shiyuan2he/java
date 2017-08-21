@@ -1,7 +1,5 @@
-package com.hsy.javase.util;
+package com.hsy.javase.utils;
 
-import com.hsy.javase.utils.DateHelper;
-import com.hsy.javase.utils.MathHelper;
 import org.junit.Test;
 
 import java.util.Date;

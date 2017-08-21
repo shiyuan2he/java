@@ -1,8 +1,7 @@
-package com.hsy.javase.util;
+package com.hsy.javase.utils;
 
 import java.util.Map;
 
-import com.hsy.javase.utils.ConvertHelper;
 import org.junit.Test;
 
 import com.hsy.javase.bean.User;

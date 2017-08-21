@@ -1,15 +1,16 @@
 package com.hsy.javase.utils;
 
-import com.hsy.javase.bean.BeanHelper;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
- * @description <p>类文件描述</p>
+ * @description <p>集合工具类</p>
  * @author heshiyuan @date 2017年3月16日 下午7:32:44
  * @path: javase-common/com.javase.util/CollectionHelper.java
  * @price ￥：5元
@@ -18,8 +19,9 @@ import java.util.Set;
  * @callnumber 15910868535
  */
 public class CollectionHelper {
-	/**
-	 * @description <p>利用双重for循环进行list去重</p>
+	private final static Logger _logger = LoggerFactory.getLogger(CollectionHelper.class) ;
+    /**
+     * @description <p>处理的集合元素越多，去重速度更快，10万元素100毫秒，10个元素200毫秒</p>
 	 * @param list
 	 * @return
 	 * @returnType List<Object>
@@ -31,21 +33,33 @@ public class CollectionHelper {
 	 * @email heshiyuan@chtwm.com
 	 * @callnumber 15910868535
 	 */
-	public static void removeDuplicateByFor(List<Object> list) {
-		for (int i = 0; i < list.size() - 1; i++) {
-			for (int j = list.size() - 1; j > i; j--) {
-				if (BeanHelper.equals(list.get(j), list.get(i))) {
-					list.remove(j);
-				}
-			}
-		}
-		System.out.println(list);
-	}
+	public static void duplicateRemoval(List<Integer> list) {
+        _logger.info("CollectionHelper.duplicateRemoval工具类去重开始！");
+        long startTime = System.currentTimeMillis() ;
+        try{
+            if(list == null) {
+                _logger.info("将要去重的list集合是空，请检查参数再行调用！");
+                long endTime = System.currentTimeMillis() ;
+                _logger.info("调用去重工具类耗时{}毫秒！",(endTime - startTime));
+                return ;
+            }
+            _logger.info("去重之前的集合是{}",list.toString());
+            list = list.parallelStream().distinct().collect(Collectors.toList()) ;
+            _logger.info("去重之后的集合是{}",list.toString());
+        }catch(Exception e){
+            _logger.error("调用去重工具类CollectionHelper.duplicateRemoval遇到异常，异常信息:{}",e.getMessage());
+            throw e ;
+        }finally{
+            long endTime = System.currentTimeMillis() ;
+            _logger.info("调用去重工具类耗时{}毫秒",(endTime - startTime));
+            _logger.info("CollectionHelper.duplicateRemoval工具类去重结束！");
+        }
+    }
 	/**
 	 * @description <p>利用set集合进行list去重</p>
 	 * @param list
 	 * @returnType void
-	 * @author heshiyuan @date 2017年3月16日 下午7:40:02
+	 * @author heshiyuan
 	 * @path javase-common/com.javase.util/CollectionHelper.java
 	 * @date 2017年3月16日 下午7:40:02
 	 * @price ￥：三毛三
@@ -54,7 +68,7 @@ public class CollectionHelper {
 	 * @callnumber 15910868535
 	 */
 	public static void removeDuplicateBySet(List<Object> list)   { 
-	    Set<Object> h = new HashSet<Object>(list); 
+	    Set<Object> h = new HashSet<>(list);
 	    list.clear(); 
 	    list.addAll(h); 
 	    System.out.println(list);
@@ -63,7 +77,7 @@ public class CollectionHelper {
 	 * @description <p>方法描述</p>
 	 * @param list
 	 * @returnType void
-	 * @author heshiyuan @date 2017年3月16日 下午7:42:02
+	 * @author heshiyuan
 	 * @path javase-common/com.javase.util/CollectionHelper.java
 	 * @date 2017年3月16日 下午7:42:02
 	 * @price ￥：三毛三

@@ -1,9 +1,8 @@
-package com.hsy.javase.util;
+package com.hsy.javase.utils;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.hsy.javase.utils.RequestHelper;
 import org.junit.Test;
 
 /**

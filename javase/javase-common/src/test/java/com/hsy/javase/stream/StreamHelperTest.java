@@ -1,4 +1,4 @@
-package com.hsy.javase.util.stream;
+package com.hsy.javase.stream;
 import org.junit.Test;
 public class StreamHelperTest {
 	@Test

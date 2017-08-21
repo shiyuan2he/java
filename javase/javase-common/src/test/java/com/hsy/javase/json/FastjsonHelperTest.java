@@ -8,7 +8,7 @@ import java.util.*;
 
 public class FastjsonHelperTest {
 	/****************************	起始符	*******************************/
-	@Test
+	/*@Test
 	public void testJavaBeanToJson() {
 		User user = new User("541013100112","hehe","UI001","password",Calendar.getInstance().getTime(),"127.0.0.1") ;
 		SystemLogger.log(JSON.toJSONString(user));
@@ -41,7 +41,7 @@ public class FastjsonHelperTest {
 		
 		SystemLogger.log(JSON.toJSONString(map));
 	}
-	/****************************	分界符	*******************************/
+	*//****************************	分界符	*******************************//*
 	@Test
 	public void testJsonToJavaBean() {
 		try{
@@ -106,7 +106,7 @@ public class FastjsonHelperTest {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-	}
+	}*/
 	/****************************	结束符	*******************************/
 	
 }

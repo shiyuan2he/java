@@ -12,6 +12,14 @@ import java.util.Scanner;
  * @callnumber 15910868535
  */
 public class DateTypeDevide {
+    /**
+     * @description <p></p>
+     * @author heshiyuan
+     * @date 15/08/2017 5:28 PM
+     * @email shiyuan4work@sina.com
+     * @github https://github.com/shiyuan2he.git
+     * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
+     */
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
         int t=sc.nextInt();
