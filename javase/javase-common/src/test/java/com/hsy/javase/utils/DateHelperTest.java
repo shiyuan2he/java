@@ -17,8 +17,8 @@ public class DateHelperTest {
 
 	@Test
 	public void test() {
-		System.out.println(DateHelper.getStrFromDateOfFormate(new Date(), "yyyy-MM-dd"));
-		System.out.println(DateHelper.getDateFromStrOfFormate("2017-03-09 22:34:30", "yyyy-MM-dd")) ;
+		//System.out.println(DateHelper.getStrFromDateOfFormate(new Date(), "yyyy-MM-dd"));
+		System.out.println(DateHelper.getDateFromStrOfFormate("2017-08-26", "yyyy-MM-dd")) ;
 	}
 }
 
