@@ -44,7 +44,7 @@ public class MathHelper {
         for(int i=0;i<length;i++){
             str.append(random.nextInt(10));
         }
-        _logger.error("生成的随机数：{}",str.toString()) ;
+        _logger.info("生成的随机数：{}",str.toString()) ;
         return Integer.parseInt(str.toString());
     }
     /**
@@ -67,7 +67,7 @@ public class MathHelper {
         for(int i=0;i<length;i++){
             str.append(random.nextInt(10));
         }
-        _logger.error("生成的随机数：{}",str.toString()) ;
+        _logger.info("生成的随机数：{}",str.toString()) ;
         return Long.parseLong(str.toString());
     }
     /**

@@ -1,6 +1,11 @@
 package com.hsy.javase.string;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @description <p>字符串帮助类的单元测试类</p>
@@ -13,7 +18,7 @@ import org.junit.Test;
  * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
  */
 public class StringHelperTest {
-	//private Logger  _logger = Logger.getLogger(StringHelperTest.class) ;
+	private Logger _logger = LoggerFactory.getLogger(StringHelperTest.class) ;
 	@Test
 	public void testIsNullOrEmpty() {
 		//_logger.info("\"\":"+StringHelper.isNullOrEmpty(""));
@@ -48,5 +53,17 @@ public class StringHelperTest {
 		System.out.println(StringHelper.chineseCompareTo("是","否"));
 		System.out.println(StringHelper.chineseCompareTo("否","是"));
 	}
+	@Test
+	public void testMap(){
+	    Map<String,Object> param = new HashMap<>() ;
+        //_logger.info("1:{}",param.get("refId").toString());
+        param.put("refId","");
+        //_logger.info("2:{}",param.get("refId").toString());
+        param.put("refId",null);
+        //_logger.info("3:{}",param.get("refId").toString());
+        if(param.containsKey("refId")&&null!=param.get("refId")){
+            _logger.info("4:{}",param.get("refId").toString());
+        }
+    }
 }
 
