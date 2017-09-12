@@ -23,6 +23,8 @@ import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +44,7 @@ import java.util.Map;
  * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
  */
 public class HttpClientUtils {
+    private static final Logger _logger = LoggerFactory.getLogger(HttpClientUtils.class) ;
     // utf-8字符编码
     public static final String CHARSET_UTF_8 = "utf-8";
     // HTTP内容类型。
@@ -56,7 +59,7 @@ public class HttpClientUtils {
     private static RequestConfig requestConfig;
     static {
         try {
-            System.out.println("初始化HttpClientTest~~~开始");
+            _logger.info("初始化HttpClientTest~~~开始");
             SSLContextBuilder builder = new SSLContextBuilder();
             SSLConnectionSocketFactory sslsf = null;
             try {
@@ -88,7 +91,7 @@ public class HttpClientUtils {
                     .setSocketTimeout(socketTimeout)
                     .setConnectTimeout(connectTimeout)
                     .build();
-            System.out.println("初始化HttpClientTest~~~结束");
+            _logger.info("初始化HttpClientTest~~~结束");
         } catch (KeyManagementException e) {
             e.printStackTrace();
         }
