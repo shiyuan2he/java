@@ -10,12 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>java-util</artifactId>
+    <properties>
 
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.hsy.java</groupId>
             <artifactId>java-base</artifactId>
             <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
         </dependency>
     </dependencies>
 

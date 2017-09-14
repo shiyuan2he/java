@@ -1,6 +1,10 @@
 package com.hsy.java.util.mybatis;
+import com.hsy.java.base.secure.AESHelper;
 import com.hsy.java.base.string.StringHelper;
+import com.hsy.java.base.utils.JdbcUtil;
+import com.hsy.java.base.utils.VelocityUtil;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.velocity.VelocityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.File;
@@ -73,7 +77,7 @@ public class MybatisGeneratorUtil {
 
         _logger.info("========== 开始生成generatorConfig.xml文件 ==========");
         _logger.info("generatorConfig.xml存放路径："+generatorConfig_xml);
-        //generateMybatisConfigXml(database,table_prefix,jdbc_driver,jdbc_url,jdbc_username,jdbc_password,package_name,last_insert_id_tables) ;
+        generateMybatisConfigXml(database,table_prefix,jdbc_driver,jdbc_url,jdbc_username,jdbc_password,package_name,last_insert_id_tables) ;
         _logger.info("========== 结束生成generatorConfig.xml文件 ==========");
 
         _logger.info("========== 开始运行MybatisGenerator，生成mapper接口==========");
@@ -89,7 +93,7 @@ public class MybatisGeneratorUtil {
         System.out.println("========== 结束生成Controller ==========");*/
     }
 
-    private static void generateServiceInterface(String module, String package_name) throws Exception {/*
+    private static void generateServiceInterface(String module, String package_name) throws Exception {
         String ctime = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
         String servicePath = basePath + module + "/" + module + "-rpc-api" +
                             "/src/main/java/" + package_name.replaceAll("\\.", "/") +
@@ -122,24 +126,24 @@ public class MybatisGeneratorUtil {
                 VelocityContext context = new VelocityContext();
                 context.put("package_name", package_name);
                 context.put("model", model);
-                context.put("mapper", StringUtil.toLowerCaseFirstOne(model));
+                context.put("mapper", StringHelper.toLowerCaseFirstOne(model));
                 context.put("ctime", ctime);
                 VelocityUtil.generate(serviceImpl_vm, serviceImpl, context);
                 _logger.info(serviceImpl);
             }
-        }*/
+        }
     }
 
     private static void generateResource(String vm,String filePath, String package_name, String model, String ctime) throws Exception {
-        /*VelocityContext context = new VelocityContext();
+        VelocityContext context = new VelocityContext();
         context.put("package_name", package_name);
         context.put("model", model);
         context.put("ctime", ctime);
         VelocityUtil.generate(vm, filePath, context);
-        _logger.info(filePath);*/
+        _logger.info(filePath);
     }
 
-    /*private static void generateModelAndMapperAndDaoInterface() throws IOException, XMLParserException, InvalidConfigurationException, SQLException, InterruptedException {
+    private static void generateModelAndMapperAndDaoInterface() throws IOException, XMLParserException, InvalidConfigurationException, SQLException, InterruptedException {
         List<String> warnings = new ArrayList<>();
         File configFile = new File(generatorConfig_xml);
         ConfigurationParser cp = new ConfigurationParser(warnings);
@@ -150,7 +154,7 @@ public class MybatisGeneratorUtil {
         for (String warning : warnings) {
             _logger.info(warning);
         }
-    }*/
+    }
 
     private static void initParam(String module) {
         // paac-urms/paac-urms-dao
@@ -181,7 +185,7 @@ public class MybatisGeneratorUtil {
         _logger.info("在"+generatorConfig_xml+"生成generatorConfig.xml文件");
     }
 
-    /*private static void generateMybatisConfigXml(String database, String table_prefix, String jdbc_driver,
+    private static void generateMybatisConfigXml(String database, String table_prefix, String jdbc_driver,
                                                  String jdbc_url, String jdbc_username, String jdbc_password,
                                                  String package_name,Map<String, String> last_insert_id_tables) {
         try {
@@ -197,7 +201,7 @@ public class MybatisGeneratorUtil {
             context.put("generator_javaModelGenerator_targetPackage", package_name + ".base.model");
             context.put("generator_sqlMapperGenerator_targetPackage", package_name + ".dao.mapper");
             context.put("generator_javaClientGenerator_targetPackage", package_name + ".dao");
-            context.put("generator_jdbc_password", AESUtil.AESDecode(jdbc_password));
+            context.put("generator_jdbc_password", AESHelper.AESDecode(jdbc_password));
             context.put("last_insert_id_tables", last_insert_id_tables);
             VelocityUtil.generate(generatorConfig_vm, generatorConfig_xml, context);
             // 删除旧代码
@@ -227,7 +231,7 @@ public class MybatisGeneratorUtil {
             tables.add(table);
         }
         jdbcUtil.release();
-    }*/
+    }
 
     // 递归删除非空文件夹
     public static void deleteDir(File dir) {

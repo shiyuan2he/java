@@ -1,0 +1,16 @@
+package ${package_name}.rpc.api;
+
+import com.hsy.paac.base.common.BaseService;
+import ${package_name}.base.model.${model};
+import ${package_name}.base.model.${model}Example;
+/**
+ * @description <p></p>
+ * @author heshiyuan
+ * @date ${ctime}
+ * @email shiyuan4work@sina.com
+ * @github https://github.com/shiyuan2he.git
+ * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
+ */
+public interface ${model}Service extends BaseService<${model}, ${model}Example> {
+
+}

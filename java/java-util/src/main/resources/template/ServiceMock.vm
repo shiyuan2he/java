@@ -1,0 +1,18 @@
+package ${package_name}.rpc.api;
+
+import com.hsy.paac.base.common.BaseServiceMock;
+import ${package_name}.dao.${model}Mapper;
+import ${package_name}.base.model.${model};
+import ${package_name}.base.model.${model}Example;
+
+/**
+ * @description <p>降级实现${model}Service接口</p>
+ * @author heshiyuan
+ * @date ${ctime}
+ * @email shiyuan4work@sina.com
+ * @github https://github.com/shiyuan2he.git
+ * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
+ */
+public class ${model}ServiceMock extends BaseServiceMock<${model}Mapper, ${model}, ${model}Example> implements ${model}Service {
+
+}
