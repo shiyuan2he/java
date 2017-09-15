@@ -129,7 +129,7 @@ public class AESHelper {
 
     public static void main(String[] args) {
         String[] keys = {
-                "paac@mariadb"
+                "root@mariadb"
         };
         System.out.println("key | AESEncode | AESDecode");
         for (String key : keys) {
