@@ -1,10 +1,13 @@
 package com.hsy.java.base.string;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,7 +22,7 @@ import java.util.regex.Pattern;
  * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
  */
 public class StringHelper extends StringUtils{
-	//private static Logger _logger = Logger.getLogger(StringHelper.class) ;
+	private static Logger _logger = LoggerFactory.getLogger(StringHelper.class) ;
 	/**
 	 * 
 	 * @description 
@@ -114,7 +117,7 @@ public class StringHelper extends StringUtils{
 	 */
 	public static String cutSpace(String str){
 		if(isNullOrEmpty(str)){
-			//_logger.error("this str is null!");
+			_logger.error("this str is null!");
 			return "" ;
 		}
 		return str.trim() ;
@@ -478,6 +481,29 @@ public class StringHelper extends StringUtils{
         } catch (Exception e) {
             return defaultValue;
         }
+    }
+    /**
+     *
+     * @description <p>根据传入的位数生成相应位数的随机数</p>
+     * @returnType 生成的随机数
+     * 方法名:
+     * 类名:MathUtils
+     * @author heshiyuan
+     * @email shiyuan4work@sina.com
+     * @date 2017/7/25 8:53
+     * @price ￥:5毛
+     * @copyright	此方法版权归本人所有，复制或者剪切请通知本人或者捐赠 通知方式：shiyuan4work@sina.com
+     * @callnumber 15910868535
+     */
+    public static String generateRandomOfStringByLength(int length){
+        StringBuilder str=new StringBuilder();//定义变长字符串
+        Random random=new Random();
+        //随机生成数字，并添加到字符串
+        for(int i=0;i<length;i++){
+            str.append(random.nextInt(10));
+        }
+        _logger.info("生成的随机数：{}",str.toString()) ;
+        return str.toString();
     }
 }
 

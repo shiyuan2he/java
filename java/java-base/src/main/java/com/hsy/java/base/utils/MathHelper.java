@@ -35,7 +35,7 @@ public class MathHelper {
      */
     public static int generateRandomByLength(int length){
         if(length > 9) {
-            _logger.error("将要生成的随机数值大于int精度，请使用返回值为long的generateRandomByLength方法") ;
+            _logger.info("将要生成的随机数值大于int精度，请使用返回值为long的generateRandomByLength方法") ;
             return 0;
         }
         StringBuilder str=new StringBuilder();//定义变长字符串
@@ -44,7 +44,7 @@ public class MathHelper {
         for(int i=0;i<length;i++){
             str.append(random.nextInt(10));
         }
-        _logger.error("生成的随机数：{}",str.toString()) ;
+        _logger.info("生成的随机数：{}",str.toString()) ;
         return Integer.parseInt(str.toString());
     }
     /**
@@ -67,7 +67,8 @@ public class MathHelper {
         for(int i=0;i<length;i++){
             str.append(random.nextInt(10));
         }
-        _logger.error("生成的随机数：{}",str.toString()) ;
+        _logger.info("生成的随机数：{}",str.toString()) ;
+        _logger.info("生成的随机数：{},{}",Long.MAX_VALUE,Math.pow(2,63)-1) ;
         return Long.parseLong(str.toString());
     }
     /**

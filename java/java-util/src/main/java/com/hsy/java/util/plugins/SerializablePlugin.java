@@ -1,4 +1,4 @@
-package com.hsy.java.util.plugin;
+package com.hsy.java.util.plugins;
 
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
