@@ -4,10 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -504,6 +501,29 @@ public class StringHelper extends StringUtils{
         }
         _logger.info("生成的随机数：{}",str.toString()) ;
         return str.toString();
+    }
+    /**
+     * @description <p>4位数字或者大写字母验证码,除"0","1"以外.</p>
+     * @param
+     * @return 返回随机码
+     * @author heshiyuan
+     * @date 19/09/2017 2:12 PM
+     * @email shiyuan4work@sina.com
+     * @github https://github.com/shiyuan2he.git
+     * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
+     */
+    public static String generateCertificationCode(){
+        String[] beforeShuffle = new String[] { "2", "3", "4", "5", "6", "7",
+                "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",
+                "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "V",
+                "W", "X", "Y", "Z" };
+        List<String> list = Arrays.asList(beforeShuffle);
+        Collections.shuffle(list);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 4; i++) {
+            sb.append(list.get(i));
+        }
+        return sb.toString();
     }
 }
 
