@@ -1,4 +1,4 @@
-package com.hsy.java.base.utils;
+package com.hsy.java.util.temp;
 
 import org.apache.commons.io.output.FileWriterWithEncoding;
 import org.apache.commons.lang3.StringUtils;

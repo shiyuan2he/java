@@ -71,7 +71,6 @@ public class CollectionHelper {
 	    Set<Object> h = new HashSet<>(list);
 	    list.clear(); 
 	    list.addAll(h); 
-	    System.out.println(list);
 	}
 	/**
 	 * @description <p>方法描述</p>

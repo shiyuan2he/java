@@ -1,4 +1,4 @@
-package com.hsy.java.base.secure;
+package com.hsy.java.util.secure;
 
 import java.security.MessageDigest;
 

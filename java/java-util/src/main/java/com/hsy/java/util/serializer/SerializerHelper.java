@@ -1,4 +1,4 @@
-package com.hsy.java.base.utils;
+package com.hsy.java.util.serializer;
 
 import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;

@@ -1,8 +1,9 @@
-package com.hsy.java.base.secure;
-import java.io.UnsupportedEncodingException;
+package com.hsy.java.util.secure;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * 

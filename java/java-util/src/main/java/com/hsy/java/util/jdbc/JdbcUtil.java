@@ -1,4 +1,4 @@
-package com.hsy.java.base.utils;
+package com.hsy.java.util.jdbc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

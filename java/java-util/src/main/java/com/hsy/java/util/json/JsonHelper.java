@@ -1,6 +1,5 @@
-package com.hsy.java.base.json;
+package com.hsy.java.util.json;
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 
 /**
  * @author heshiyuan

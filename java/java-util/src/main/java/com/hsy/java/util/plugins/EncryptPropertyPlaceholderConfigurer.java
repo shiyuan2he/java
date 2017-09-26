@@ -1,6 +1,6 @@
 package com.hsy.java.util.plugins;
 
-import com.hsy.java.base.secure.AESHelper;
+import com.hsy.java.util.secure.AESHelper;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
 /**

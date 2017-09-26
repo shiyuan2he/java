@@ -1,4 +1,4 @@
-package com.hsy.java.base.secure;
+package com.hsy.java.util.secure;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;

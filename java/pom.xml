@@ -34,6 +34,9 @@
         <version.pagehelper>5.1.1</version.pagehelper>
         <version.fastjson>1.2.7</version.fastjson>
         <version.rabbitmq>4.2.1</version.rabbitmq>
+        <version.jedis>2.9.0</version.jedis>
+        <version.spring.data.redis>1.8.7.RELEASE</version.spring.data.redis>
+        <version.aspectj>1.8.10</version.aspectj>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -139,6 +142,22 @@
                 <artifactId>amqp-client</artifactId>
                 <version>${version.rabbitmq}</version>
             </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${version.jedis}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${version.spring.data.redis}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${version.aspectj}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
