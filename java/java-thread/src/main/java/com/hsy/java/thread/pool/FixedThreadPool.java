@@ -16,7 +16,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  *      那么一个新线程将代替它执行后续的任务（如果需要）。在某个线程被显式地关闭之前，
  *      池中的线程将一直存在。
  *      </p>
- * @path framework/com.hsy.thread.pool
  * @date 23/08/2017 5:01 PM
  * @github http://github.com/shiyuan2he
  * @email shiyuan4work@sina.com
@@ -27,11 +26,20 @@ public class FixedThreadPool {
 
     private final ExecutorService fixedThreadPool;
 
+    public FixedThreadPool() {
+        this.fixedThreadPool = Executors.newFixedThreadPool(5,new ThreadFactory() {
+            AtomicInteger atomic = new AtomicInteger();
+            public Thread newThread(Runnable runnable) {
+                return new Thread(runnable, "fixedThreadPool[5]-" + this.atomic.getAndIncrement());
+            }
+        });
+    }
+
     public FixedThreadPool(int threadPoolNum) {
         this.fixedThreadPool = Executors.newFixedThreadPool(threadPoolNum,new ThreadFactory() {
             AtomicInteger atomic = new AtomicInteger();
             public Thread newThread(Runnable runnable) {
-                return new Thread(runnable, "fixedThreadPool-" + this.atomic.getAndIncrement());
+                return new Thread(runnable, "fixedThreadPool["+threadPoolNum+"]-" + this.atomic.getAndIncrement());
             }
         });
     }

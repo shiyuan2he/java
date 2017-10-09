@@ -37,9 +37,15 @@
         <version.jedis>2.9.0</version.jedis>
         <version.spring.data.redis>1.8.7.RELEASE</version.spring.data.redis>
         <version.aspectj>1.8.10</version.aspectj>
+        <version.hsy.java>1.0</version.hsy.java>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.hsy.java</groupId>
+                <artifactId>java-thread</artifactId>
+                <version>${version.hsy.java}</version>
+            </dependency>
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>

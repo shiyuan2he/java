@@ -25,7 +25,6 @@ public class ArraysHelper {
 	private void arrayParallel(){
 		int[] score = new int[]{30,90,100,40,60,50,70,10,20,80} ;
 		Arrays.parallelSort(score);
-		System.out.println(score.toString());
 		int[] score2 = new int[]{30,90,100,40,60,50,70,10,20,80} ;
 		Arrays.parallelPrefix(score2, new IntBinaryOperator() {
 			/**
@@ -44,7 +43,6 @@ public class ArraysHelper {
 				return operand + 6;
 			}
 		});
-		System.out.println(score2.toString());
 	}
 	/**
 	 * 
