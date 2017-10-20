@@ -1,5 +1,8 @@
 package com.hsy.java.base.array;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Arrays;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntUnaryOperator;
@@ -11,9 +14,9 @@ import java.util.function.IntUnaryOperator;
  * @time 2016年4月9日 上午12:25:24
  */
 public class ArraysHelper {
+    private Logger _logger = LoggerFactory.getLogger(this.getClass()) ;
 
 	/**
-	 * 
 	 * @author shiyuan2he shiyuan4work@sina.com
 	 * @github https://github.com/shiyuan2he
 	 * @description
@@ -44,6 +47,9 @@ public class ArraysHelper {
 			}
 		});
 	}
+	public void arrayCopy(){
+	    _logger.info(Arrays.copyOf(new int[]{1,2,3,4,2,3,},3).toString());
+    }
 	/**
 	 * 
 	 * @author shiyuan2he shiyuan4work@sina.com
@@ -55,6 +61,6 @@ public class ArraysHelper {
 	 * @param
 	 */
 	public static void main(String[] args) {
-		new ArraysHelper().arrayParallel();
+		new ArraysHelper().arrayCopy();
 	}
 }

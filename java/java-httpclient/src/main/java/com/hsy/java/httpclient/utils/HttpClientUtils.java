@@ -142,10 +142,10 @@ public class HttpClientUtils {
         try {
             // 创建默认的httpClient实例.
             httpClient = getHttpClient();
-            // 配置请求信息
-            httpGet.setConfig(requestConfig);
             // 执行请求
             if(null!=httpGet){
+                // 配置请求信息
+                httpGet.setConfig(requestConfig);
                 response = httpClient.execute(httpGet);
             }else{
                 response = httpClient.execute(httpPost);

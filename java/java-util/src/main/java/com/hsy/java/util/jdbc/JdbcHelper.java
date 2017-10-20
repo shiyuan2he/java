@@ -19,17 +19,17 @@ import java.util.Map;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class JdbcUtil {
-    private static Logger _logger = LoggerFactory.getLogger(JdbcUtil.class.getName()) ;
+public class JdbcHelper {
+    private static Logger _logger = LoggerFactory.getLogger(JdbcHelper.class.getName()) ;
     // 定义数据库的链接
-    private Connection conn;
+    private static Connection conn;
     // 定义sql语句的执行对象
-    private PreparedStatement pstmt;
+    private static PreparedStatement pstmt;
     // 定义查询返回的结果集合
-    private ResultSet rs;
+    private static ResultSet rs;
 
     // 初始化
-    public JdbcUtil(String driver, String url, String username, String password) {
+    public JdbcHelper(String driver, String url, String username, String password) {
         try {
             Class.forName(driver);
             conn = DriverManager.getConnection(url, username, password);
@@ -39,9 +39,38 @@ public class JdbcUtil {
             e.printStackTrace();
         }
     }
+    /**
+     * @description <p>通过将JDBC的连接保存在ThreadLocal中，每个线程都会拥有属于自己的连接</p>
+     * @author heshiyuan
+     * @date 10/10/2017 5:07 PM
+     */
+    private static ThreadLocal<Connection> connectionHolder = new ThreadLocal<Connection>(){
+        public Connection initialValue(){
+        try {
+            return DriverManager.getConnection("") ;
+        } catch (SQLException e) {
+            _logger.error("获取数据库连接异常，异常信息：{}",e.getMessage());
+            e.printStackTrace();
+        }
+        return null ;
+        }
+    } ;
+    /**
+     * @description <p>获取数据库连接</p>
+     * @param
+     * @return 数据库连接对象
+     * @author heshiyuan
+     * @date 10/10/2017 5:07 PM
+     * @email shiyuan4work@sina.com
+     * @github https://github.com/shiyuan2he.git
+     * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
+     */
+    public static Connection getConnection(){
+        return connectionHolder.get() ;
+    }
 
     // 更新数据
-    public boolean updateByParams(String sql, List params) throws SQLException {
+    public static boolean updateByParams(String sql, List params) throws SQLException {
         // 影响行数
         int result = -1;
         pstmt = conn.prepareStatement(sql);
@@ -57,8 +86,8 @@ public class JdbcUtil {
     }
 
     // 查询多条记录
-    public List<Map> selectByParams(String sql, List params) throws SQLException {
-        List<Map> list = new ArrayList<>();
+    public static List<Map<String,Object>> selectByParams(String sql, List<Map<String,Object>> params) throws SQLException {
+        List<Map<String,Object>> list = new ArrayList<>();
         int index = 1;
         pstmt = conn.prepareStatement(sql);
         if (null != params && !params.isEmpty()) {

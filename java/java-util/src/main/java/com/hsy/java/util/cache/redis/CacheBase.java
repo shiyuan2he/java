@@ -26,8 +26,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 public abstract class CacheBase<T> {
     private final Logger _logger = LoggerFactory.getLogger(this.getClass()) ;
-    @Autowired
-    ISpringRedisCache springRedisCache ;
+    //@Autowired
+    //ISpringRedisCache springRedisCache ;
     /**
      * @description <p>缓存切点，满足切点会添加缓存</p>
      * @author heshiyuan
@@ -46,9 +46,9 @@ public abstract class CacheBase<T> {
         String key = sb.toString();
 
         // 从缓存中获取数据
-        List <T> list = springRedisCache.getListCache(key, getResponseGeneric()) ;
+        //List <T> list = springRedisCache.getListCache(key, getResponseGeneric()) ;
 
-        if (null!=list&&list.size()>0) {
+        /*if (null!=list&&list.size()>0) {
             _logger.info("【reids切面缓存】从缓存中获取到key={}的数据，请求返回。") ;
             return list ;
         }else{
@@ -69,7 +69,8 @@ public abstract class CacheBase<T> {
         if (list == null) {// 防止数据库查不到，空指针异常
             list = new ArrayList<>();
         }
-        return list;
+        return list;*/
+        return null ;
     }
     /**
      * @description <p>获取缓存key</p>
