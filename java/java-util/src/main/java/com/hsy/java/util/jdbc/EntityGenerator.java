@@ -4,7 +4,6 @@ import com.hsy.java.base.string.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -21,26 +20,32 @@ import java.sql.*;
  * @price ¥5    微信：hewei1109
  */
 public class EntityGenerator {
-    private final Logger _logger = LoggerFactory.getLogger(this.getClass()) ;
-    private String packageOutPath = "com.hsy.java.util.jdbc.entity";//指定实体生成所在包的路径
-    private String authorName = "shiyuan2he";//作者名字
-    private String tablename = "t_sso_user";//表名
-    private String[] colnames; // 列名数组
-    private String[] colTypes; //列名类型数组
-    private int[] colSizes; //列名大小数组
-    private boolean f_util = false; // 是否需要导入包java.util.*
-    private boolean f_sql = false; // 是否需要导入包java.sql.*
+    private static Logger _logger = LoggerFactory.getLogger(EntityGenerator.class) ;
+    private static String packageName ;
+    private static String tablename;//表名
+    private static String[] colnames; // 列名数组
+    private static String[] colTypes; //列名类型数组
+    private static int[] colSizes; //列名大小数组
+    private static boolean f_util = false; // 是否需要导入包java.util.*
+    private static boolean f_sql = false; // 是否需要导入包java.sql.*
 
     //数据库连接
-    private static final String URL ="jdbc:mysql://192.168.216.129:3306/sso";
-    private static final String NAME = "root";
-    private static final String PASS = "root@mariadb";
-    private static final String DRIVER ="org.mariadb.jdbc.Driver";
+    private static String URL = null;
+    private static String NAME = null;
+    private static String PASS = null;
+    private static String DRIVER = null;
 
-    /*
-     * 构造函数
-     */
-    public EntityGenerator(){
+
+    public EntityGenerator(String packageName,String tablename,String dburl,String dbname,String dbpass,String dbdriver){
+        this.packageName = packageName ;
+        this.tablename = tablename ;
+        this.URL = dburl ;
+        this.NAME = dbname ;
+        this.PASS = dbpass ;
+        this.DRIVER = dbdriver ;
+        generator() ;
+    }
+    public static void generator(){
         //创建连接
         Connection con;
         //查要生成实体类的表
@@ -76,7 +81,7 @@ public class EntityGenerator {
             String content = parse(colnames,colTypes,colSizes);
 
             try {
-                String path=this.getClass().getResource("").getPath();
+                String path = EntityGenerator.class.getResource("").getPath();
                 path = path.replaceAll("target/classes","src/main/java");
                 String outputPath = path + "entity/" + StringHelper.lineToHump(tablename) + ".java";
                 _logger.info("【实体生成器】实体生成地址：{}",outputPath);
@@ -100,10 +105,10 @@ public class EntityGenerator {
      * @param colSizes
      * @return
      */
-    private String parse(String[] colnames, String[] colTypes, int[] colSizes) {
+    private static String parse(String[] colnames, String[] colTypes, int[] colSizes) {
         StringBuffer sb = new StringBuffer();
         //生成包路径
-        sb.append("package " + this.packageOutPath + ";\r\n");
+        sb.append("package " + packageName + ";\r\n");
         sb.append("\r\n");
         //判断是否导入工具包
         if(f_util){
@@ -131,7 +136,7 @@ public class EntityGenerator {
      * 功能：生成所有属性
      * @param sb
      */
-    private void processAllAttrs(StringBuffer sb) {
+    private static void processAllAttrs(StringBuffer sb) {
         for (int i = 0; i < colnames.length; i++) {
             sb.append("\tprivate " + sqlType2JavaType(colTypes[i]) + " " + StringHelper.toLowerCaseFirstOne(StringHelper.lineToHump(colnames[i])) + ";\r\n");
         }
@@ -142,7 +147,7 @@ public class EntityGenerator {
      * 功能：生成所有方法
      * @param sb
      */
-    private void processAllMethod(StringBuffer sb) {
+    private static void processAllMethod(StringBuffer sb) {
         for (int i = 0; i < colnames.length; i++) {
             sb.append("\tpublic void set" + StringHelper.lineToHump(colnames[i]) + "(" + sqlType2JavaType(colTypes[i]) + " " + StringHelper.toLowerCaseFirstOne(StringHelper.lineToHump(colnames[i])) + "){\r\n");
             sb.append("\t\tthis." + StringHelper.toLowerCaseFirstOne(StringHelper.lineToHump(colnames[i])) + "=" + StringHelper.toLowerCaseFirstOne(StringHelper.lineToHump(colnames[i])) + ";\r\n");
@@ -157,25 +162,27 @@ public class EntityGenerator {
      * @param sqlType
      * @return
      */
-    private String sqlType2JavaType(String sqlType) {
+    private static String sqlType2JavaType(String sqlType) {
+        _logger.info("字段类型{}",sqlType);
         if(sqlType.equalsIgnoreCase("bit")){
-            return "boolean";
+            return "Boolean";
         }else if(sqlType.equalsIgnoreCase("tinyint")){
-            return "byte";
+            return "Byte";
         }else if(sqlType.equalsIgnoreCase("smallint")){
-            return "short";
-        }else if(sqlType.equalsIgnoreCase("int")){
-            return "int";
+            return "Short";
+        }else if(sqlType.equalsIgnoreCase("int")
+                || sqlType.equalsIgnoreCase("integer")){
+            return "Integer";
         }else if(sqlType.equalsIgnoreCase("bigint")){
-            return "long";
+            return "Long";
         }else if(sqlType.equalsIgnoreCase("float")){
-            return "float";
+            return "Float";
         }else if(sqlType.equalsIgnoreCase("decimal")
                 || sqlType.equalsIgnoreCase("numeric")
                 || sqlType.equalsIgnoreCase("real")
                 || sqlType.equalsIgnoreCase("money")
                 || sqlType.equalsIgnoreCase("smallmoney")){
-            return "double";
+            return "Double";
         }else if(sqlType.equalsIgnoreCase("varchar")
                 || sqlType.equalsIgnoreCase("char")
                 || sqlType.equalsIgnoreCase("nvarchar")
@@ -189,14 +196,15 @@ public class EntityGenerator {
         }
         return null;
     }
-
-    /**
-     * 出口
-     * TODO
-     * @param args
-     */
-    public static void main(String[] args) {
-        new EntityGenerator();
+    private static final String packageNames = "com.hsy.java.util.jdbc.entity" ;
+    private static final String tableName = "t_city" ;
+    private static final String driver = "org.mariadb.jdbc.Driver" ;
+    private static final String url = "jdbc:mariadb://192.168.216.129:3306/springboot?useUnicode=true&characterEncoding=UTF-8" ;
+    private static final String username = "root" ;
+    private static final String password = "root@mariadb" ;
+    public static void main(String[] args){
+        new EntityGenerator(packageNames,tableName, url,
+                username,password,driver) ;
     }
 }
 
