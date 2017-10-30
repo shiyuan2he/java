@@ -1,4 +1,6 @@
-package com.hsy.java.base.exception;
+package com.hsy.java.exception.cache;
+
+import com.hsy.java.enums.CacheEnum;
 
 /**
  * @author heshiyuan
@@ -11,8 +13,18 @@ package com.hsy.java.base.exception;
  * @price ¥5    微信：hewei1109
  */
 public class CacheException extends RuntimeException{
+    private String code ;
+    private String msg ;
     public CacheException(String msg) {
         super(msg);
+    }
+    public CacheException(CacheEnum cacheEnum) {
+        super(cacheEnum.getMessage());
+        this.code = cacheEnum.getCode() ;
+    }
+    public CacheException(String code ,String msg) {
+        super(msg);
+        this.code = code ;
     }
 
     public CacheException(String msg, Throwable cause) {

@@ -1,6 +1,6 @@
 package com.hsy.java.util.cache.redis.impl;
 
-import com.hsy.java.base.exception.CacheException;
+import com.hsy.java.exception.cache.CacheException;
 import com.hsy.java.util.cache.redis.ISpringRedisCache;
 import com.hsy.java.util.serializer.SerializerHelper;
 import org.apache.commons.lang3.StringUtils;

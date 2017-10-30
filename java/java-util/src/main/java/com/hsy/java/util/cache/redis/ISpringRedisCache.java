@@ -1,6 +1,6 @@
 package com.hsy.java.util.cache.redis;
 
-import com.hsy.java.base.exception.CacheException;
+import com.hsy.java.exception.cache.CacheException;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public interface ISpringRedisCache {
      * @author heshiyuan
      * @date 25/09/2017 3:27 PM
      */
-    <T> boolean putCache(String key, T obj) throws CacheException ;
+    <T> boolean putCache(String key, T obj) throws CacheException;
     /**
      * @description <p></p>
      * @param key 存入缓存的key

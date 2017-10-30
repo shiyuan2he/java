@@ -1,5 +1,7 @@
 package com.hsy.java.exception.dao;
 
+import com.hsy.java.enums.DBEnum;
+
 /**
  * @author heshiyuan
  * @description <p></p>
@@ -10,18 +12,22 @@ package com.hsy.java.exception.dao;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class DBExecuteException extends RuntimeException{
+public class DBHandleException extends RuntimeException{
 
     private String code ;
     private String msg ;
-    public DBExecuteException(String message) {
+    public DBHandleException(DBEnum dbEnum) {
+        this.code = dbEnum.getCode();
+        this.msg = dbEnum.getMessage();
+    }
+    public DBHandleException(String message) {
         super(message);
     }
 
-    public DBExecuteException(String message, Throwable cause) {
+    public DBHandleException(String message, Throwable cause) {
         super(message, cause);
     }
-    public DBExecuteException(String code ,String message) {
+    public DBHandleException(String code , String message) {
         super(message);
         this.code = code ;
     }

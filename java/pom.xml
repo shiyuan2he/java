@@ -18,6 +18,7 @@
         <module>java-swing</module>
         <module>java-exception</module>
         <module>java-enum</module>
+        <module>java-bean</module>
     </modules>
 
     <properties>
@@ -179,6 +180,11 @@
                 <version>${version.hsy.java}</version>
             </dependency>
             <dependency>
+                <groupId>com.hsy.java</groupId>
+                <artifactId>java-exception</artifactId>
+                <version>${version.hsy.java}</version>
+            </dependency>
+            <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
                 <version>${version.commons.logging}</version>
@@ -193,6 +199,17 @@
                 <artifactId>bcprov-jdk15on</artifactId>
                 <version>1.50</version>
             </dependency>
+            <dependency>
+                <groupId>com.hsy.java</groupId>
+                <artifactId>java-enum</artifactId>
+                <version>${version.hsy.java}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hsy.java</groupId>
+                <artifactId>java-bean</artifactId>
+                <version>${version.hsy.java}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
