@@ -14,7 +14,7 @@ public class SessionBean {
     private String sessionId ;
     private String userName ;
     private String userCode ;
-    private String mobile ;
+    private Long mobile ;
     private String ticket ;
 
     public String getTicket() {
@@ -49,11 +49,11 @@ public class SessionBean {
         this.userCode = userCode;
     }
 
-    public String getMobile() {
+    public Long getMobile() {
         return mobile;
     }
 
-    public void setMobile(String mobile) {
+    public void setMobile(Long mobile) {
         this.mobile = mobile;
     }
 }

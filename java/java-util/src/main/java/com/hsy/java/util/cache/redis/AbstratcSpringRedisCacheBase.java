@@ -14,7 +14,7 @@ import java.util.List;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public interface ISpringRedisCache {
+public abstract class AbstratcSpringRedisCacheBase<V> {
     /**
      * @description <p>添加进缓存当中</p>
      * @param key 存入缓存的key
@@ -23,7 +23,7 @@ public interface ISpringRedisCache {
      * @author heshiyuan
      * @date 25/09/2017 3:27 PM
      */
-    <T> boolean putCache(String key, T obj) throws CacheException;
+    abstract boolean putCache(String key, V obj) throws CacheException;
     /**
      * @description <p></p>
      * @param key 存入缓存的key
@@ -33,7 +33,7 @@ public interface ISpringRedisCache {
      * @author heshiyuan
      * @date 25/09/2017 3:29 PM
      */
-    <T> boolean putCacheWithExpireTime(String key, T obj, final long expireTime) throws CacheException;
+    abstract boolean putCacheWithExpireTime(String key, V obj, final long expireTime) throws CacheException;
 
     /**
      * @description <p>将list添加进缓存</p>
@@ -43,7 +43,7 @@ public interface ISpringRedisCache {
      * @author heshiyuan
      * @date 25/09/2017 4:07 PM
      */
-    <T> boolean putListCache(String key, List<T> objList) throws CacheException;
+    abstract boolean putListCache(String key, List<V> objList) throws CacheException;
     /**
      * @description <p>将list添加进缓存，带缓存过期时间</p>
      * @param key 存入缓存的key
@@ -53,7 +53,7 @@ public interface ISpringRedisCache {
      * @author heshiyuan
      * @date 25/09/2017 4:09 PM
      */
-    <T> boolean putListCacheWithExpireTime(String key, List<T> objList, final long expireTime) throws CacheException;
+    abstract boolean putListCacheWithExpireTime(String key, List<V> objList, final long expireTime) throws CacheException;
     /**
      * @description <p></p>
      * @param key 存入缓存的key
@@ -62,7 +62,7 @@ public interface ISpringRedisCache {
      * @author heshiyuan
      * @date 25/09/2017 4:18 PM
      */
-    <T> T getCache(final String key, Class<T> targetClass) throws CacheException;
+    abstract V getCache(final String key, Class<V> targetClass) throws CacheException;
     /**
      * @description <p></p>
      * @param key 存入缓存的key
@@ -71,44 +71,44 @@ public interface ISpringRedisCache {
      * @author heshiyuan
      * @date 25/09/2017 4:18 PM
      */
-    <T> List<T> getListCache(final String key, Class<T> targetClass) throws CacheException;
+    abstract List<V> getListCache(final String key, Class<V> targetClass) throws CacheException;
     /**
      * @description <p>根据key精确删除数据</p>
      * @param key
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    void deleteCacheByKey(String key) throws CacheException;
+    abstract void deleteCacheByKey(String key) throws CacheException;
     /**
      * @description <p>根据key精确删除数据</p>
      * @param key
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    void deleteCacheByKeys(String... key) throws CacheException;
+    abstract void deleteCacheByKeys(String... key) throws CacheException;
     /**
      * @description <p>根据key模糊删除数据</p>
      * @param pattern
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    void deleteCacheWithPattern(String pattern) throws CacheException;
+    abstract void deleteCacheWithPattern(String pattern) throws CacheException;
     /**
      * @description <p>删除所有key</p>
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    void clearCache() throws CacheException;
+    abstract void clearCache() throws CacheException;
     /**
      * @description <p>根据前缀模糊删除</p>
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    void deleteByPrefix(String prex)throws CacheException;
+    abstract void deleteByPrefix(String prex)throws CacheException;
     /**
      * @description <p>根据后缀模糊删除</p>
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    void deleteBySuffix(String suffix) throws CacheException;
+    abstract void deleteBySuffix(String suffix) throws CacheException;
 }

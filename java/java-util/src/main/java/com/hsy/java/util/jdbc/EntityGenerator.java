@@ -69,7 +69,8 @@ public class EntityGenerator {
                 colnames[i] = rsmd.getColumnName(i + 1);
                 colTypes[i] = rsmd.getColumnTypeName(i + 1);
 
-                if(colTypes[i].equalsIgnoreCase("datetime")){
+                if(colTypes[i].equalsIgnoreCase("datetime")
+                        || colTypes[i].equalsIgnoreCase("timestamp")){
                     f_util = true;
                 }
                 if(colTypes[i].equalsIgnoreCase("image")
@@ -189,7 +190,8 @@ public class EntityGenerator {
                 || sqlType.equalsIgnoreCase("nchar")
                 || sqlType.equalsIgnoreCase("text")){
             return "String";
-        }else if(sqlType.equalsIgnoreCase("datetime")){
+        }else if(sqlType.equalsIgnoreCase("datetime")
+                || sqlType.equalsIgnoreCase("timestamp")){
             return "Date";
         }else if(sqlType.equalsIgnoreCase("image")){
             return "Blod";
@@ -197,9 +199,9 @@ public class EntityGenerator {
         return null;
     }
     private static final String packageNames = "com.hsy.java.util.jdbc.entity" ;
-    private static final String tableName = "t_city" ;
+    private static final String tableName = "t_seckilling_item" ;
     private static final String driver = "org.mariadb.jdbc.Driver" ;
-    private static final String url = "jdbc:mariadb://192.168.216.129:3306/springboot?useUnicode=true&characterEncoding=UTF-8" ;
+    private static final String url = "jdbc:mariadb://192.168.216.129:3306/seckilling?useUnicode=true&characterEncoding=UTF-8" ;
     private static final String username = "root" ;
     private static final String password = "root@mariadb" ;
     public static void main(String[] args){

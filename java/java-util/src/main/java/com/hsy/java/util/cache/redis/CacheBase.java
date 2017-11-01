@@ -23,11 +23,8 @@ import java.util.concurrent.TimeUnit;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-@Component
 public abstract class CacheBase<T> {
     private final Logger _logger = LoggerFactory.getLogger(this.getClass()) ;
-    //@Autowired
-    //ISpringRedisCache springRedisCache ;
     /**
      * @description <p>缓存切点，满足切点会添加缓存</p>
      * @author heshiyuan
