@@ -1,4 +1,10 @@
 package com.hsy.java.base.utils;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Random;
+
 /**
  * 
  * @description 
@@ -12,7 +18,7 @@ package com.hsy.java.base.utils;
  * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
  */
 public class RandomHelper {
-	
+    private final static Logger _logger = LoggerFactory.getLogger(MathHelper.class);
 	/**
 	 * 
 	 * @description 
@@ -77,7 +83,71 @@ public class RandomHelper {
 		sb.append(start).append(Math.round(Math.random()*Integer.parseInt(stringCount.toString()))).append(end) ;
 		return sb.toString() ;
 	}
-	public static void main(String[] args) {
+    /**
+     *
+     * @description <p>Random生成：根据传入的位数生成相应位数的随机数</p>
+     * @returnType 生成的随机苏
+     * 方法名:
+     * 类名:MathUtils
+     * @author heshiyuan
+     * @email shiyuan4work@sina.com
+     * @date 2017/7/25 8:53
+     * @price ￥:5毛
+     * @copyright	此方法版权归本人所有，复制或者剪切请通知本人或者捐赠 通知方式：shiyuan4work@sina.com
+     * @callnumber 15910868535
+     */
+    public static int generateRandomByLength(int length){
+        if(length > 9) {
+            _logger.info("将要生成的随机数值大于int精度，请使用返回值为long的generateRandomByLength方法") ;
+            return 0;
+        }
+        StringBuilder str= new StringBuilder();//定义变长字符串
+        Random random = new Random();
+        //随机生成数字，并添加到字符串
+        for(int i=0;i<length;i++){
+            str.append(random.nextInt(10));
+        }
+        _logger.info("生成的随机数：{}",str.toString()) ;
+        return Integer.parseInt(str.toString());
+    }
+    /**
+     * @description <p>根据ascii生成随机数</p>
+     * @param
+     * @return
+     * @author heshiyuan
+     * @date 2017/11/6 18:11
+     */
+    public static String generateNumberByLength(int length){
+        if(length > 9) {
+            _logger.info("将要生成的随机数值大于int精度，请使用返回值为long的generateRandomByLength方法") ;
+            return null;
+        }
+        String sRand = "" ;
+        for(int i=48;i<(48+length);i++){
+            sRand += (char) i ;
+        }
+        _logger.info("生成的length位随机字符：{}",sRand) ;
+        return sRand;
+    }
+
+    /**
+     * @description <p>根据ascii生成随机数</p>
+     * @param
+     * @return
+     * @author heshiyuan
+     * @date 2017/11/6 18:11
+     */
+    public static String generateStringByLength(int length){
+
+        String sRand = "" ;
+        for(int i=48;i<(48+length);i++){
+            sRand += (char) i ;
+        }
+        _logger.info("生成的length位随机字符：{}",sRand) ;
+        return sRand;
+    }
+
+    public static void main(String[] args) {
 		System.out.println(System.currentTimeMillis());
 		System.out.println(IDGenerateValue(System.currentTimeMillis()));
 	}

@@ -1,5 +1,7 @@
 package com.hsy.bean.vo;
 
+import java.io.Serializable;
+
 /**
  * @author heshiyuan
  * @description <p></p>
@@ -10,12 +12,14 @@ package com.hsy.bean.vo;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class SessionBean {
+public class SessionBean implements Serializable{
     private String sessionId ;
     private String userName ;
     private String userCode ;
     private Long mobile ;
     private String ticket ;
+
+    public SessionBean() {}
 
     public String getTicket() {
         return ticket;
@@ -55,5 +59,16 @@ public class SessionBean {
 
     public void setMobile(Long mobile) {
         this.mobile = mobile;
+    }
+
+    @Override
+    public String toString() {
+        return "SessionBean{" +
+                "sessionId='" + sessionId + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userCode='" + userCode + '\'' +
+                ", mobile=" + mobile +
+                ", ticket='" + ticket + '\'' +
+                '}';
     }
 }

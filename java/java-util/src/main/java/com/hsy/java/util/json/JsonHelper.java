@@ -1,7 +1,5 @@
 package com.hsy.java.util.json;
 import com.alibaba.fastjson.JSON;
-import net.sf.json.JSONObject;
-
 import java.util.List;
 import java.util.Map;
 
@@ -47,12 +45,12 @@ public class JsonHelper {
 
     public static <T> T json2ObjStrong(String json, Class<T> clazz) {
         net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(json);
-        return (T) JSONObject.toBean(jsonObject, clazz);
+        return (T) net.sf.json.JSONObject.toBean(jsonObject, clazz);
     }
 
     public static <T> T json2ObjStrong(String json, Class<T> clazz, Map<String, Class<?>> classMap) {
         net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(json);
-        return (T) JSONObject.toBean(jsonObject, clazz, classMap);
+        return (T) net.sf.json.JSONObject.toBean(jsonObject, clazz, classMap);
     }
 
     public static <T> List<T> json2Arr(String json, Class<T> clazz) {

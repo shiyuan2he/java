@@ -12,9 +12,9 @@ package com.hsy.java.enums;
  */
 public enum WebEnum {
 
+    WEB_FOUND_EXCEPTION("3000","WEB层发生异常"),
     PARAM_VALID_EXCEPTION("3001","参数校验异常"),
-    WEB_FOUND_EXCEPTION("3000","WEB层发生异常")
-
+    PARAM_TRANSFORM_EXCEPTION("3002","参数转换异常"),
     ;
 
     private String code ;

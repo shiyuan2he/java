@@ -14,6 +14,8 @@ public enum BusinessEnum {
 
     BUSINESS_HANDLE_EXCEPTION("2000","业务处理异常"),
     LOGIN_EXCEPTION("2001","登陆出现异常"),
+    TICKET_USER_NOT_MAPPING_EXCEPTION("2002","通票无效，请重新登录"),
+    RESPONSE_DATA_IS_NULLEXCEPTION("2003","返回参数data节点为空")
     ;
 
     private String code ;

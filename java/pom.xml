@@ -19,6 +19,7 @@
         <module>java-exception</module>
         <module>java-enum</module>
         <module>java-bean</module>
+        <module>java-resource</module>
     </modules>
 
     <properties>
@@ -44,6 +45,7 @@
         <version.spring.data.redis>1.8.7.RELEASE</version.spring.data.redis>
         <version.aspectj>1.8.10</version.aspectj>
         <version.hsy.java>1.0</version.hsy.java>
+        <version.servlet.api>3.1.0</version.servlet.api>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -209,7 +211,11 @@
                 <artifactId>java-bean</artifactId>
                 <version>${version.hsy.java}</version>
             </dependency>
-
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${version.servlet.api}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

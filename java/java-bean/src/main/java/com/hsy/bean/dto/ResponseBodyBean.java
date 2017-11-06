@@ -32,6 +32,8 @@ public class ResponseBodyBean<T> extends AbstractResponseBody implements Seriali
         this.data = data ;
     }
 
+    public ResponseBodyBean() {}
+
     public boolean isSuccess() {
         return success;
     }
