@@ -31,7 +31,7 @@ public class CollectionHelperTest {
         CollectionHelper.duplicateRemoval(listInteger);
         List<Integer> listInteger2 = new ArrayList<>() ;
         for(int i=0;i<100000;i++){
-            listInteger2.add(MathHelper.generateRandomByLength(1)) ;
+            listInteger2.add(RandomHelper.generateRandomByLength(1)) ;
         }
         CollectionHelper.duplicateRemoval(listInteger2);
     }

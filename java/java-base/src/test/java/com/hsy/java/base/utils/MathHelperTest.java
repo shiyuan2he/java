@@ -18,9 +18,6 @@ public class MathHelperTest {
 
     @Test
     public void testGenerateRandomByLength(){
-        for(int i=0;i<10;i++){
-            System.out.println("3028"+ DateHelper.getStrFromDateOfFormate(new Date(),"yyyyMMddmmhhssSSS")+MathHelper.generateRandomByLength(7));
-        }
 
     }
 }

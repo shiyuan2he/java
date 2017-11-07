@@ -26,17 +26,26 @@ public class VerificationCodeHelper {
     private BufferedImage image; // 图像
     private String str; // 验证码
 
-    private VerificationCodeHelper () {
-        width = 120;
-        height = 30;
-        font = "Times New Roman";
-        codeType = "4";
+    private VerificationCodeHelper (){
+        this.width = 100 ;
+        this.height = 30 ;
+        this.font = "Times New Roman" ;
+        this.codeType = "4A" ;
+        init();
+    }
+    private VerificationCodeHelper (int width,int height,String font,String codeType) {
+        this.width = width ;
+        this.height = height ;
+        this.font = font ;
+        this.codeType = codeType ;
         init();
     }
 
-    // 获取实例
-    public static VerificationCodeHelper Instance() {
+    public static VerificationCodeHelper getInstance(){
         return new VerificationCodeHelper();
+    }
+    public static VerificationCodeHelper getInstance(int width,int height,String font,String codeType){
+        return new VerificationCodeHelper(width,height,font,codeType);
     }
 
     // 获取图片
@@ -62,7 +71,7 @@ public class VerificationCodeHelper {
         graphics.setFont(new Font(font, Font.PLAIN, height - 4));
         // 随机产生155条干扰线，使图象中的认证码不易被其它程序探测到
         graphics.setColor(ColorHelper.getRandColor(160, 200));
-        for (int i = 0; i < 155; i++) {
+        for (int i = 0; i < 255; i++) {
             int x = random.nextInt(width);
             int y = random.nextInt(height);
             int xl = random.nextInt(12);
@@ -70,10 +79,8 @@ public class VerificationCodeHelper {
             graphics.drawLine(x, y, x + xl, y + yl);
         }
         // 取随机产生的认证码(4位数字)
-        String sRand = "";
-        generateString(sRand,graphics) ;
         // 赋值验证码
-        this.str = sRand;
+        this.str = generateString(graphics) ;
         // 图象生效
         graphics.dispose();
         this.image = image;
@@ -89,25 +96,31 @@ public class VerificationCodeHelper {
      * @author heshiyuan
      * @date 2017/11/6 18:05
      */
-    private void generateString(String sRand,Graphics graphics) {
-        int length = 0 ;
+    private String generateString(Graphics graphics) {
+        String sRand = "" ;
+        int length ;
         Random random = new Random();
-        String rand = "" ;
+        char[] randomCode = null;
         if(codeType.length()==1){
+            // 数字
             length = Integer.parseInt(codeType) ;
-            rand = String.valueOf(random.nextInt(10));
+            randomCode = "0123456789".toCharArray() ;
         }else{
+            // 字符
             length = Integer.parseInt(Pattern.compile("[^0-9]").matcher(codeType).replaceAll("").trim());
+            // 字体只显示大写，去掉了1,0,i,o,I,O几个容易混淆的字符
+            randomCode = "23456789ABCDEFGHJKLMNPKRSTUVWXYZabcdefghjklmnpqrstuvwxyz".toCharArray() ;
         }
-        // 取随机产生的认证码(4位数字)
+        // 取随机产生的认证码()
         for (int i = 0; i < length; i++) {
-            sRand += rand;
+            int index = random.nextInt(randomCode.length) ;
+            String randStr = String.valueOf(randomCode[index]);
             // 将认证码显示到图象中
             graphics.setColor(new Color(20 + random.nextInt(110), 20 + random.nextInt(110), 20 + random.nextInt(110)));
             // 调用函数出来的颜色相同，可能是因为种子太接近，所以只能直接生成
-            graphics.drawString(rand, 13 * i + 26, 25);
+            graphics.drawString(randStr, 13 * i + 26, 25);
+            sRand += randStr ;
         }
+        return sRand ;
     }
-
-
 }
