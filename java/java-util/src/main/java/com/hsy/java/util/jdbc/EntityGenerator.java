@@ -199,9 +199,9 @@ public class EntityGenerator {
         return null;
     }
     private static final String packageNames = "com.hsy.java.util.jdbc.entity" ;
-    private static final String tableName = "t_seckilling_item" ;
+    private static final String tableName = "t_sso_user" ;
     private static final String driver = "org.mariadb.jdbc.Driver" ;
-    private static final String url = "jdbc:mariadb://192.168.216.129:3306/seckilling?useUnicode=true&characterEncoding=UTF-8" ;
+    private static final String url = "jdbc:mariadb://192.168.216.129:3306/sso?useUnicode=true&characterEncoding=UTF-8" ;
     private static final String username = "root" ;
     private static final String password = "root@mariadb" ;
     public static void main(String[] args){

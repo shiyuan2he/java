@@ -20,6 +20,7 @@
         <module>java-enum</module>
         <module>java-bean</module>
         <module>java-resource</module>
+        <module>java-exercise</module>
     </modules>
 
     <properties>
