@@ -17,6 +17,8 @@ public class PermissionBean implements Serializable{
     private Long id ;
     private String authAddress ;
     private String authDescription ;
+    private String authImg ;
+    private String authStyle ;
     private Long parentid ;
     private List<PermissionBean> children ;
 
@@ -58,5 +60,21 @@ public class PermissionBean implements Serializable{
 
     public void setChildren(List<PermissionBean> children) {
         this.children = children;
+    }
+
+    public String getAuthImg() {
+        return authImg;
+    }
+
+    public void setAuthImg(String authImg) {
+        this.authImg = authImg;
+    }
+
+    public String getAuthStyle() {
+        return authStyle;
+    }
+
+    public void setAuthStyle(String authStyle) {
+        this.authStyle = authStyle;
     }
 }
