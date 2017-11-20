@@ -10,17 +10,17 @@
     <version>1.0</version>
 
     <modules>
-        <module>java-base</module>
-        <module>java-httpclient</module>
-        <module>java-util</module>
-        <module>java-algorithm</module>
-        <module>java-thread</module>
-        <module>java-swing</module>
-        <module>java-exception</module>
         <module>java-enum</module>
         <module>java-bean</module>
-        <module>java-resource</module>
+        <module>java-algorithm</module>
         <module>java-exercise</module>
+        <module>java-resource</module>
+        <module>java-base</module>
+        <module>java-swing</module>
+        <module>java-thread</module>
+        <module>java-httpclient</module>
+        <module>java-exception</module>
+        <module>java-util</module>
     </modules>
 
     <properties>
@@ -226,7 +226,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>3.7.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
