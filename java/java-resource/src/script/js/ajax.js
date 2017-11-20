@@ -60,9 +60,9 @@ var ajax = {
             url : serviceUrl,
             success:callbackFunc,
             error:function(XMLHttpRequest, textStatus, errorThrown) {
-                alert(XMLHttpRequest.status);
-                alert(XMLHttpRequest.readyState);
-                alert(textStatus);
+                console.log(XMLHttpRequest.status);
+                console.log(XMLHttpRequest.readyState);
+                console.log(textStatus);
             }
         });
     },
@@ -73,9 +73,9 @@ var ajax = {
             url : serviceUrl,
             success:callbackFunc,
             error:function(XMLHttpRequest, textStatus, errorThrown) {
-                alert(XMLHttpRequest.status);
-                alert(XMLHttpRequest.readyState);
-                alert(textStatus);
+                console.log(XMLHttpRequest.status);
+                console.log(XMLHttpRequest.readyState);
+                console.log(textStatus);
             }
         });
     }
