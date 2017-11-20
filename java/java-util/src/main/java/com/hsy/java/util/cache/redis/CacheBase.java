@@ -32,7 +32,7 @@ public abstract class CacheBase<T> {
      */
     protected abstract void cacheAspect() ;
     @Around("cacheAspect()")
-    public List<T> excute(ProceedingJoinPoint joinPoint) throws Throwable {
+    public List<T> execute(ProceedingJoinPoint joinPoint) throws Throwable {
         // 调用所拦截方法传递参数
         Object[] args = joinPoint.getArgs();
         _logger.info("【reids切面缓存】进入切面缓存中，参数{}", Arrays.asList(args)) ;

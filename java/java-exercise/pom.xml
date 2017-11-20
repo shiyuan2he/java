@@ -16,5 +16,9 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.hsy.java</groupId>
+            <artifactId>java-base</artifactId>
+        </dependency>
     </dependencies>
 </project>
