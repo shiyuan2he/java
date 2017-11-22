@@ -1,7 +1,5 @@
 package com.hsy.java.exception.web;
-
 import com.hsy.java.enums.WebEnum;
-
 /**
  * @author heshiyuan
  * @description <p></p>

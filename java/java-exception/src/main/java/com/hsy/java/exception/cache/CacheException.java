@@ -1,7 +1,5 @@
 package com.hsy.java.exception.cache;
-
 import com.hsy.java.enums.CacheEnum;
-
 /**
  * @author heshiyuan
  * @description <p>缓存抛出时异常</p>

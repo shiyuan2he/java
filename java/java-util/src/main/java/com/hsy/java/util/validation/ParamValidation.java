@@ -1,7 +1,7 @@
 package com.hsy.java.util.validation;
 
-import com.hsy.java.base.string.StringHelper;
 import com.hsy.java.exception.web.ParamValidationException;
+import com.hsy.java.java.base.string.StringHelper;
 
 /**
  * @author heshiyuan

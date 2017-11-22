@@ -1,5 +1,4 @@
 package com.hsy.java.util.cache.redis;
-
 import com.hsy.java.exception.cache.CacheException;
 
 import java.util.List;
