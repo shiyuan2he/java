@@ -1,8 +1,5 @@
 package com.hsy.java.exception.service;
-
 import com.hsy.java.enums.BusinessEnum;
-import com.hsy.java.enums.DBEnum;
-
 /**
  * @author heshiyuan
  * @description <p></p>

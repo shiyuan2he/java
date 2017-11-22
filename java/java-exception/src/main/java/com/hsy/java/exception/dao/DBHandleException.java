@@ -1,5 +1,4 @@
 package com.hsy.java.exception.dao;
-
 import com.hsy.java.enums.DBEnum;
 
 /**

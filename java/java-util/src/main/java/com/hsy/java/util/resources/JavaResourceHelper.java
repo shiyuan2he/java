@@ -1,6 +1,6 @@
 package com.hsy.java.util.resources;
-import com.hsy.java.base.jar.JarHelper;
-import com.hsy.java.base.utils.PropertiesFileUtil;
+import com.hsy.java.java.base.jar.JarHelper;
+import com.hsy.java.java.base.utils.PropertiesFileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;

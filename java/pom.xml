@@ -47,6 +47,8 @@
         <version.aspectj>1.8.10</version.aspectj>
         <version.hsy.java>1.0</version.hsy.java>
         <version.servlet.api>3.1.0</version.servlet.api>
+        <version.aeonbits>1.0.9</version.aeonbits>
+        <version.commons.dbutils>1.5</version.commons.dbutils>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -226,6 +228,16 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
                 <version>${version.spring}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.aeonbits.owner</groupId>
+                <artifactId>owner</artifactId>
+                <version>${version.aeonbits}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-dbutils</groupId>
+                <artifactId>commons-dbutils</artifactId>
+                <version>${version.commons.dbutils}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

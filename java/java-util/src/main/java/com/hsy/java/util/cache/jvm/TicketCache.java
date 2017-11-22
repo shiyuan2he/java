@@ -1,7 +1,5 @@
 package com.hsy.java.util.cache.jvm;
-
-
-import com.hsy.bean.vo.SessionBean;
+import com.hsy.java.bean.vo.SessionBean;
 import com.hsy.java.enums.CacheEnum;
 import com.hsy.java.exception.cache.CacheException;
 

@@ -1,6 +1,6 @@
 package com.hsy.java.util.jdbc;
 
-import com.hsy.java.base.string.StringHelper;
+import com.hsy.java.java.base.string.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -2,8 +2,8 @@ package com.hsy.java.util.json;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.hsy.bean.dto.RequestBodyBean;
-import com.hsy.bean.dto.ResponseBodyBean;
+import com.hsy.java.bean.dto.RequestBodyBean;
+import com.hsy.java.bean.dto.ResponseBodyBean;
 import com.hsy.java.enums.BusinessEnum;
 import com.hsy.java.enums.WebEnum;
 import com.hsy.java.exception.service.BusinessException;

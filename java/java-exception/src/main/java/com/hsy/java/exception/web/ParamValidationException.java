@@ -12,7 +12,7 @@ import com.hsy.java.enums.WebEnum;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class ParamValidationException extends WebException{
+public class ParamValidationException extends WebException {
     public ParamValidationException(WebEnum webEnum) {
         super(webEnum);
     }
