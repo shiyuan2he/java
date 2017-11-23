@@ -1,6 +1,6 @@
 package com.hsy.java.java.base;
 
-import com.hsy.java.java.thread.pool.FixedThreadPool;
+import com.hsy.java.thread.pool.FixedThreadPool;
 import org.junit.Before;
 
 /**

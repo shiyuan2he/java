@@ -2,6 +2,7 @@ package com.hsy.java.java.util.json;
 
 import com.hsy.java.bean.dto.ResponseBodyBean;
 import com.hsy.java.bean.vo.SessionBean;
+import com.hsy.java.util.json.JsonToBeanUtil;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

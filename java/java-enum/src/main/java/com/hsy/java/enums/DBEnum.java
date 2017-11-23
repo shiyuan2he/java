@@ -15,6 +15,7 @@ public enum DBEnum {
     DB_SELECT_IS_NULL("DB1001","db select return null"),
     DB_EXECUTE_EXCEPTION("DB1000","数据库执行异常"),
     DB_INSERT_RESULT_ERROR("DB1001", "db insert error"),
+    DB_DELETE_RESULT_ERROR("DB1001", "db delete error"),
     DB_UPDATE_RESULT_ERROR("DB1001", "db update error"),
     ;
 

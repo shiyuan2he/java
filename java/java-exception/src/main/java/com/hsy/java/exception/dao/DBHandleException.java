@@ -15,10 +15,18 @@ public class DBHandleException extends RuntimeException{
 
     private String code ;
     private String msg ;
-    public DBHandleException(DBEnum dbEnum) {
+    public DBHandleException(DBEnum dbEnum,Throwable cause) {
+        super(cause);
         this.code = dbEnum.getCode();
         this.msg = dbEnum.getMessage();
     }
+
+    public DBHandleException(String code, String msg,Throwable cause) {
+        super(cause);
+        this.code = code;
+        this.msg = msg;
+    }
+
     public DBHandleException(String message) {
         super(message);
     }
