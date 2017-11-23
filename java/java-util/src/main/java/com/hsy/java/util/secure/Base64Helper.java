@@ -1,14 +1,15 @@
 package com.hsy.java.util.secure;
 
-import com.hsy.java.java.base.string.StringHelper;
+import java.io.UnsupportedEncodingException;
+
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.hsy.java.java.base.string.StringHelper;
+
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
-
-import java.io.UnsupportedEncodingException;
-
 /**
  * 
  * @description 
@@ -25,7 +26,6 @@ public class Base64Helper {
 	private final static String CHARSET = "utf-8" ;
 
 	/**
-	 * 
 	 * @description <p>jdk方式base64加密-不建议使用</p>
 	 * @param originStr 待加密的字符串
 	 * @return

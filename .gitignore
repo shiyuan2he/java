@@ -24,4 +24,9 @@ javaee/*/target/*
 */redis/*
 */.idea
 
-
+.metadata
+*.settings
+*/*.settings
+*/*.project
+RemoteSystemsTempFiles
+*/*/.externalToolBuilders/

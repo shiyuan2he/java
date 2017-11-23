@@ -1,11 +1,18 @@
 package com.hsy.java.java.util.json;
 
+<<<<<<< HEAD
 import com.hsy.java.bean.dto.ResponseBodyBean;
 import com.hsy.java.bean.vo.SessionBean;
 import com.hsy.java.util.json.JsonToBeanUtil;
+=======
+>>>>>>> 504005e11bffb516241d11f64abc9c4335d8baa7
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.hsy.java.bean.dto.ResponseBodyBean;
+import com.hsy.java.bean.vo.SessionBean;
+import com.hsy.java.util.json.JsonToBeanUtil;
 
 /**
  * @author heshiyuan
