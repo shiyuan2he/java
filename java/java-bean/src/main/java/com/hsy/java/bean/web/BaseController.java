@@ -24,7 +24,7 @@ public class BaseController {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
      */
-    protected ResponseBodyBean<Object> failure(){
+    protected <T> ResponseBodyBean<T> failure(){
         return new ResponseBodyBean<>(false, ConstantEnum.RETURN_COMMON_FAILURE.getCode(), ConstantEnum.RETURN_COMMON_FAILURE.getMessage()) ;
     }
     /**
@@ -37,7 +37,7 @@ public class BaseController {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
      */
-    protected ResponseBodyBean<Object> failure(String code , String errorInfo){
+    protected <T> ResponseBodyBean<T> failure(String code , String errorInfo){
         return new ResponseBodyBean<>(false, code,errorInfo) ;
     }
     /**
@@ -50,7 +50,7 @@ public class BaseController {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
      */
-    protected ResponseBodyBean<Object> failure(String errorInfo){
+    protected <T> ResponseBodyBean<T> failure(String errorInfo){
         return new ResponseBodyBean<>(false, ConstantEnum.RETURN_COMMON_FAILURE.getCode(), ConstantEnum.RETURN_COMMON_FAILURE.getMessage()) ;
     }
     /**
@@ -63,7 +63,7 @@ public class BaseController {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
      */
-    protected ResponseBodyBean<Object> success(){
+    protected <T>ResponseBodyBean<T> success(){
         return new ResponseBodyBean<>(true, ConstantEnum.RETURN_COMMON_SUCCESS.getCode(), ConstantEnum.RETURN_COMMON_SUCCESS.getMessage()) ;
     }
     /**
@@ -76,7 +76,7 @@ public class BaseController {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
      */
-    protected ResponseBodyBean<Object> success(Object obj){
+    protected <T>ResponseBodyBean<T> success(T obj){
         return new ResponseBodyBean<>(true, ConstantEnum.RETURN_COMMON_SUCCESS.getCode(),obj) ;
     }
 }

@@ -7,9 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.hsy.java.java.base.string.StringHelper;
-
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 /**
  * 
  * @description 
@@ -39,7 +36,7 @@ public class Base64Helper {
 	 * @copyright	此方法版权归本人所有，复制或者剪切请通知本人或者捐赠 通知方式：shiyuan4work@sina.com
 	 * @callnumber 15003828090
 	 */
-	public static String stringToBase64OfJdk(String originStr) {
+	/*public static String stringToBase64OfJdk(String originStr) {
         _logger.info("【jdk-base64-api】待加密的原始字符串{}",originStr);
 		byte[] b = null;
 		String targetStr = originStr;
@@ -55,7 +52,7 @@ public class Base64Helper {
             _logger.info("【jdk-base64-api】加密后的字符串{}",targetStr);
 		}
 		return targetStr;
-	}
+	}*/
 
 	/**
 	 * 
@@ -72,7 +69,7 @@ public class Base64Helper {
 	 * @copyright	此方法版权归本人所有，复制或者剪切请通知本人或者捐赠 通知方式：shiyuan4work@sina.com
 	 * @callnumber 15003828090
 	 */
-	public static String base64ToStringOfJdk(String originStr) {
+	/*public static String base64ToStringOfJdk(String originStr) {
         _logger.info("【jdk-base64-api】待解密的原始字符串{}",originStr);
 		byte[] b = null;
 		String targetStr = null;
@@ -87,7 +84,7 @@ public class Base64Helper {
 		}
         _logger.info("【jdk-base64-api】解密后的字符串{}",targetStr);
 		return targetStr;
-	}
+	}*/
     /**
      * @description <p>apache commons-codec加解密包</p>
      * @param originStr 加密前的字符串
