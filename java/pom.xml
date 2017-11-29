@@ -260,6 +260,11 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
                     <encoding>UTF-8</encoding>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                    <escapeString>\</escapeString>
+                    <delimiters>
+                        <delimiter>${*}</delimiter>
+                    </delimiters>
                 </configuration>
             </plugin>
         </plugins>
