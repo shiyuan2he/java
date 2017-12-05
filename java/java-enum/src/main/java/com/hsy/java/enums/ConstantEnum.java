@@ -15,8 +15,8 @@ public enum ConstantEnum {
     SESSION_KEY("sessionKey","session的key"),
     // 系统异常
     SESSION_IS_OUT_TIME("99980003", "会话超时"),
-    RETURN_COMMON_FAILURE("NB9999","操作失败，请联系管理员!"),
-    RETURN_COMMON_SUCCESS("NB0000","操作成功！"),
+    RETURN_COMMON_FAILURE("9999","操作失败，请联系管理员!"),
+    RETURN_COMMON_SUCCESS("0000","操作成功！"),
     ;
     private String code;
     private String message;
