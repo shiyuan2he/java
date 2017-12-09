@@ -54,7 +54,7 @@ public class BaseController {
         return new ResponseBodyBean<>(false, ConstantEnum.RETURN_COMMON_FAILURE.getCode(), ConstantEnum.RETURN_COMMON_FAILURE.getMessage()) ;
     }
     /**
-     * @description <p>通用失败返回</p>
+     * @description <p>通用成功返回</p>
      * @param
      * @return No such property: code for class: Script1
      * @author heshiyuan
@@ -66,8 +66,9 @@ public class BaseController {
     protected <T>ResponseBodyBean<T> success(){
         return new ResponseBodyBean<>(true, ConstantEnum.RETURN_COMMON_SUCCESS.getCode(), ConstantEnum.RETURN_COMMON_SUCCESS.getMessage()) ;
     }
+
     /**
-     * @description <p>定制失败返回</p>
+     * @description <p>定制成功返回</p>
      * @param
      * @return No such property: code for class: Script1
      * @author heshiyuan
@@ -77,6 +78,6 @@ public class BaseController {
      * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
      */
     protected <T>ResponseBodyBean<T> success(T obj){
-        return new ResponseBodyBean<>(true, ConstantEnum.RETURN_COMMON_SUCCESS.getCode(),obj) ;
+        return new ResponseBodyBean<>(true, ConstantEnum.RETURN_COMMON_SUCCESS.getCode(),ConstantEnum.RETURN_COMMON_SUCCESS.getMessage(),obj) ;
     }
 }
