@@ -2,6 +2,9 @@ package com.hsy.java.java.base.array;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author heshiyuan
  * @description <p></p>
@@ -20,5 +23,15 @@ public class ArraySortHelperTest {
         for(int i=0;i<10;i++){
             ArraySortHelper.bubbleSort(sortedArray);
         }
+    }
+
+    @Test
+    public void test(){
+        Long[] array1 = new Long[]{1l,2l} ;
+        Long[] array2 = new Long[]{2l,3l,4l} ;
+        List<Long> list1 = Arrays.asList(array1) ;
+        List<Long> list2 = Arrays.asList(array2) ;
+
+        list1.removeAll(list2);//此时temp中存在的是list1中去除相同那部分的数据
     }
 }
