@@ -95,6 +95,25 @@ public class CollectionHelper {
 		list.clear();
 		list.addAll(newList);
 		System.out.println(" remove duplicate " + list);
-	} 
+	}
+
+	/**
+	 * 去除两个List里相同的部分
+	 */
+	public static void removeTheSameOfList(List<Long> listA,List<Long> listB){
+		for (int i = 0; i < listA.size(); i++) {
+			Long a = listA.get(i) ;
+			for (int j = 0; j < listA.size(); j++) {
+				Long b = listB.get(j) ;
+				if(a == b){
+					_logger.info("{}==>{};{}==>{}",listA.toString(),listA.get(i),listB.toString(),listB.get(j));
+
+					listA.remove(a) ;
+					listB.remove(b) ;
+					i--;j--;
+				}
+			}
+		}
+	}
 }
 

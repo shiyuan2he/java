@@ -14,7 +14,7 @@ import java.util.List;
  * @github http://github.com/shiyuan2he
  * @email shiyuan4work@sina.com
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
- * @price ¥5    微信：hewei1109
+ * @price ?5    微信：hewei1109
  */
 public class CollectionHelperTest {
     /**
@@ -34,5 +34,13 @@ public class CollectionHelperTest {
             listInteger2.add(RandomHelper.generateRandomByLength(1)) ;
         }
         CollectionHelper.duplicateRemoval(listInteger2);
+    }
+
+    @Test
+    public void testRemoveTheSameOfList(){
+        List<Long> listA = Arrays.asList(1l,2l,3l) ;
+        List<Long> listB = Arrays.asList(2l,3l,4l) ;
+
+        CollectionHelper.removeTheSameOfList(listA,listB);
     }
 }
