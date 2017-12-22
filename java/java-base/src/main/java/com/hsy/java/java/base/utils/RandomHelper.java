@@ -110,25 +110,6 @@ public class RandomHelper {
         _logger.info("生成的随机数：{}",str.toString()) ;
         return Integer.parseInt(str.toString());
     }
-    /**
-     * @description <p>根据ascii生成随机数</p>
-     * @param
-     * @return
-     * @author heshiyuan
-     * @date 2017/11/6 18:11
-     */
-    public static String generateNumberByLength(int length){
-        if(length > 9) {
-            _logger.info("将要生成的随机数值大于int精度，请使用返回值为long的generateRandomByLength方法") ;
-            return null;
-        }
-        String sRand = "" ;
-        for(int i=48;i<(48+length);i++){
-            sRand += (char) i ;
-        }
-        _logger.info("生成的length位随机字符：{}",sRand) ;
-        return sRand;
-    }
 
     /**
      * @description <p>根据ascii生成随机数</p>

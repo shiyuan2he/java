@@ -12,6 +12,8 @@ package com.hsy.java.enums;
  */
 public enum ConstantEnum {
     ENCRYPTION_TYPE_BASE64("BASE64", "BASE64加密类型"),
+    ENCRYPTION_TYPE_AES("AES", "AES加密类型"),
+    ENCRYPTION_TYPE_MD5("MD5", "MD5加密类型"),
     SESSION_KEY("sessionKey","session的key"),
     // 系统异常
     SESSION_IS_OUT_TIME("99980003", "会话超时"),

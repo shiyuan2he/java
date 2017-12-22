@@ -16,10 +16,10 @@ import javax.crypto.spec.SecretKeySpec;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
-
 /**
  * AES加解密工具类
- * Created by shuzheng on 2017/2/5.
+ * @author heshiyuan
+ * @date 2017/12/22 10:55
  */
 public class AESHelper {
 
@@ -34,7 +34,7 @@ public class AESHelper {
      * 5.内容加密
      * 6.返回字符串
      */
-    public static String AESEncode(String content) {
+    public static String encode(String content) {
         try {
             //1.构造密钥生成器，指定为AES算法,不区分大小写
             KeyGenerator keygen = KeyGenerator.getInstance("AES");
@@ -88,7 +88,7 @@ public class AESHelper {
      * 2.将加密后的字符串反纺成byte[]数组
      * 3.将加密内容解密
      */
-    public static String AESDecode(String content) {
+    public static String decode(String content) {
         try {
             //1.构造密钥生成器，指定为AES算法,不区分大小写
             KeyGenerator keygen = KeyGenerator.getInstance("AES");
@@ -140,9 +140,9 @@ public class AESHelper {
         System.out.println("key | AESEncode | AESDecode");
         for (String key : keys) {
             System.out.print(key + " | ");
-            String encryptString = AESEncode(key);
+            String encryptString = encode(key);
             System.out.print(encryptString + " | ");
-            String decryptString = AESDecode(encryptString);
+            String decryptString = decode(encryptString);
             System.out.println(decryptString);
         }
     }

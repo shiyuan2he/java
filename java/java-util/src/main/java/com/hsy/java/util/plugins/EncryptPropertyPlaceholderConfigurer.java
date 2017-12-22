@@ -28,7 +28,7 @@ public class EncryptPropertyPlaceholderConfigurer extends PropertyPlaceholderCon
 	protected String convertProperty(String propertyName, String propertyValue) {
 		for (String p : propertyNames) {
 			if (p.equalsIgnoreCase(propertyName)) {
-				return AESHelper.AESDecode(propertyValue);
+				return AESHelper.decode(propertyValue);
 			}
 		}
 		return super.convertProperty(propertyName, propertyValue);
