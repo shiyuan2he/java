@@ -153,15 +153,6 @@ public class HttpClientUtils {
             // 得到响应实例
             HttpEntity entity = response.getEntity();
 
-            // 可以获得响应头
-            // Header[] headers = response.getHeaders(HttpHeaders.CONTENT_TYPE);
-            // for (Header header : headers) {
-            // System.out.println(header.getName());
-            // }
-
-            // 得到响应类型
-            // System.out.println(ContentType.getOrDefault(response.getEntity()).getMimeType());
-
             // 判断响应状态
             if (response.getStatusLine().getStatusCode() >= 300) {
                 throw new Exception("HTTP Request is not success, Response code is " + response.getStatusLine().getStatusCode());

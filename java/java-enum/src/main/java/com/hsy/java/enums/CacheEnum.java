@@ -14,6 +14,9 @@ public enum CacheEnum {
 
     CACHE__EXCEPTION("4000","用户信息缓存过期，请重新登陆"),
     CACHE_LOGIN_EXPIRE_EXCEPTION("4001","用户信息缓存过期，请重新登陆"),
+
+    CACHE_KEY_TICKET("sso:ticket:","sso通票redis key"),
+    CACHE_KEY_IMAGE_CODE("base:service:image:","base-service图形验证码key"),
     ;
     private String code ;
     private String message ;
