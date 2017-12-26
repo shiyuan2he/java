@@ -3,6 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+    </parent>
 
     <groupId>com.hsy.java</groupId>
     <artifactId>java</artifactId>
@@ -43,7 +48,7 @@
         <version.fastjson>1.2.7</version.fastjson>
         <version.rabbitmq>4.2.1</version.rabbitmq>
         <version.jedis>2.9.0</version.jedis>
-        <version.spring.data.redis>1.8.7.RELEASE</version.spring.data.redis>
+        <version.spring.data.redis>1.8.9.RELEASE</version.spring.data.redis>
         <version.aspectj>1.8.10</version.aspectj>
         <version.hsy.java>1.0</version.hsy.java>
         <version.servlet.api>3.1.0</version.servlet.api>

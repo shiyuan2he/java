@@ -14,6 +14,7 @@ public enum SsoEnum {
 
     SSO_KEY_USER_SESSION("sso_key_user_session","session key值"),
     SSO_KEY_TICKET_COOKIE("sso_key_ticket_cookie","cookie中ticket的键"),
+    SSO_EXCEPTION_QUERY_USERINFO("SSO9999","查询用户信息失败"),
     ;
 
     private String code ;

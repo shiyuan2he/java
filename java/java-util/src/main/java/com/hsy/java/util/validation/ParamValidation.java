@@ -2,6 +2,9 @@ package com.hsy.java.util.validation;
 
 import com.hsy.java.exception.web.ParamValidationException;
 import com.hsy.java.java.base.string.StringHelper;
+import org.springframework.validation.BindingResult;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author heshiyuan
@@ -30,5 +33,22 @@ public class ParamValidation {
                 }
             }
         }
+    }
+    /**
+     * @description <p>spring参数校验工具类</p>
+     * @param result spring-context 数据校验结果对象
+     * @return 
+     * @author heshiyuan
+     * @date 2017/12/26 9:31
+     */
+    public static String validateRequestParam(BindingResult result){
+        return result.getAllErrors()
+                .stream()
+                .filter(errorObjuct -> null!=errorObjuct.getObjectName())
+                .collect(toList())
+                .get(0)
+                .getObjectName()
+                ;
+
     }
 }

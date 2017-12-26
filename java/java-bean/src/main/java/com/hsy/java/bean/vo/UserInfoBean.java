@@ -1,41 +1,28 @@
 package com.hsy.java.bean.vo;
 
-import java.io.Serializable;
-
 /**
  * @author heshiyuan
  * @description <p></p>
- * @path sso/com.hsy.sso.base.bean.user
- * @date 20/10/2017 5:50 PM
+ * @path java/com.hsy.java.bean.vo
+ * @date 2017/12/26 9:08
  * @github http://github.com/shiyuan2he
  * @email shiyuan4work@sina.com
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class SessionBean implements Serializable{
-    private String sessionId ;
-    private Long userId;
+public class UserInfoBean {
+    private Long userId ;
     private String userName ;
     private String userCode ;
     private Long mobile ;
     private String ticket ;
 
-    public SessionBean() {}
-
-    public String getTicket() {
-        return ticket;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setTicket(String ticket) {
-        this.ticket = ticket;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {
@@ -62,12 +49,11 @@ public class SessionBean implements Serializable{
         this.mobile = mobile;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getTicket() {
+        return ticket;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setTicket(String ticket) {
+        this.ticket = ticket;
     }
-
 }

@@ -17,6 +17,10 @@ public enum CacheEnum {
 
     CACHE_KEY_TICKET("sso:ticket:","sso通票redis key"),
     CACHE_KEY_IMAGE_CODE("base:service:image:","base-service图形验证码key"),
+
+    CACHE_HANDLE_SET_EXCEPTION("cache9999","缓存set异常"),
+    CACHE_HANDLE_GET_EXCEPTION("cache9999","缓存get异常"),
+    CACHE_HANDLE_DELETE_EXCEPTION("cache9999","缓存delete异常")
     ;
     private String code ;
     private String message ;
