@@ -23,7 +23,7 @@ import java.util.Set;
 public abstract class AbstractSpringRedisCache<T>{
     private final Logger _logger = LoggerFactory.getLogger(this.getClass()) ;
 
-    public abstract RedisTemplate<String, ?> getRedisTemplate() ;
+    public abstract RedisTemplate<Object,Object> getRedisTemplate() ;
 
     public boolean putCache(String key, T obj) throws CacheException {
         if(StringUtils.isBlank(key)){
@@ -123,7 +123,7 @@ public abstract class AbstractSpringRedisCache<T>{
         if(org.springframework.util.StringUtils.isEmpty(pattern)) {
             throw new IllegalArgumentException("指定删除的key不能为空");
         } else {
-            Set<String> keys = this.getRedisTemplate().keys(pattern);
+            Set<Object> keys = this.getRedisTemplate().keys(pattern);
             this.getRedisTemplate().delete(keys);
         }
     }
@@ -136,7 +136,7 @@ public abstract class AbstractSpringRedisCache<T>{
         if(org.springframework.util.StringUtils.isEmpty(prex)) {
             throw new IllegalArgumentException("指定删除的key前缀不能为空");
         } else {
-            Set<String> keys = this.getRedisTemplate().keys(prex + "*");
+            Set<Object> keys = this.getRedisTemplate().keys(prex + "*");
             this.getRedisTemplate().delete(keys);
         }
     }
@@ -144,7 +144,7 @@ public abstract class AbstractSpringRedisCache<T>{
         if(org.springframework.util.StringUtils.isEmpty(suffix)) {
             throw new IllegalArgumentException("指定删除的key后缀不能为空");
         } else {
-            Set<String> keys = this.getRedisTemplate().keys("*" + suffix);
+            Set<Object> keys = this.getRedisTemplate().keys("*" + suffix);
             this.getRedisTemplate().delete(keys);
         }
     }
