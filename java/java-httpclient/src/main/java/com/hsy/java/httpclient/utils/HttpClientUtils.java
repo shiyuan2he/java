@@ -95,8 +95,6 @@ public class HttpClientUtils {
         } catch (KeyManagementException e) {
             e.printStackTrace();
         }
-        // 设置请求超时时间
-        //requestConfig = RequestConfig.custom().setSocketTimeout(50000).setConnectTimeout(50000).setConnectionRequestTimeout(50000).build();
     }
     /**
      *

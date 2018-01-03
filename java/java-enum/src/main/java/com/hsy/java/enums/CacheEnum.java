@@ -15,8 +15,8 @@ public enum CacheEnum {
     CACHE__EXCEPTION("4000","用户信息缓存过期，请重新登陆"),
     CACHE_LOGIN_EXPIRE_EXCEPTION("4001","用户信息缓存过期，请重新登陆"),
 
-    CACHE_KEY_TICKET("sso:ticket:","sso通票redis key"),
-    CACHE_KEY_IMAGE_CODE("base:service:image:","base-service图形验证码key"),
+    CACHE_KEY_TICKET("sso:ticket:","sso通票redis key,过期时间60秒",60l),
+    CACHE_KEY_IMAGE_CODE("base:service:image:","base-service图形验证码key,过期时间2分钟",5 * 60l),
 
     CACHE_HANDLE_SET_EXCEPTION("cache9999","缓存set异常"),
     CACHE_HANDLE_GET_EXCEPTION("cache9999","缓存get异常"),
@@ -24,10 +24,20 @@ public enum CacheEnum {
     ;
     private String code ;
     private String message ;
+    private Long expire ;
 
     CacheEnum(String code, String message) {
         this.code = code;
         this.message = message;
+    }
+    CacheEnum(String code, String message,Long expire) {
+        this.code = code;
+        this.message = message;
+        this.expire = expire ;
+    }
+
+    public Long getExpire() {
+        return expire;
     }
 
     public String getCode() {
