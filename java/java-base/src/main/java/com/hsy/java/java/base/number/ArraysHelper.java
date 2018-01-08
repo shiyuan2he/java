@@ -1,4 +1,4 @@
-package com.hsy.java.java.base.array;
+package com.hsy.java.java.base.number;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

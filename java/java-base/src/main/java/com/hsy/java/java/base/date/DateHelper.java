@@ -5,7 +5,7 @@
  *     http://githob.com/shiyuan2he
  * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
  */
-package com.hsy.java.java.base.utils;
+package com.hsy.java.java.base.date;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +19,6 @@ public class DateHelper {
 	 * @return			格式化之后的时间
 	 * @returnType String
 	 * @author heshiyuan @date 2017年3月9日 下午7:10:53
-	 * @path javase-common/com.javase.util/DateHelper.java
 	 * @date 2017年3月9日 下午7:10:53
 	 * ￥：三毛三
 	 * @copyright 如有复制粘贴请通知本人或者捐赠，微信号：hewei1109
@@ -42,7 +41,6 @@ public class DateHelper {
 	 * @return			格式化之后的时间
 	 * @returnType Date
 	 * @author heshiyuan @date 2017年3月9日 下午7:15:51
-	 * @path javase-common/com.javase.util/DateHelper.java
 	 * @date 2017年3月9日 下午7:15:51
 	 * ￥：三毛三
 	 * @copyright 如有复制粘贴请通知本人或者捐赠，微信号：hewei1109

@@ -1,5 +1,6 @@
 package com.hsy.java.java.base.utils;
 
+import com.hsy.java.java.base.number.MathHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -128,8 +129,13 @@ public class RandomHelper {
         return sRand;
     }
 
-    public static void main(String[] args) {
-		System.out.println(System.currentTimeMillis());
-		System.out.println(IDGenerateValue(System.currentTimeMillis()));
+    public static Integer[] generetaArrayByLength(int length){
+		Integer[] newArray = new Integer[length] ;
+		Random random = new Random();
+		for (int i=0;i<length;i++){
+			//随机生成数字，并添加到字符串
+			newArray[i] = random.nextInt(100000) ;
+		}
+		return newArray ;
 	}
 }

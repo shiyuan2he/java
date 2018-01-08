@@ -1,4 +1,4 @@
-package com.hsy.java.java.base.utils;
+package com.hsy.java.java.base.number;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;

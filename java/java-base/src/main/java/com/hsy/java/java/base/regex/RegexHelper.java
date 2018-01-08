@@ -19,8 +19,8 @@ public class RegexHelper {
     private static final Logger _logger = LoggerFactory.getLogger(RegexHelper.class) ;
     /**
      * @description <p>提取字符串中的数字</p>
-     * @param number  代替去的字符串
-     * @return No such property: code for class: Script1
+     * @param number  被替代的字符串
+     * @return 过滤后的字符串
      * @author heshiyuan
      * @date 23/09/2017 7:57 PM
      * @email shiyuan4work@sina.com
@@ -83,7 +83,6 @@ public class RegexHelper {
      */
     public static boolean checkCellphone(String cellphone) {
         String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$";
-        // "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$"
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(regex);
         if(m.matches()){

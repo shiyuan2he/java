@@ -1,5 +1,6 @@
-package com.hsy.java.java.base.array;
+package com.hsy.java.java.base.number;
 
+import com.hsy.java.java.base.utils.RandomHelper;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -18,10 +19,16 @@ import java.util.List;
 public class ArraySortHelperTest {
 
     @Test
-    public void testArraySort(){
-        Integer[] sortedArray = {1,9,20,1000,2,99,23,4,3000} ;
+    public void testBubbleSortToSmall(){
         for(int i=0;i<10;i++){
-            ArraySortHelper.bubbleSort(sortedArray);
+            ArraySortHelper.bubbleSortToSmall(RandomHelper.generetaArrayByLength(1000));
+        }
+    }
+
+    @Test
+    public void testBubbleSortToBig(){
+        for(int i=0;i<10;i++){
+            ArraySortHelper.bubbleSortToBig(RandomHelper.generetaArrayByLength(1000));
         }
     }
 

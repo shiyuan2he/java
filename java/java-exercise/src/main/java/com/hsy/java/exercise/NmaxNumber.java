@@ -1,6 +1,6 @@
 package com.hsy.java.exercise;
 
-import com.hsy.java.java.base.array.ArraySortHelper;
+import com.hsy.java.java.base.number.ArraySortHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,7 +38,7 @@ public class NmaxNumber {
         _logger.info("getNmaxNumberBySort数组{}", Arrays.asList(originArray).toString()) ;
         Integer[] tempArray = originArray.clone() ;
         long start = System.currentTimeMillis() ;
-        ArraySortHelper.bubbleSort(tempArray);
+        ArraySortHelper.bubbleSortToBig(tempArray);
         int nMaxNumber = tempArray[arrayMax-1];
         _logger.info("第{}大的元素是{}",arrayMax,nMaxNumber);
         long end = System.currentTimeMillis() ;
@@ -53,7 +53,7 @@ public class NmaxNumber {
         for(int i=0;i<arrayMax;i++){
             tempArray[i] = tempArrays[i] ;
         }
-        ArraySortHelper.bubbleSort(tempArray);
+        ArraySortHelper.bubbleSortToBig(tempArray);
         for(int i=arrayMax;i<arrayLength;i++){
             if(originArray[i] > tempArray[arrayMax-1]){
                 tempArray[arrayMax-1] = originArray[i] ;

@@ -1,4 +1,4 @@
-package com.hsy.java.java.base.utils;
+package com.hsy.java.java.base.number;
 /**
  * @description <p>Integer帮助工具类</p>
  * @author heshiyuan @date 2017年3月9日 下午3:27:33
