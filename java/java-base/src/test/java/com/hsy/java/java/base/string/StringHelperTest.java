@@ -1,6 +1,8 @@
 package com.hsy.java.java.base.string;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @description <p>字符串帮助类的单元测试类</p>
@@ -13,7 +15,7 @@ import org.junit.Test;
  * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
  */
 public class StringHelperTest {
-	//private Logger  _logger = Logger.getLogger(StringHelperTest.class) ;
+	private static final Logger _logger = LoggerFactory.getLogger(StringHelperTest.class) ;
 	@Test
 	public void testIsNullOrEmpty() {
 		//_logger.info("\"\":"+StringHelper.isNullOrEmpty(""));
@@ -47,6 +49,18 @@ public class StringHelperTest {
 	public void testChineseCompareTo(){
 		System.out.println(StringHelper.chineseCompareTo("是","否"));
 		System.out.println(StringHelper.chineseCompareTo("否","是"));
+	}
+	@Test
+	public void testReplacementWithBrace(){
+		_logger.info(StringHelper.replacementWithBrace("快速转出单笔最高可转出{}",500000));
+        _logger.info("----------------------------------------");
+		_logger.info(StringHelper.replacementWithBrace("手机号{}可转出{}",111111,50000)) ;
+        _logger.info("----------------------------------------");
+		_logger.info(StringHelper.replacementWithBrace("手机号{}可转出{}傻傻的发呆",111111,23434)) ;
+        _logger.info("----------------------------------------");
+		_logger.info(StringHelper.replacementWithBrace("{}可转出{}傻傻的发呆",3434,3423)) ;
+        _logger.info("----------------------------------------");
+		_logger.info(StringHelper.replacementWithBrace("{}可转出{}傻傻的发呆{}","sf","sdf",34342)) ;
 	}
 }
 

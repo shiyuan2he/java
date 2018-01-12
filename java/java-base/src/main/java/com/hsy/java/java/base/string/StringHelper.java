@@ -544,5 +544,65 @@ public class StringHelper extends StringUtils{
         }
         return sb.toString();
     }
+	/**
+	 * @description <p></p>
+	 * @param strTemplate 被替换的字符串模板
+	 * @param args 模板里面涉及的参数
+	 * @return 
+	 * @author heshiyuan
+	 * @date 2018/1/12 14:57
+	 */
+    public static String replacementWithBrace(String strTemplate,Object ... args){
+		_logger.info("{}",strTemplate);
+		int start = strTemplate.indexOf("{}") ;
+		int end = strTemplate.lastIndexOf("{}") ;
+
+		String[] strArray = strTemplate.split("\\{\\}") ;
+		/**
+		 * {}可转出{}傻傻的发呆
+		 */
+		if(start==0&&end!=strTemplate.length()-2){
+			StringBuffer sb = new StringBuffer() ;
+			for(int i=0;i<args.length;i++){
+                _logger.info("{}",args[i]);
+				sb.append(args[i]).append(strArray[i+1]) ;
+			}
+			return sb.toString() ;
+		}
+		/**
+		 * 手机号{}可转出{}
+		 */
+		if(start!=0&&end==strTemplate.length()-2){
+			StringBuffer sb = new StringBuffer() ;
+			for(int i=0;i<args.length;i++){
+                _logger.info("{}",args[i]);
+				sb.append(strArray[i]).append(args[i]) ;
+			}
+			return sb.toString() ;
+		}
+		/**
+		 * {}可转出{}傻傻的发呆{}
+		 */
+		if(start==0&&end==strTemplate.length()-2){
+			StringBuffer sb = new StringBuffer() ;
+			for(int i=0;i<args.length;i++){
+                _logger.info("{}",args[i]);
+				sb.append(strArray[i]).append(args[i]) ;
+			}
+			return sb.toString() ;
+		}
+		/**
+		 * 手机号{}可转出{}傻傻的发呆
+		 */
+		if(start!=0&&end!=strTemplate.length()-2){
+			StringBuffer sb = new StringBuffer(strArray[0]) ;
+			for(int i=0;i<args.length;i++){
+                _logger.info("{}",args[i]);
+				sb.append(args[i]).append(strArray[i+1]) ;
+			}
+			return sb.toString() ;
+		}
+		return null ;
+	}
 }
 
