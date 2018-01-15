@@ -13,13 +13,13 @@ import java.util.Arrays;
  * @github http://github.com/shiyuan2he
  * @email shiyuan4work@sina.com
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
- * @price ?5    Î¢ÐÅ£ºhewei1109
+ * @price ?5    ????hewei1109
  */
 public class ArraySortHelper {
     private static final Logger _logger = LoggerFactory.getLogger(ArraySortHelper.class) ;
     /**
-     * @description <p>Ã°ÅÝÅÅÐò£¬½µÐò</p>
-     * @param sortedArray ±»ÅÅÐòµÄÊý×é
+     * @description <p></p>
+     * @param sortedArray ???????????
      * @author heshiyuan
      * @date 13/09/2017 2:35 PM 
      * @email shiyuan4work@sina.com
@@ -28,10 +28,10 @@ public class ArraySortHelper {
      */
     public static void bubbleSortToSmall(Integer[] sortedArray){
         long start = System.currentTimeMillis() ;
-        _logger.info("ÅÅÐòÖ®Ç°µÄÊý×é{}", Arrays.asList(sortedArray).toString()) ;
+        _logger.info("????????????{}", Arrays.asList(sortedArray).toString()) ;
         for(int i=0;i<sortedArray.length;i++){
             for(int j=i+1;j<sortedArray.length;j++){
-                // Èç¹ûÇ°Ò»¸öÊý±ÈºóÒ»¸öÊýÐ¡£¬½»»»Î»ÖÃ
+                // ?????????????????Ð¡??????Î»??
                 if(sortedArray[i] < sortedArray[j]){
                     int temp = sortedArray[i] ;
                     sortedArray[i] = sortedArray[j] ;
@@ -39,15 +39,15 @@ public class ArraySortHelper {
                 }
             }
         }
-        _logger.info("ÅÅÐòÖ®ºóµÄÊý×é{}",Arrays.asList(sortedArray).toString()) ;
+        _logger.info("????????????{}",Arrays.asList(sortedArray).toString()) ;
         long end = System.currentTimeMillis() ;
-        _logger.info("Ã°ÅÝÅÅÐòºÄÊ±{}ms",(end-start)) ;
+        _logger.info("?????????{}ms",(end-start)) ;
     }
 
     /**
      * @description <p>
-     *     Ã°ÅÝÅÅÐò£¬ÉýÐò
-     *     ¿Õ¼ä¸´ÔÓ¶È n*(n-1)/2
+     *     ???????????
+     *     ??ä¸´??? n*(n-1)/2
      * </p>
      * @param
      * @return
@@ -56,10 +56,10 @@ public class ArraySortHelper {
      */
     public static void bubbleSortToBig(Integer[] sortedArray){
         long start = System.currentTimeMillis() ;
-        _logger.info("ÅÅÐòÖ®Ç°µÄÊý×é{}", Arrays.asList(sortedArray).toString()) ;
+        _logger.info("????????????{}", Arrays.asList(sortedArray).toString()) ;
         for(int i=0;i<sortedArray.length;i++){
             for(int j=i+1;j<sortedArray.length;j++){
-                // Èç¹ûÇ°Ò»¸öÊý±ÈºóÒ»¸öÊýÐ¡£¬½»»»Î»ÖÃ
+                // ?????????????????Ð¡??????Î»??
                 if(sortedArray[i] > sortedArray[j]){
                     sortedArray[i] = sortedArray[i] +  sortedArray[j] ;
                     sortedArray[j] = sortedArray[i] - sortedArray[j] ;
@@ -67,8 +67,8 @@ public class ArraySortHelper {
                 }
             }
         }
-        _logger.info("ÅÅÐòÖ®ºóµÄÊý×é{}",Arrays.asList(sortedArray).toString()) ;
+        _logger.info("????????????{}",Arrays.asList(sortedArray).toString()) ;
         long end = System.currentTimeMillis() ;
-        _logger.info("Ã°ÅÝÅÅÐòºÄÊ±{}ms",(end-start)) ;
+        _logger.info("?????????{}ms",(end-start)) ;
     }
 }

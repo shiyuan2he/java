@@ -14,7 +14,6 @@ import java.security.MessageDigest;
  * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
  */
 public class MD5Helper{
-	static String subMark="paac.wt";	
 	// 十六进制下数字到字符的映射数组
 	private final static String[] hexDigits = { "0", "1", "2", "3", "4", "5","6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
 	
@@ -33,8 +32,8 @@ public class MD5Helper{
 	 * @copyright	此方法版权归本人所有，复制或者剪切请通知本人或者捐赠 通知方式：shiyuan4work@sina.com
 	 * @callnumber 15003828090
 	 */
-	public static String stringToMD5ByIdentified(String inputString) {
-		return stringToMD5(inputString+subMark);
+	public static String stringToMD5ByIdentified(String subMark,String inputString) {
+		return stringToMD5(subMark+inputString);
 	}
 	/**
 	 * 
@@ -71,8 +70,8 @@ public class MD5Helper{
 	 * @copyright	此方法版权归本人所有，复制或者剪切请通知本人或者捐赠 通知方式：shiyuan4work@sina.com
 	 * @callnumber 15003828090
 	 */
-	public static boolean validateMD5ByIdentified(String originString, String inputString) {
-		return  originString.equals(stringToMD5(inputString+subMark));
+	public static boolean validateMD5ByIdentified(String originString, String inputString,String subMark) {
+		return  originString.equals(stringToMD5(subMark+inputString));
 	}
 	/**
 	 * @description <p>将传入的 字符串md5进行加密</p>
