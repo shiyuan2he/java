@@ -14,8 +14,13 @@ public class UserInfoBean {
     private Long userId ;
     private String userName ;
     private String userCode ;
-    private Long mobile ;
     private String ticket ;
+    private String picture ;
+    private String realName ;
+    private String email ;
+    private Long mobile ;
+    private short age ;
+    private byte sex ;
 
     public Long getUserId() {
         return userId;
@@ -55,5 +60,45 @@ public class UserInfoBean {
 
     public void setTicket(String ticket) {
         this.ticket = ticket;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public short getAge() {
+        return age;
+    }
+
+    public void setAge(short age) {
+        this.age = age;
+    }
+
+    public byte getSex() {
+        return sex;
+    }
+
+    public void setSex(byte sex) {
+        this.sex = sex;
     }
 }
