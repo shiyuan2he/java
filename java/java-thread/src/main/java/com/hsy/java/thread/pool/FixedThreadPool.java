@@ -1,5 +1,8 @@
 package com.hsy.java.thread.pool;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -26,26 +29,89 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @price ¥5    微信：hewei1109
  */
 public class FixedThreadPool {
+    private static final Logger _logger = LoggerFactory.getLogger(FixedThreadPool.class);
+    volatile private static FixedThreadPool instance ;
 
-    private final ExecutorService fixedThreadPool;
+    volatile private ExecutorService fixedThreadPool;
+    private final int poolSize = 50 ;
 
-    public FixedThreadPool() {
-        this.fixedThreadPool = Executors.newFixedThreadPool(5,new ThreadFactory() {
-            AtomicInteger atomic = new AtomicInteger();
-            public Thread newThread(Runnable runnable) {
-                return new Thread(runnable, "fixedThreadPool[5]-" + this.atomic.getAndIncrement());
+    private FixedThreadPool() {
+        ExecutorService result = fixedThreadPool ;
+        if(null == result) {
+            synchronized (ExecutorService.class) {
+                result = fixedThreadPool;
+                if (null == result) {
+                    _logger.info("正在初始化一个({})线程数的线程池：", poolSize);
+                    this.fixedThreadPool = Executors.newFixedThreadPool(poolSize, new ThreadFactory() {
+                        AtomicInteger atomic = new AtomicInteger(0);
+                        public Thread newThread(Runnable runnable) {
+                            _logger.info("正在new一个线程，线程(ID:{})：", atomic.intValue());
+                            return new Thread(runnable, "fixedThreadPool[" + poolSize + "]-" + this.atomic.getAndIncrement()) ;
+                        }
+                    });
+                }
             }
-        });
+        }
     }
 
-    public FixedThreadPool(int threadPoolNum) {
-        this.fixedThreadPool = Executors.newFixedThreadPool(threadPoolNum,new ThreadFactory() {
-            AtomicInteger atomic = new AtomicInteger();
-            public Thread newThread(Runnable runnable) {
-                return new Thread(runnable, "fixedThreadPool["+threadPoolNum+"]-" + this.atomic.getAndIncrement());
+    private FixedThreadPool(int threadPoolNum) {
+        ExecutorService result = fixedThreadPool ;
+        if(null == result) {
+            synchronized (ExecutorService.class) {
+                result = fixedThreadPool;
+                if (null == result) {
+                    _logger.info("正在初始化一个({})线程数的线程池：", threadPoolNum);
+                    this.fixedThreadPool = Executors.newFixedThreadPool(threadPoolNum, new ThreadFactory() {
+                        AtomicInteger atomic = new AtomicInteger(0);
+                        public Thread newThread(Runnable runnable) {
+                            _logger.info("正在new一个线程，线程(ID:{})：", atomic.intValue());
+                            return new Thread(runnable, "fixedThreadPool[" + threadPoolNum + "]-" + this.atomic.getAndIncrement()) ;
+                        }
+                    });
+                }
             }
-        });
+        }
     }
+
+    /**
+     * 双锁保证线程池对象单例
+     * @return
+     */
+    public static FixedThreadPool getInstince(){
+        FixedThreadPool result = instance ;
+        // 如果是null就锁类并实例化
+        if(null == result){
+            /**
+             * 锁类并再次判断实例是否为空，否则new
+             */
+            synchronized (FixedThreadPool.class){
+                result = instance ;
+                if(null == result){
+                    _logger.info("正在new一个FixedThreadPool对象");
+                    result = instance = new FixedThreadPool();
+                }
+            }
+        }
+        return result ;
+    }
+    public static FixedThreadPool getInstince(int poolSize){
+        FixedThreadPool result = instance ;
+        // 如果是null就锁类并实例化
+        if(null == result){
+            /**
+             * 锁类并再次判断实例是否为空，否则new
+             */
+            synchronized (FixedThreadPool.class){
+                result = instance ;
+                if(null == result){
+                    _logger.info("正在new一个FixedThreadPool对象，参数poolSize({})");
+                    result = instance = new FixedThreadPool(poolSize);
+                }
+            }
+        }
+        return result ;
+    }
+
     public ExecutorService getFixedThreadPool() {
         return fixedThreadPool;
     }
