@@ -43,10 +43,22 @@ public class FixedThreadPool {
                 if (null == result) {
                     _logger.info("正在初始化一个({})线程数的线程池：", poolSize);
                     this.fixedThreadPool = Executors.newFixedThreadPool(poolSize, new ThreadFactory() {
-                        AtomicInteger atomic = new AtomicInteger(0);
+
+                        SecurityManager s = System.getSecurityManager();
+                        // 添加线程组
+                        private final ThreadGroup group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
+
+                        private final AtomicInteger poolNumber = new AtomicInteger(1);
+                        private final AtomicInteger threadNumber = new AtomicInteger(1);
+                        private final String namePrefix = "fixedThreadPool-" + poolNumber.getAndIncrement() + "-thread-";
+
                         public Thread newThread(Runnable runnable) {
-                            _logger.info("正在new一个线程，线程(ID:{})：", atomic.intValue());
-                            return new Thread(runnable, "fixedThreadPool[" + poolSize + "]-" + this.atomic.getAndIncrement()) ;
+                            _logger.info("正在new一个线程，线程(ID:{})：", namePrefix + threadNumber.intValue());
+                            // 线程池新线程
+                            Thread thread = new Thread(group, runnable,namePrefix + threadNumber.getAndIncrement(), 0);
+                            if (thread.isDaemon()) thread.setDaemon(false);
+                            if (thread.getPriority() != Thread.NORM_PRIORITY) thread.setPriority(Thread.NORM_PRIORITY);
+                            return thread ;
                         }
                     });
                 }
@@ -62,10 +74,22 @@ public class FixedThreadPool {
                 if (null == result) {
                     _logger.info("正在初始化一个({})线程数的线程池：", threadPoolNum);
                     this.fixedThreadPool = Executors.newFixedThreadPool(threadPoolNum, new ThreadFactory() {
-                        AtomicInteger atomic = new AtomicInteger(0);
+
+                        SecurityManager s = System.getSecurityManager();
+                        // 添加线程组
+                        private final ThreadGroup group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
+
+                        private final AtomicInteger poolNumber = new AtomicInteger(1);
+                        private final AtomicInteger threadNumber = new AtomicInteger(1);
+                        private final String namePrefix = "fixedThreadPool-" + poolNumber.getAndIncrement() + "-thread-";
+
                         public Thread newThread(Runnable runnable) {
-                            _logger.info("正在new一个线程，线程(ID:{})：", atomic.intValue());
-                            return new Thread(runnable, "fixedThreadPool[" + threadPoolNum + "]-" + this.atomic.getAndIncrement()) ;
+                            _logger.info("正在new一个线程，线程(ID:{})：", namePrefix + threadNumber.intValue());
+                            // 线程池新线程
+                            Thread thread = new Thread(group, runnable,namePrefix + threadNumber.getAndIncrement(), 0);
+                            if (thread.isDaemon()) thread.setDaemon(false);
+                            if (thread.getPriority() != Thread.NORM_PRIORITY) thread.setPriority(Thread.NORM_PRIORITY);
+                            return thread ;
                         }
                     });
                 }

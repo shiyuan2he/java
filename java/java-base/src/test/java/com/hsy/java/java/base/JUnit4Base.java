@@ -16,6 +16,6 @@ public class JUnit4Base {
     protected FixedThreadPool fixedThreadPool = null ;
     @Before
     public void before(){
-        fixedThreadPool = new FixedThreadPool(10) ;
+        //fixedThreadPool = new FixedThreadPool(10) ;
     }
 }

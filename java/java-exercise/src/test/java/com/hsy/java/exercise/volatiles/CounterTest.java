@@ -5,9 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static org.junit.Assert.*;
-
 /**
  * @author heshiyuan
  * @description <p></p>
@@ -29,9 +26,9 @@ public class CounterTest {
         Counter counter = new Counter() ;
         AtomicInteger atomicInteger = new AtomicInteger(0) ;
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
             new Thread(() -> {
-                for(int j=0;j<1000;j++){
+                for(int j=0;j<10;j++){
                     count ++ ;
                     counter.increment();
                     atomicInteger.incrementAndGet();
