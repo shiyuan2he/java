@@ -26,6 +26,7 @@
         <module>java-httpclient</module>
         <module>java-exception</module>
         <module>java-util</module>
+        <module>java-security</module>
     </modules>
 
     <properties>

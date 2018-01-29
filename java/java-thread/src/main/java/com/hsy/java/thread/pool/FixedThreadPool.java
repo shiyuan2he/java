@@ -21,6 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *       附加任务将在队列中等待。如果在关闭前的执行期间由于失败而导致任何线程终止，
  *       那么一个新线程将代替它执行后续的任务（如果需要）。在某个线程被显式地关闭之前，
  *       池中的线程将一直存在。
+ *      c.创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待
  *      </p>
  * @date 23/08/2017 5:01 PM
  * @github http://github.com/shiyuan2he
@@ -50,7 +51,7 @@ public class FixedThreadPool {
 
                         private final AtomicInteger poolNumber = new AtomicInteger(1);
                         private final AtomicInteger threadNumber = new AtomicInteger(1);
-                        private final String namePrefix = "fixedThreadPool-" + poolNumber.getAndIncrement() + "-thread-";
+                        private final String namePrefix = "fixedPool-" + poolNumber.getAndIncrement() + "-thread-";
 
                         public Thread newThread(Runnable runnable) {
                             _logger.info("正在new一个线程，线程(ID:{})：", namePrefix + threadNumber.intValue());

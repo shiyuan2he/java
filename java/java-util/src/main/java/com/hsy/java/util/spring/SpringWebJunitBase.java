@@ -10,7 +10,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.util.MultiValueMap;
 /**
  * @author heshiyuan
- * @description <p></p>
+ * @description <p>spring controller mock测试</p>
  * @path sso/com.hsy.sso.web.better
  * @date 2017/11/14 20:05
  * @github http://github.com/shiyuan2he
