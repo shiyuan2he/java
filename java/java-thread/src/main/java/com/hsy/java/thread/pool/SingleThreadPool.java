@@ -2,11 +2,7 @@ package com.hsy.java.thread.pool;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 /**
  * @author heshiyuan
  * @description <p>

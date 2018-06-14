@@ -199,14 +199,38 @@ public class EntityGenerator {
         return "Object";
     }
     private static final String packageNames = "com.hsy.java.util.jdbc.entity" ;
-    private static final String tableName = "t_exercise_zone" ;
-    private static final String driver = "org.mariadb.jdbc.Driver" ;
-    private static final String url = "jdbc:mariadb://192.168.216.129:3306/exercise?useUnicode=true&characterEncoding=UTF-8" ;
+    /*private static final String[] tableName =
+            {
+                    "t_activity_apply",
+                    "t_user_operation_record",
+                    "t_activity_publish",
+                    "t_banner_manager",
+                    "t_content_detail",
+                    "t_content_manager",
+                    "t_project_financing",
+                    "t_project_invest",
+                    "t_qj_certification",
+                    "t_successful_case",
+                    "t_sys_group_type",
+                    "t_sys_params",
+                    "t_user_intention_application"
+            } ;*/
+    private static final String[] tableName =
+            {
+                    "t_sys_group_type",
+                    "t_sys_params",
+            } ;
+    //private static final String driver = "org.mariadb.jdbc.Driver" ;
+    //private static final String url = "jdbc:mariadb://192.168.6.101:3306/qyjr?useUnicode=true&characterEncoding=UTF-8" ;
+    private static final String driver = "com.mysql.jdbc.Driver" ;
+    private static final String url = "jdbc:mysql://192.168.6.101:3306/qyjr?useUnicode=true&autoReconnect=true&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull" ;
     private static final String username = "root" ;
-    private static final String password = "root@mariadb" ;
+    private static final String password = "htbuy@2016" ;
     public static void main(String[] args){
-        new EntityGenerator(packageNames,tableName, url,
-                username,password,driver) ;
+        for (int i = 0; i < tableName.length; i++) {
+            new EntityGenerator(packageNames,tableName[i], url,
+                    username,password,driver) ;
+        }
     }
 }
 
