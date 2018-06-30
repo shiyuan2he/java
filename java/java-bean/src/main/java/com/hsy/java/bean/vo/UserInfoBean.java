@@ -19,8 +19,8 @@ public class UserInfoBean {
     private String realName ;
     private String email ;
     private Long mobile ;
-    private short age ;
-    private byte sex ;
+    private Short age ;
+    private Byte sex ;
 
     public Long getUserId() {
         return userId;
@@ -86,19 +86,19 @@ public class UserInfoBean {
         this.email = email;
     }
 
-    public short getAge() {
+    public Short getAge() {
         return age;
     }
 
-    public void setAge(short age) {
+    public void setAge(Short age) {
         this.age = age;
     }
 
-    public byte getSex() {
+    public Byte getSex() {
         return sex;
     }
 
-    public void setSex(byte sex) {
+    public void setSex(Byte sex) {
         this.sex = sex;
     }
 }
