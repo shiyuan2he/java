@@ -1,8 +1,13 @@
 package com.hsy.java.java.base.utils;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -125,5 +130,46 @@ public class ConvertHelper {
             throw new RuntimeException(e);
         }
 	}
+    public static <T> void setDefault(Object data) {
+        try {
+            if(data instanceof List){
+                ((List) data).stream().forEach(entity -> setDefaultValue(entity));
+            }else{
+                setDefaultValue(data);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    /**
+     * @description <p>将值为null的字段改为""空字符串</p>
+     * @param
+     * @return
+     * @author heshiyuan
+     * @date 2018/5/22 13:26
+     */
+    private static void setDefaultValue(Object target) {
+        if (target != null) {
+            try {
+                BeanInfo beanInfo = Introspector.getBeanInfo(target.getClass(), Object.class);
+                PropertyDescriptor[] propertyDescripions = beanInfo.getPropertyDescriptors();
+
+                for (PropertyDescriptor propertyDescripion : propertyDescripions) {
+                    Object value = propertyDescripion.getReadMethod().invoke(target);
+                    if (value == null) {
+                        propertyDescripion.getWriteMethod().invoke(target,"");
+                    }
+                }
+            } catch (IntrospectionException e) {
+
+            } catch (IllegalArgumentException e) {
+
+            } catch (IllegalAccessException e) {
+
+            } catch (InvocationTargetException e) {
+
+            }
+        }
+    }
 }
 

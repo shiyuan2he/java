@@ -99,7 +99,7 @@ public class RandomHelper {
      */
     public static int generateRandomByLength(int length){
         if(length > 9) {
-            _logger.info("将要生成的随机数值大于int精度，请使用返回值为long的generateRandomByLength方法") ;
+            //_logger.info("将要生成的随机数值大于int精度，请使用返回值为long的generateRandomByLength方法") ;
             return 0;
         }
         StringBuilder str= new StringBuilder();//定义变长字符串
@@ -108,7 +108,7 @@ public class RandomHelper {
         for(int i=0;i<length;i++){
             str.append(random.nextInt(10));
         }
-        _logger.info("生成的随机数：{}",str.toString()) ;
+        //_logger.info("生成的随机数：{}",str.toString()) ;
         return Integer.parseInt(str.toString());
     }
 
