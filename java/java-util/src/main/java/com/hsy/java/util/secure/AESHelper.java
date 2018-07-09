@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Base64;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -32,7 +33,7 @@ public class AESHelper {
      * 6.返回字符串
      */
     public static String encode(String content) {
-        /*try {
+        try {
             //1.构造密钥生成器，指定为AES算法,不区分大小写
             KeyGenerator keygen = KeyGenerator.getInstance("AES");
             //2.根据ecnodeRules规则初始化密钥生成器
@@ -58,7 +59,7 @@ public class AESHelper {
             //这里用Base64Encoder中会找不到包
             //解决办法：
             //在项目的Build path中先移除JRE System Library，再添加库JRE System Library，重新编译后就一切正常了。
-            String AES_encode = new String(new BASE64Encoder().encode(byte_AES));
+            String AES_encode = new String(Base64.getEncoder().encode(byte_AES));
             //11.将字符串返回
             return AES_encode;
         } catch (NoSuchAlgorithmException e) {
@@ -73,7 +74,7 @@ public class AESHelper {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        }*/
+        }
         //如果有错就返加nulll
         return null;
     }
@@ -86,7 +87,7 @@ public class AESHelper {
      * 3.将加密内容解密
      */
     public static String decode(String content) {
-        /*try {
+        try {
             //1.构造密钥生成器，指定为AES算法,不区分大小写
             KeyGenerator keygen = KeyGenerator.getInstance("AES");
             //2.根据ecnodeRules规则初始化密钥生成器
@@ -105,10 +106,10 @@ public class AESHelper {
             //7.初始化密码器，第一个参数为加密(Encrypt_mode)或者解密(Decrypt_mode)操作，第二个参数为使用的KEY
             cipher.init(Cipher.DECRYPT_MODE, key);
             //8.将加密并编码后的内容解码成字节数组
-            byte[] byte_content = new BASE64Decoder().decodeBuffer(content);
-            *//*
+            byte[] byte_content = Base64.getDecoder().decode(content);
+            /*
              * 解密
-             *//*
+             */
             byte[] byte_decode = cipher.doFinal(byte_content);
             String AES_decode = new String(byte_decode, "utf-8");
             return AES_decode;
@@ -125,7 +126,7 @@ public class AESHelper {
             //e.printStackTrace();
         } catch (BadPaddingException e) {
             e.printStackTrace();
-        }*/
+        }
         //如果有错就返加nulll
         return null;
     }
