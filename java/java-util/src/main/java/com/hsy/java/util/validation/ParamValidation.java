@@ -1,7 +1,7 @@
 package com.hsy.java.util.validation;
 
 import com.hsy.java.exception.web.ParamValidationException;
-import com.hsy.java.java.base.string.StringHelper;
+import com.hsy.java.base.string.StringHelper;
 import org.springframework.validation.BindingResult;
 
 import static java.util.stream.Collectors.toList;

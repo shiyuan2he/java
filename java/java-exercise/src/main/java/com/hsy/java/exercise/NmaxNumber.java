@@ -1,6 +1,6 @@
 package com.hsy.java.exercise;
 
-import com.hsy.java.java.base.number.ArraySortHelper;
+import com.hsy.java.base.number.ArraySortHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
