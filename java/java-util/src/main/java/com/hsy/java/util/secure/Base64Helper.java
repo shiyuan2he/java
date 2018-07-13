@@ -73,7 +73,7 @@ public class Base64Helper {
 	public static String base64ToStringOfJdk(String originStr) {
         _logger.info("【jdk-base64-api】待解密的原始字符串{}",originStr);
 		byte[] b = null;
-		String targetStr = null;
+		String targetStr = "";
 		if (StringUtils.isNotBlank(originStr)) {
 			try {
 				b = java.util.Base64.getDecoder().decode(originStr);
@@ -98,7 +98,7 @@ public class Base64Helper {
     public static String stringToBase64OfCc(String originStr){
         _logger.info("【apache commons-codec-base64-api】待加密的原始字符串{}",originStr);
         if(StringUtils.isBlank(originStr)) return originStr ;
-        String targetStr = null;
+        String targetStr = "";
         byte[] b = null;
         try {
             if(StringHelper.isNotNullOrEmpty(originStr)){
@@ -125,7 +125,7 @@ public class Base64Helper {
     public static String base64ToStringOfCc(String originStr){
         _logger.info("【apache commons-codec-base64-api】待解密的原始字符串{}",originStr);
         if(StringUtils.isBlank(originStr)) return originStr ;
-        String targetStr = null;
+        String targetStr = "";
         byte[] b = null;
         try {
             if(StringHelper.isNotNullOrEmpty(originStr)){
@@ -152,7 +152,7 @@ public class Base64Helper {
     public static String stringToBase64OfBc(String originStr){
         _logger.info("【bouncycastle-base64-api】待加密的原始字符串{}",originStr);
         if(StringUtils.isBlank(originStr)) return originStr ;
-        String targetStr = null;
+        String targetStr = "";
         byte[] b = null;
         try {
             if(StringHelper.isNotNullOrEmpty(originStr)){
@@ -180,7 +180,7 @@ public class Base64Helper {
         _logger.info("【bouncycastle-base64-api】待解密的原始字符串{}",originStr);
         
         if(StringUtils.isBlank(originStr)) return originStr ;
-        String targetStr = null;
+        String targetStr = "";
         byte[] b = null;
         try {
             if(StringHelper.isNotNullOrEmpty(originStr)){
@@ -190,6 +190,7 @@ public class Base64Helper {
             targetStr = new String(b, CHARSET);
         } catch (UnsupportedEncodingException e) {
             _logger.error("【bouncycastle-base64-api】解密字符串{}遇到异常，异常信息：{}",originStr,e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
         _logger.info("【bouncycastle-base64-api】解密后的字符串{}",targetStr);
         return targetStr ;
