@@ -4,6 +4,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * @description <p>字符串帮助类的单元测试类</p>
  * @path javase-base/com.hsy.codebase.utils.javase.string
@@ -62,5 +64,15 @@ public class StringHelperTest {
         _logger.info("----------------------------------------");
 		_logger.info(StringHelper.replacementWithBrace("{}可转出{}傻傻的发呆{}","sf","sdf",34342)) ;
 	}
+    @Test
+    public void testString(){
+        String ss = "{\"hmac\":\"hmac\",\"status\":\"0\",\"code\":\"CS0000\",\"msg\":\"success\",\"data\":{\"totalPage\":1,\"pageSize\":3,\"list\":[{\"fundCode\":\"000007\",\"incomeIndex\":\"?????\",\"fundName\":\"??1\",\"incomeData\":\"1.25%\"},{\"fundCode\":\"000011\",\"incomeIndex\":\"?????\",\"fundName\":\"??2\",\"incomeData\":\"8.25%\"},{\"fundCode\":\"000004\",\"incomeIndex\":\"?????\",\"fundName\":\"?????????C\",\"incomeData\":\"-18.86%\"}],\"totalCount\":3,\"pageNum\":1}}";
+        try {
+            String str = new String(ss.getBytes("ISO-8859-1"),"utf-8");
+            _logger.info(str);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

@@ -67,13 +67,13 @@ public class FixedThreadPool {
         }
     }
 
-    private FixedThreadPool(int threadPoolNum) {
+    private FixedThreadPool(int threadPoolNum, String threadName) {
         ExecutorService result = fixedThreadPool ;
         if(null == result) {
             synchronized (ExecutorService.class) {
                 result = fixedThreadPool;
                 if (null == result) {
-                    _logger.info("正在初始化一个({})线程数的线程池：", threadPoolNum);
+                    _logger.info("正在初始化一个({})线程数的线程池", threadPoolNum);
                     this.fixedThreadPool = Executors.newFixedThreadPool(threadPoolNum, new ThreadFactory() {
 
                         SecurityManager s = System.getSecurityManager();
@@ -85,9 +85,14 @@ public class FixedThreadPool {
                         private final String namePrefix = "fixedThreadPool-" + poolNumber.getAndIncrement() + "-thread-";
 
                         public Thread newThread(Runnable runnable) {
-                            _logger.info("正在new一个线程，线程(ID:{})：", namePrefix + threadNumber.intValue());
                             // 线程池新线程
-                            Thread thread = new Thread(group, runnable,namePrefix + threadNumber.getAndIncrement(), 0);
+                            Thread thread = null;
+                            if(null==threadName){
+                                thread = new Thread(group, runnable,namePrefix + threadNumber.getAndIncrement(), 0);
+                            }else{
+                                thread = new Thread(group, runnable,threadName, 0);
+                            }
+                            _logger.info("正在new一个线程，线程(ThreadName:{})：", Thread.currentThread().getName());
                             if (thread.isDaemon()) thread.setDaemon(false);
                             if (thread.getPriority() != Thread.NORM_PRIORITY) thread.setPriority(Thread.NORM_PRIORITY);
                             return thread ;
@@ -129,8 +134,25 @@ public class FixedThreadPool {
             synchronized (FixedThreadPool.class){
                 result = instance ;
                 if(null == result){
-                    _logger.info("正在new一个FixedThreadPool对象，参数poolSize({})");
-                    result = instance = new FixedThreadPool(poolSize);
+                    _logger.info("正在new一个FixedThreadPool对象，参数poolSize({})", poolSize);
+                    result = instance = new FixedThreadPool(poolSize, null);
+                }
+            }
+        }
+        return result ;
+    }
+    public static FixedThreadPool getInstince(int poolSize, String threadName){
+        FixedThreadPool result = instance ;
+        // 如果是null就锁类并实例化
+        if(null == result){
+            /**
+             * 锁类并再次判断实例是否为空，否则new
+             */
+            synchronized (FixedThreadPool.class){
+                result = instance ;
+                if(null == result){
+                    _logger.info("正在new一个FixedThreadPool对象，参数poolSize({})", poolSize);
+                    result = instance = new FixedThreadPool(poolSize, threadName);
                 }
             }
         }
