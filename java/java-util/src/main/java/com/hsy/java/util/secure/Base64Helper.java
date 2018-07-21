@@ -3,6 +3,7 @@ package com.hsy.java.util.secure;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +37,7 @@ public class Base64Helper {
 	 * @copyright	此方法版权归本人所有，复制或者剪切请通知本人或者捐赠 通知方式：shiyuan4work@sina.com
 	 * @callnumber 15003828090
 	 */
-	/*public static String stringToBase64OfJdk(String originStr) {
+	public static String stringToBase64OfJdk(String originStr) {
         _logger.info("【jdk-base64-api】待加密的原始字符串{}",originStr);
 		byte[] b = null;
 		String targetStr = originStr;
@@ -48,11 +49,11 @@ public class Base64Helper {
             _logger.error("【jdk-base64-api】加密字符串{}遇到异常，异常信息：{}",originStr,e.getMessage());
 		}
 		if (b != null) {
-            targetStr = new BASE64Encoder().encode(b);
+            targetStr = java.util.Base64.getEncoder().encodeToString(b);
             _logger.info("【jdk-base64-api】加密后的字符串{}",targetStr);
 		}
 		return targetStr;
-	}*/
+	}
 
 	/**
 	 * 
@@ -69,14 +70,13 @@ public class Base64Helper {
 	 * @copyright	此方法版权归本人所有，复制或者剪切请通知本人或者捐赠 通知方式：shiyuan4work@sina.com
 	 * @callnumber 15003828090
 	 */
-	/*public static String base64ToStringOfJdk(String originStr) {
+	public static String base64ToStringOfJdk(String originStr) {
         _logger.info("【jdk-base64-api】待解密的原始字符串{}",originStr);
 		byte[] b = null;
 		String targetStr = null;
-		if (StringHelper.isNotBlank(originStr)) {
-			BASE64Decoder decoder = new BASE64Decoder();
+		if (StringUtils.isNotBlank(originStr)) {
 			try {
-				b = decoder.decodeBuffer(originStr);
+				b = java.util.Base64.getDecoder().decode(originStr);
 				targetStr = new String(b, CHARSET);
 			} catch (Exception e) {
                 _logger.error("【jdk-base64-api】加密字符串{}遇到异常，异常信息：{}",originStr,e.getMessage());
@@ -84,7 +84,7 @@ public class Base64Helper {
 		}
         _logger.info("【jdk-base64-api】解密后的字符串{}",targetStr);
 		return targetStr;
-	}*/
+	}
     /**
      * @description <p>apache commons-codec加解密包</p>
      * @param originStr 加密前的字符串
@@ -97,7 +97,7 @@ public class Base64Helper {
      */
     public static String stringToBase64OfCc(String originStr){
         _logger.info("【apache commons-codec-base64-api】待加密的原始字符串{}",originStr);
-        if(StringHelper.isNullOrEmpty(originStr)) return originStr ;
+        if(StringUtils.isBlank(originStr)) return originStr ;
         String targetStr = null;
         byte[] b = null;
         try {
@@ -124,7 +124,7 @@ public class Base64Helper {
      */
     public static String base64ToStringOfCc(String originStr){
         _logger.info("【apache commons-codec-base64-api】待解密的原始字符串{}",originStr);
-        if(StringHelper.isNullOrEmpty(originStr)) return originStr ;
+        if(StringUtils.isBlank(originStr)) return originStr ;
         String targetStr = null;
         byte[] b = null;
         try {
@@ -151,7 +151,7 @@ public class Base64Helper {
      */
     public static String stringToBase64OfBc(String originStr){
         _logger.info("【bouncycastle-base64-api】待加密的原始字符串{}",originStr);
-        if(StringHelper.isNullOrEmpty(originStr)) return originStr ;
+        if(StringUtils.isBlank(originStr)) return originStr ;
         String targetStr = null;
         byte[] b = null;
         try {
@@ -178,7 +178,8 @@ public class Base64Helper {
      */
     public static String base64ToStringOfBc(String originStr){
         _logger.info("【bouncycastle-base64-api】待解密的原始字符串{}",originStr);
-        if(StringHelper.isNullOrEmpty(originStr)) return originStr ;
+        
+        if(StringUtils.isBlank(originStr)) return originStr ;
         String targetStr = null;
         byte[] b = null;
         try {

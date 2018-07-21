@@ -217,17 +217,14 @@ public class EntityGenerator {
             } ;*/
     private static final String[] tableName =
             {
-                    "t_cms_check",
-                    "t_cms_picture",
-                    "t_cms_dict",
-                    "t_cms_information",
+                    "CFundPchRedm"
             } ;
     //private static final String driver = "org.mariadb.jdbc.Driver" ;
     //private static final String url = "jdbc:mariadb://192.168.6.101:3306/qyjr?useUnicode=true&characterEncoding=UTF-8" ;
     private static final String driver = "com.mysql.jdbc.Driver" ;
-    private static final String url = "jdbc:mysql://172.16.191.102:3306/cms?useUnicode=true&autoReconnect=true&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull" ;
+    private static final String url = "jdbc:mysql://192.168.6.209:3306/wind_db?useUnicode=true&autoReconnect=true&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull" ;
     private static final String username = "root" ;
-    private static final String password = "root@mariadb" ;
+    private static final String password = "htbuy@2016" ;
     public static void main(String[] args){
         for (int i = 0; i < tableName.length; i++) {
             new EntityGenerator(packageNames,tableName[i], url,

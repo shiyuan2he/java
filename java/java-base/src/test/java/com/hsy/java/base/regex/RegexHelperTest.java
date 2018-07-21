@@ -6,6 +6,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author heshiyuan
  * @description <p></p>
@@ -21,14 +24,25 @@ public class RegexHelperTest extends JUnit4Base {
     @Test
     public void testNumberIntercept() throws Exception {
         String str = "fsdfsdf当时发生的发生地方34舒服的234 多福多寿日人399938" ;
-        RegexHelper.numberIntercept(str) ;
+        // RegexHelper.numberIntercept(str) ;
+        Matcher matcher = Pattern.compile("[0-9]").matcher(str);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()){
+            sb.append(matcher.group());
+        }
+        _logger.info(sb.toString());
     }
 
     @Test
     public void testCheckCellPhone(){
         for(int i=0;i<1000;i++){
-            String mobile = RandomHelper.generateStringByLength(11);
-            _logger.info("{}是否是手机号：{}", mobile, RegexHelper.checkCellphone(mobile));
+            new Runnable(){
+                @Override
+                public void run() {
+                    String mobile = RandomHelper.generateStringByLength(11);
+                    _logger.info("{}是否是手机号：{}", mobile, RegexHelper.checkCellphone(mobile));
+                }
+            };
         }
         try {
             Thread.sleep(10000);
