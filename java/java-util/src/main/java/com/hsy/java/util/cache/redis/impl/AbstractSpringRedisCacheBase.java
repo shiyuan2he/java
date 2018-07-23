@@ -5,10 +5,7 @@ import com.hsy.java.exception.cache.CacheException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.core.*;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
@@ -30,6 +27,10 @@ public abstract class AbstractSpringRedisCacheBase {
     private final Logger _logger = LoggerFactory.getLogger(this.getClass()) ;
 
     public abstract RedisTemplate<String,Object> getRedisTemplate() ;
+    public abstract StringRedisTemplate getStringRedisTemplate() ;
+    protected final static String TIMEOUT_PREFIX = "TO:";
+    protected final static String TIMEEVER_PREFIX = "NO:";
+    protected final static String LOCK_PREFIX = "LOCK:";
 
     public void deleteCacheByKey(String key) {
         this.getRedisTemplate().delete(key);
