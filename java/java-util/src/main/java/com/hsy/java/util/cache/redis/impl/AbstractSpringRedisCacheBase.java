@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author heshiyuan
@@ -24,64 +25,27 @@ import java.util.Set;
  */
 public abstract class AbstractSpringRedisCacheBase {
 
-    private final Logger _logger = LoggerFactory.getLogger(this.getClass()) ;
-
-    public abstract RedisTemplate<String,Object> getRedisTemplate() ;
-    public abstract StringRedisTemplate getStringRedisTemplate() ;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
     protected final static String TIMEOUT_PREFIX = "TO:";
     protected final static String TIMEEVER_PREFIX = "NO:";
     protected final static String LOCK_PREFIX = "LOCK:";
-
-    public void deleteCacheByKey(String key) {
-        this.getRedisTemplate().delete(key);
-    }
-
-    public void deleteCacheByKeys(String... keys) {
-        if(!org.springframework.util.StringUtils.isEmpty(keys) && keys.length != 0) {
-            try{
-                if(keys.length == 1) {
-                    if(org.springframework.util.StringUtils.isEmpty(keys[0])) {
-                        throw new IllegalArgumentException("指定删除的key不能为空");
-                    }
-                    this.getRedisTemplate().delete(keys[0]);
-                } else {
-                    this.getRedisTemplate().delete(Arrays.asList(keys));
-                }
-            }catch(Exception e){
-                throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
+    protected void consoleLog(String key, long timeOut, TimeUnit timeUnit){
+        if (0!=timeOut && null!=timeUnit){
+            if(TimeUnit.DAYS == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}天；", key, timeOut);
+            }else if(TimeUnit.HOURS == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}小时；", key, timeOut);
+            }else if(TimeUnit.MINUTES == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}分钟；", key, timeOut);
+            }else if(TimeUnit.SECONDS == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}秒；", key, timeOut);
+            }else{
+                logger.info("设值缓存成功！key：{};过期时间：{}毫秒；", key, timeOut);
             }
-        } else {
-            throw new IllegalArgumentException("指定删除的key不能为空");
-        }
-    }
-
-    public void deleteCacheWithPattern(String pattern) {
-        if(org.springframework.util.StringUtils.isEmpty(pattern)) {
-            throw new IllegalArgumentException("指定删除的key不能为空");
-        } else {
-            Set<String> keys = this.getRedisTemplate().keys(pattern);
-            this.getRedisTemplate().delete(keys);
-        }
-    }
-
-    public void clearCache() {
-        deleteCacheWithPattern("*");
-    }
-
-    public void deleteByPrefix(String prex) {
-        if(org.springframework.util.StringUtils.isEmpty(prex)) {
-            throw new IllegalArgumentException("指定删除的key前缀不能为空");
-        } else {
-            Set<String> keys = this.getRedisTemplate().keys(prex + "*");
-            this.getRedisTemplate().delete(keys);
-        }
-    }
-    public void deleteBySuffix(String suffix) {
-        if(org.springframework.util.StringUtils.isEmpty(suffix)) {
-            throw new IllegalArgumentException("指定删除的key后缀不能为空");
-        } else {
-            Set<String> keys = this.getRedisTemplate().keys("*" + suffix);
-            this.getRedisTemplate().delete(keys);
+        }else if(0!=timeOut && null==timeUnit){
+            logger.info("设值缓存成功！key：{};过期时间：{}秒；", key, timeOut);
+        }else{
+            logger.info("设值缓存成功！key：{};", key);
         }
     }
 }

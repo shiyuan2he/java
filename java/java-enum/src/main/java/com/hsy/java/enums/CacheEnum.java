@@ -19,6 +19,7 @@ public enum CacheEnum {
     CACHE_KEY_IMAGE_CODE("base:service:image:","base-service图形验证码key,过期时间2分钟",5 * 60l),
 
     CACHE_HANDLE_SET_EXCEPTION("cache9999","缓存set异常"),
+    CACHE_HANDLE_INCREMENT_EXCEPTION("cache9999","INCREMENT异常"),
     CACHE_HANDLE_GET_EXCEPTION("cache9999","缓存get异常"),
     CACHE_HANDLE_DELETE_EXCEPTION("cache9999","缓存delete异常")
     ;
