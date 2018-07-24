@@ -52,6 +52,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
             valueOperations.set(key,obj);
             return true ;
         }catch(Exception e){
+            _logger.info("{}", e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
         }
     }
