@@ -28,24 +28,118 @@ import java.util.concurrent.TimeUnit;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
+@SuppressWarnings("Duplicates")
 public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedisCacheBase{
 
-    private final Logger _logger = LoggerFactory.getLogger(this.getClass()) ;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
 
+    private ValueOperations<String,String> stringValueOperations;
     private ValueOperations<String,Object> valueOperations;
     private ListOperations<String,Object> listOperations;
     private HashOperations hashOperations;
 
     @PostConstruct
     public void getValueOperation(){
+        stringValueOperations = getStringRedisTemplate().opsForValue();
         valueOperations = getRedisTemplate().opsForValue();
         listOperations = getRedisTemplate().opsForList();
         hashOperations = getRedisTemplate().opsForHash();
     }
+    /**
+     * @description <p>保存字符串类型的值</p>
+     * @param key 键
+     * @param value 值
+     * @return boolean 保存是否成功
+     * @author heshiyuan 
+     * @date 2018/7/23 21:59 
+     * @email shiyuan4work@sina.com
+     * @github https://github.com/shiyuan2he.git
+     * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
+     */
+    public boolean set(String key, String value){
+        if(StringUtils.isBlank(key)){
+            logger.error("key is null");
+            return false;
+        }
+        try{
+            stringValueOperations.set(TIMEEVER_PREFIX + key, value);
+            consoleLog(TIMEEVER_PREFIX + key, 0, null);
+            return true ;
+        }catch(Exception e){
+            logger.error("设值缓存成功！失败信息：{}", e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
+        }
+    }
+    /**
+     * @description <p>采用默认 过期单位指定过期时间的值</p>
+     * @param key 键
+     * @param value 值
+     * @param timeOut 过期时间
+     * @return boolean 是否设值成功
+     * @author heshiyuan
+     * @date 2018/7/23 22:18 
+     * @email shiyuan4work@sina.com
+     * @github https://github.com/shiyuan2he.git
+     * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
+     */
+    public boolean set(String key, String value, long timeOut){
+        if(StringUtils.isBlank(key)){
+            logger.error("key is null");
+            return false;
+        }
+        try{
+            stringValueOperations.set(TIMEOUT_PREFIX + key, value, timeOut);
+            consoleLog(TIMEOUT_PREFIX + key, timeOut, null);
+            return true ;
+        }catch(Exception e){
+            logger.error("设值缓存成功！失败信息：{}", e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
+        }
+    }
+    /**
+     * @description <p>给key设值值、过期时间</p>
+     * @param key 键
+     * @param value 值
+     * @param timeOut 过期时间
+     * @param timeUnit 过期单位
+     * @return boolean 设值是否成功
+     * @author heshiyuan
+     * @date 2018/7/23 22:48
+     * @email shiyuan4work@sina.com
+     * @github https://github.com/shiyuan2he.git
+     * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
+     */
+    public boolean set(String key, String value, long timeOut, TimeUnit timeUnit){
+        if(StringUtils.isBlank(key)){
+            logger.error("key is null");
+            return false;
+        }
+        try{
+            stringValueOperations.set(TIMEOUT_PREFIX + key, value, timeOut, timeUnit);
+            consoleLog(TIMEOUT_PREFIX + key, timeOut, timeUnit);
+            return true ;
+        }catch(Exception e){
+            logger.error("设值缓存成功！失败信息：{}", e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
+        }
+    }
+    public boolean get(String key){
+        if(StringUtils.isBlank(key)){
+            logger.error("key is null");
+            return false;
+        }
+        try{
+            stringValueOperations.get(key);
+            return true ;
+        }catch(Exception e){
+            logger.error("设值缓存成功！失败信息：{}", e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
+        }
+    }
 
     public <T> boolean putCache(String key, T obj){
         if(StringUtils.isBlank(key)){
-            _logger.error("key is null");
+            logger.error("key is null");
             return false ;
         }
         try{
@@ -59,7 +153,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
 
     public <T> boolean putCacheWithExpireTime(String key, T obj, long expireTime){
         if(StringUtils.isBlank(key)){
-            _logger.error("key is null");
+            logger.error("key is null");
             return false ;
         }
         try{
@@ -72,7 +166,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
 
     public <T> boolean putCacheWithExpireTimeAndTimeUnit(String key, T obj, long expireTime, TimeUnit timeUnit){
         if(StringUtils.isBlank(key)){
-            _logger.error("key is null");
+            logger.error("key is null");
             return false ;
         }
         try{
@@ -85,7 +179,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
 
     public <T> boolean putListCache(String key, List<T> objList) {
         if(StringUtils.isBlank(key)){
-            _logger.error("key is null");
+            logger.error("key is null");
             return false ;
         }
         try{
@@ -97,7 +191,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
 
     public <T> boolean putListCacheWithExpireTime(String key, List<T> objList, long expireTime) {
         if(StringUtils.isBlank(key)){
-            _logger.error("key is null");
+            logger.error("key is null");
             return false ;
         }
         try{
@@ -110,10 +204,10 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
 
     private boolean listPushResult(Long count){
         if(count > 0){
-            _logger.error("list leftPush success;set {} count",count);
+            logger.error("list leftPush success;set {} count",count);
             return true ;
         }else{
-            _logger.error("list leftPush error");
+            logger.error("list leftPush error");
             return false ;
         }
     }
@@ -124,5 +218,25 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
 
     public <T> List<T> getListCache(String key) {
         return (List<T>) listOperations.leftPop(key);
+    }
+
+    private void consoleLog(String key, long timeOut, TimeUnit timeUnit){
+        if (0!=timeOut && null!=timeUnit){
+            if(TimeUnit.DAYS == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}天；", key, timeOut);
+            }else if(TimeUnit.HOURS == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}小时；", key, timeOut);
+            }else if(TimeUnit.MINUTES == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}分钟；", key, timeOut);
+            }else if(TimeUnit.SECONDS == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}秒；", key, timeOut);
+            }else{
+                logger.info("设值缓存成功！key：{};过期时间：{}毫秒；", key, timeOut);
+            }
+        }else if(0!=timeOut && null==timeUnit){
+            logger.info("设值缓存成功！key：{};过期时间：{}毫秒；", key, timeOut);
+        }else{
+            logger.info("设值缓存成功！key：{};", key);
+        }
     }
 }
