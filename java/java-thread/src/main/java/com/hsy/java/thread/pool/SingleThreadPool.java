@@ -29,7 +29,7 @@ public class SingleThreadPool {
                 if(null == result){
                     //this.singleThreadPool = Executors.newSingleThreadExecutor() ;
                     // 1个线程的固定数量线程池
-                    this.singleThreadPool = FixedThreadPool.getInstince(1).getFixedThreadPool() ;
+                    this.singleThreadPool = FixedThreadPool.getInstince(1, null).getFixedThreadPool() ;
                 }
             }
         }

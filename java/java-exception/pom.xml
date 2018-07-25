@@ -16,28 +16,6 @@
             <groupId>com.hsy.java</groupId>
             <artifactId>java-enum</artifactId>
         </dependency>
-        <!-- logback + slf4j start -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-        <!-- logback + slf4j end -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hsy.java</groupId>
-            <artifactId>java-bean</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

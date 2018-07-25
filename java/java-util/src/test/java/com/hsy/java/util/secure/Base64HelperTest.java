@@ -20,6 +20,11 @@ import com.hsy.java.util.secure.Base64Helper;
 public class Base64HelperTest {
     private final Logger _logger = LoggerFactory.getLogger(this.getClass());
     @Test
+    public void testStringToBase64OfJdk(){
+        _logger.info(Base64Helper.base64ToStringOfJdk(Base64Helper.stringToBase64OfJdk("hello world")));
+    }
+
+    @Test
     public void testStringToBase64OfCc(){
         _logger.info(Base64Helper.base64ToStringOfCc(Base64Helper.stringToBase64OfCc("hello world")));
     }

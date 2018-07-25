@@ -1,19 +1,4 @@
 package com.hsy.java.exception.handle;
-
-import java.io.PrintWriter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.alibaba.fastjson.JSON;
-import com.hsy.java.bean.dto.ResponseBodyBean;
-import com.hsy.java.exception.service.BusinessException;
-
 /**
  * @author heshiyuan
  * @description <p></p>
@@ -24,7 +9,7 @@ import com.hsy.java.exception.service.BusinessException;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class GlobalExceptionHandle implements HandlerExceptionResolver {
+/*public class GlobalExceptionHandle implements HandlerExceptionResolver {
     private final Logger _logger = LoggerFactory.getLogger(this.getClass());
     private String defaultView ;
     @Override
@@ -69,4 +54,4 @@ public class GlobalExceptionHandle implements HandlerExceptionResolver {
     public void setDefaultView(String defaultView) {
         this.defaultView = defaultView;
     }
-}
+}*/

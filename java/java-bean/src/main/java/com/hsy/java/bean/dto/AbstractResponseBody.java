@@ -11,4 +11,5 @@ package com.hsy.java.bean.dto;
  * @price ¥5    微信：hewei1109
  */
 public abstract class AbstractResponseBody {
+    
 }

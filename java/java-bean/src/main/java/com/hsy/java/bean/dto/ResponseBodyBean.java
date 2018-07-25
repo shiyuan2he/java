@@ -1,6 +1,7 @@
 package com.hsy.java.bean.dto;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * 
@@ -19,6 +20,8 @@ public class ResponseBodyBean<T> extends AbstractResponseBody implements Seriali
     private String msg ;
 
     private T data;
+
+    private Map<String, Object> link;
 
     public ResponseBodyBean(boolean success, String code , String msg) {
         this.success = success;
@@ -71,5 +74,13 @@ public class ResponseBodyBean<T> extends AbstractResponseBody implements Seriali
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public Map<String, Object> getLink() {
+        return link;
+    }
+
+    public void setLink(Map<String, Object> link) {
+        this.link = link;
     }
 }

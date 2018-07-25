@@ -2,18 +2,19 @@ package com.hsy.java.util.cache.redis.impl;
 
 import com.hsy.java.enums.CacheEnum;
 import com.hsy.java.exception.cache.CacheException;
+import com.hsy.java.util.cache.ICacheBase;
+import com.hsy.java.util.serializer.SerializerHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.ListOperations;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.*;
 
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author heshiyuan
@@ -25,62 +26,110 @@ import java.util.Set;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public abstract class AbstractSpringRedisCacheBase {
+public abstract class AbstractSpringRedisCacheBase implements ICacheBase {
 
-    private final Logger _logger = LoggerFactory.getLogger(this.getClass()) ;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+    protected final static String TIMEOUT_PREFIX = "TO:";
+    protected final static String TIMEEVER_PREFIX = "NO:";
+    protected final static String LOCK_PREFIX = "LOCK:";
+    // 字符型
+    public abstract StringRedisTemplate getStringRedisTemplate();
+    // 泛型
+    public abstract RedisTemplate<String, Object> getRedisTemplate();
 
-    public abstract RedisTemplate<String,Object> getRedisTemplate() ;
-
-    public void deleteCacheByKey(String key) {
-        this.getRedisTemplate().delete(key);
+    public <T> boolean putCache(String key, T obj) {
+        if(StringUtils.isBlank(key)){
+            logger.error("key is null");
+            return false ;
+        }
+        final byte[] bkey = key.getBytes() ;
+        final byte[] bvalue = SerializerHelper.serialize(obj) ;
+        // java8 labbda表达式
+        return getRedisTemplate().execute(
+            (RedisConnection redisConnection) -> redisConnection.setNX(bkey,bvalue)
+        ) ;
     }
 
-    public void deleteCacheByKeys(String... keys) {
-        if(!org.springframework.util.StringUtils.isEmpty(keys) && keys.length != 0) {
-            try{
-                if(keys.length == 1) {
-                    if(org.springframework.util.StringUtils.isEmpty(keys[0])) {
-                        throw new IllegalArgumentException("指定删除的key不能为空");
-                    }
-                    this.getRedisTemplate().delete(keys[0]);
-                } else {
-                    this.getRedisTemplate().delete(Arrays.asList(keys));
-                }
-            }catch(Exception e){
-                throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
+    public <T> boolean putCacheWithExpireTime(String key, T obj, long expireTime){
+        if(StringUtils.isBlank(key)){
+            logger.error("key is null");
+            return false ;
+        }
+        final byte[] bkey = key.getBytes() ;
+        final byte[] bvalue = SerializerHelper.serialize(obj) ;
+        return this.getRedisTemplate().execute(
+            (RedisConnection redisConnection) -> {
+                redisConnection.setEx(bkey,expireTime,bvalue);
+                return true;
             }
-        } else {
-            throw new IllegalArgumentException("指定删除的key不能为空");
-        }
+        ) ;
     }
 
-    public void deleteCacheWithPattern(String pattern) {
-        if(org.springframework.util.StringUtils.isEmpty(pattern)) {
-            throw new IllegalArgumentException("指定删除的key不能为空");
-        } else {
-            Set<String> keys = this.getRedisTemplate().keys(pattern);
-            this.getRedisTemplate().delete(keys);
+    public <T> boolean putListCache(String key, List<T> objList) {
+        if(StringUtils.isBlank(key)){
+            logger.error("key is null");
+            return false ;
         }
+        final byte[] bkey = key.getBytes() ;
+        final byte[] bvalue = SerializerHelper.serializeList(objList) ;
+        // java8 labbda表达式
+        return getRedisTemplate().execute(
+            (RedisConnection redisConnection) -> redisConnection.setNX(bkey,bvalue)
+        ) ;
     }
 
-    public void clearCache() {
-        deleteCacheWithPattern("*");
+    public <T> boolean putListCacheWithExpireTime(String key, List<T> objList, long expireTime) {
+        if(StringUtils.isBlank(key)){
+            logger.error("key is null");
+            return false ;
+        }
+        final byte[] bkey = key.getBytes() ;
+        final byte[] bvalue = SerializerHelper.serializeList(objList) ;
+        return this.getRedisTemplate().execute(
+            (RedisConnection redisConnection) -> {
+                redisConnection.setEx(bkey,expireTime,bvalue);
+                return true;
+            }
+        ) ;
     }
 
-    public void deleteByPrefix(String prex) {
-        if(org.springframework.util.StringUtils.isEmpty(prex)) {
-            throw new IllegalArgumentException("指定删除的key前缀不能为空");
-        } else {
-            Set<String> keys = this.getRedisTemplate().keys(prex + "*");
-            this.getRedisTemplate().delete(keys);
+    public <T> T getCache(String key, Class<T> targetClass) {
+        byte[] result = this.getRedisTemplate().execute(
+                (RedisConnection redisConnection) -> redisConnection.get(key.getBytes())
+        );
+        if(null == result){
+            return null ;
         }
+        return SerializerHelper.deserialize(result,targetClass);
     }
-    public void deleteBySuffix(String suffix) {
-        if(org.springframework.util.StringUtils.isEmpty(suffix)) {
-            throw new IllegalArgumentException("指定删除的key后缀不能为空");
-        } else {
-            Set<String> keys = this.getRedisTemplate().keys("*" + suffix);
-            this.getRedisTemplate().delete(keys);
+
+    public <T> List<T> getListCache(String key, Class<T> targetClass) {
+        byte[] result = this.getRedisTemplate().execute(
+                (RedisConnection redisConnection) -> redisConnection.get(key.getBytes())
+        );
+        if(null == result){
+            return null ;
+        }
+        return SerializerHelper.deserializeList(result,targetClass);
+    }
+    
+    protected void consoleLog(String key, long timeOut, TimeUnit timeUnit){
+        if (0!=timeOut && null!=timeUnit){
+            if(TimeUnit.DAYS == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}天；", key, timeOut);
+            }else if(TimeUnit.HOURS == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}小时；", key, timeOut);
+            }else if(TimeUnit.MINUTES == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}分钟；", key, timeOut);
+            }else if(TimeUnit.SECONDS == timeUnit){
+                logger.info("设值缓存成功！key：{};过期时间：{}秒；", key, timeOut);
+            }else{
+                logger.info("设值缓存成功！key：{};过期时间：{}毫秒；", key, timeOut);
+            }
+        }else if(0!=timeOut && null==timeUnit){
+            logger.info("设值缓存成功！key：{};过期时间：{}秒；", key, timeOut);
+        }else{
+            logger.info("设值缓存成功！key：{};", key);
         }
     }
 }
