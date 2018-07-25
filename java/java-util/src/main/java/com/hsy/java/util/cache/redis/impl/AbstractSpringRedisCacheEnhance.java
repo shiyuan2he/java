@@ -10,11 +10,9 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.*;
 
 import javax.annotation.PostConstruct;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * @author heshiyuan
@@ -31,14 +29,12 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
 
-    private ValueOperations<String,Object> valueOperations;
-    private ListOperations<String,Object> listOperations;
+    private ValueOperations<String, Object> valueOperations;
+    private ListOperations<String, Object> listOperations;
     private SetOperations<String, Object> setOperations;
     private ZSetOperations<String, Object> zSetOperations;
     private HashOperations hashOperations;
     private GeoOperations<String, Object> geoOperations;
-
-    public abstract RedisTemplate<String,Object> getRedisTemplate();
     @PostConstruct
     public void getValueOperation(){
         logger.info("正在初始化redis。。。");
@@ -61,7 +57,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
      */
-    public boolean set(String key, Object value) {
+    public boolean valueSet(String key, Object value) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return false;
@@ -81,11 +77,11 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
     }
 
     /**
+     * @description <p>采用默认 过期单位指定过期时间的值,此方法经测试有问题，不建议使用</p>
      * @param key     键
      * @param value   值
      * @param timeOut 过期时间
      * @return boolean 是否设值成功
-     * @description <p>采用默认 过期单位指定过期时间的值,此方法经测试有问题，不建议使用</p>
      * @author heshiyuan
      * @date 2018/7/23 22:18
      * @email shiyuan4work@sina.com
@@ -93,7 +89,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
      */
     @Deprecated
-    public boolean set(String key, Object value, long timeOut) {
+    public boolean valueSet(String key, Object value, long timeOut) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return false;
@@ -127,7 +123,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
      */
-    public boolean set(String key, Object value, long timeOut, TimeUnit timeUnit) {
+    public boolean valueSet(String key, Object value, long timeOut, TimeUnit timeUnit) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return false;
@@ -156,7 +152,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 9:00
      */
-    public Object get(String key, boolean isTimeOutkey) {
+    public Object valueGet(String key, boolean isTimeOutkey) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -188,7 +184,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 9:12
      */
-    public Object getAndSet(String key, Object value, boolean isTimeOutKey) {
+    public Object valueGetAndSet(String key, Object value, boolean isTimeOutKey) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -220,7 +216,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 9:12
      */
-    public long increment(String key, long value, long timeLive, TimeUnit timeUnit) {
+    public long valueIncrement(String key, long value, long timeLive, TimeUnit timeUnit) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return 0;
@@ -258,7 +254,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 9:12
      */
-    public double increment(String key, double value, long timeLive, TimeUnit timeUnit) {
+    public double valueIncrement(String key, double value, long timeLive, TimeUnit timeUnit) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return 0;
@@ -294,7 +290,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 13:54
      */
-    public long addSet(String key, String... values) {
+    public long setAdd(String key, Object ... values) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return 0;
@@ -321,7 +317,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 13:55
      */
-    public String popSet(String key) {
+    public Object setPop(String key) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -349,7 +345,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:05
      */
-    public Set<String> difference(String key, String otherKey) {
+    public Set<Object> setDifference(String key, String otherKey) {
         if (StringUtils.isBlank(key) || StringUtils.isBlank(otherKey)) {
             logger.error("key is null");
             return null;
@@ -380,7 +376,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:05
      */
-    public long differenceAndStore(String key, String otherKey, String storeKey) {
+    public long setDifferenceAndStore(String key, String otherKey, String storeKey) {
         if (StringUtils.isBlank(key) || StringUtils.isBlank(otherKey) || StringUtils.isBlank(storeKey)) {
             logger.error("key is null");
             return 0;
@@ -412,7 +408,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public String indexList(String key, long index) {
+    public Object listIndex(String key, long index) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -440,7 +436,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public long leftPush(String key, Object value) {
+    public long listLeftPush(String key, Object value) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return 0;
@@ -468,7 +464,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public long rightPush(String key, Object value) {
+    public long listRightPush(String key, Object value) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return 0;
@@ -495,7 +491,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public String leftPop(String key) {
+    public Object listLeftPop(String key) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -522,7 +518,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public String rightPop(String key) {
+    public Object listRightPop(String key) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -548,7 +544,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public long size(String key) {
+    public long listSize(String key) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return 0;
@@ -574,7 +570,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public List<String> range(String key, long start, long end) {
+    public List<Object> listRange(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -602,7 +598,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @date 2018/7/24 14:51
      */
     @Deprecated
-    public long remove(String key, long start, long end) {
+    public long listRemove(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return 0;
@@ -629,7 +625,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public void set(String key, long index, Object value) {
+    public void listSet(String key, long index, Object value) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
         }
@@ -656,7 +652,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 16:35
      */
-    public boolean addZSet(String key, Object value, double score){
+    public boolean zSetAdd(String key, Object value, double score){
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return false;
@@ -683,7 +679,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 16:35
      */
-    public long addZSet(String key,Set<ZSetOperations.TypedTuple<String>> values){
+    public long zSetAdd(String key,Set<ZSetOperations.TypedTuple<Object>> values){
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return 0;
@@ -711,7 +707,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 16:35
      */
-    public double incrementScore(String key, Object value, double score){
+    public double zSetIncrementScore(String key, Object value, double score){
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return 0;
@@ -737,7 +733,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public Set<String> range4ZSet(String key, long start, long end) {
+    public Set<Object> zSetRange(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -763,7 +759,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public Set<String> range4ZSetReverse(String key, long start, long end) {
+    public Set<Object> zSetReverseRange(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -792,7 +788,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public Set<ZSetOperations.TypedTuple<String>> rangeWithScores(String key, long start, long end) {
+    public Set<ZSetOperations.TypedTuple<Object>> zSetRangeWithScores(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -821,7 +817,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 14:51
      */
-    public Set<ZSetOperations.TypedTuple<String>> reverseRangeWithScores(String key, long start, long end) {
+    public Set<ZSetOperations.TypedTuple<Object>> zSetReverseRangeWithScores(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -848,7 +844,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 17:26
      */
-    public void put4Hash(String key, String hashKey, String hashValue){
+    public void hashPut(String key, String hashKey, Object hashValue){
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
         }
@@ -874,7 +870,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 17:26
      */
-    public boolean putIfAbsent(String key, String hashKey, String hashValue){
+    public boolean hashPutIfAbsent(String key, String hashKey, Object hashValue){
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return false;
@@ -900,7 +896,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 17:26
      */
-    public void putAll(String key, Map<String, Object> map){
+    public void hashPutAll(String key, Map<String, Object> map){
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
         }
@@ -926,7 +922,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @author heshiyuan
      * @date 2018/7/24 17:26
      */
-    public Object get(String key, String hashKey){
+    public Object hashGet(String key, String hashKey){
         if (StringUtils.isBlank(key)) {
             logger.error("key is null");
             return null;
@@ -945,138 +941,118 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
             throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
         }
     }
-   /* public <T> boolean putCache(String key, T obj){
-        if(StringUtils.isBlank(key)){
+    /**
+     * @description <p>删除缓存</p>
+     * @param key 键
+     * @return boolean 是否删除成功
+     * @author heshiyuan
+     * @date 2018/7/25 8:37
+     */
+    public boolean delete(String key, boolean isTimeOutKey){
+        if (StringUtils.isBlank(key)) {
             logger.error("key is null");
-            return false ;
+            return false;
         }
+        StringBuilder keyStr = new StringBuilder();
         try{
-            valueOperations.set(key,obj);
+            if(isTimeOutKey){
+                keyStr.append(TIMEOUT_PREFIX).append(key);
+            }else{
+                keyStr.append(TIMEEVER_PREFIX).append(key);
+            }
+            getRedisTemplate().delete(key);
+            logger.info("操作成功！key={};", keyStr.toString());
             return true ;
-        }catch(Exception e){
-            logger.info("{}", e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
+        }catch (Exception e){
+            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            return false;
         }
     }
 
-    public <T> boolean putCacheWithExpireTime(String key, T obj, long expireTime){
-        if(StringUtils.isBlank(key)){
-            logger.error("key is null");
-            return false ;
-        }
-        try{
-            valueOperations.set(key,obj,expireTime);
-            return true ;
-        }catch(Exception e){
-            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
-        }
-    }
-
-    public <T> boolean putCacheWithExpireTimeAndTimeUnit(String key, T obj, long expireTime, TimeUnit timeUnit){
-        if(StringUtils.isBlank(key)){
-            logger.error("key is null");
-            return false ;
-        }
-        try{
-            valueOperations.set(key,obj,expireTime,timeUnit);
-            return true ;
-        }catch(Exception e){
-            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
-        }
-    }
-
-    public <T> boolean putListCache(String key, List<T> objList) {
-        if(StringUtils.isBlank(key)){
-            logger.error("key is null");
-            return false ;
-        }
-        try{
-            return listPushResult(listOperations.leftPush(key,objList)) ;
-        }catch(Exception e){
-            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
-        }
-    }
-
-    public <T> boolean putListCacheWithExpireTime(String key, List<T> objList, long expireTime) {
-        if(StringUtils.isBlank(key)){
-            logger.error("key is null");
-            return false ;
-        }
-        try{
-            return listPushResult(listOperations.leftPush(key,objList,expireTime)) ;
-
-        }catch(Exception e){
-            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
-        }
-    }
-
-    private boolean listPushResult(Long count){
-        if(count > 0){
-            logger.error("list leftPush success;set {} count",count);
-            return true ;
-        }else{
-            logger.error("list leftPush error");
-            return false ;
-        }
-    }
-
-    public <T> T getCache(String key) {
-        return (T) valueOperations.get(key);
-    }
-
-    public <T> List<T> getListCache(String key) {
-        return (List<T>) listOperations.leftPop(key);
-    }
-    public void deleteCacheByKey(String key) {
-        this.getRedisTemplate().delete(key);
-    }
-
-    public void deleteCacheByKeys(String... keys) {
-        if(!org.springframework.util.StringUtils.isEmpty(keys) && keys.length != 0) {
+    public void delete(boolean isTimeOutKey, String... keys) {
+        if(null!=keys && keys.length!=0) {
+            StringBuilder keyStr = new StringBuilder();
+            for (int i = 0; i < keys.length; i++) {
+                if (isTimeOutKey){
+                    keyStr.append(TIMEOUT_PREFIX).append(keys[i]);
+                }else{
+                    keyStr.append(TIMEEVER_PREFIX).append(keys[i]);
+                }
+            }
             try{
                 if(keys.length == 1) {
-                    if(org.springframework.util.StringUtils.isEmpty(keys[0])) {
+                    if(StringUtils.isEmpty(keys[0])) {
                         throw new IllegalArgumentException("指定删除的key不能为空");
                     }
                     this.getRedisTemplate().delete(keys[0]);
+                    logger.info("操作成功！key={};", keyStr.toString());
                 } else {
                     this.getRedisTemplate().delete(Arrays.asList(keys));
                 }
             }catch(Exception e){
+                logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
                 throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
             }
         } else {
             throw new IllegalArgumentException("指定删除的key不能为空");
         }
     }
-
-    public void deleteCacheWithPattern(String pattern) {
-        if(org.springframework.util.StringUtils.isEmpty(pattern)) {
-            throw new IllegalArgumentException("指定删除的key不能为空");
-        } else {
+    /**
+     * @description <p>删除缓存</p>
+     * @param keys 键
+     * @return boolean 是否删除成功
+     * @author heshiyuan
+     * @date 2018/7/25 8:37
+     */
+    public boolean delete(List<String> keys, boolean isTimeOutKey){
+        try{
+            keys.stream().forEach(key -> {
+                if (isTimeOutKey){
+                    key += TIMEOUT_PREFIX;
+                }else{
+                    key += TIMEEVER_PREFIX;
+                }
+                logger.info("即将删除key={};", key);
+            });
+            getRedisTemplate().delete(keys);
+            return true ;
+        }catch (Exception e){
+            logger.error("操作失败！失败信息：{}", e);
+            return false;
+        }
+    }
+    /**
+     * @description <p>删除缓存</p>
+     * @param pattern 键
+     * @return boolean 是否删除成功
+     * @author heshiyuan
+     * @date 2018/7/25 8:37
+     */
+    public boolean deleteByPattern(String pattern){
+        if(StringUtils.isBlank(pattern)){
+            logger.error("key is null");
+            return false;
+        }
+        try{
+            logger.info("正则范式：key={}", pattern);
             Set<String> keys = this.getRedisTemplate().keys(pattern);
-            this.getRedisTemplate().delete(keys);
+            keys.parallelStream().forEach(key -> logger.info("即将删除key={}", key));
+            getRedisTemplate().delete(keys.stream().collect(Collectors.toList()));
+            logger.info("操作成功！");
+            return true ;
+        }catch (Exception e){
+            logger.error("操作失败！异常信息：{}", e);
+            return false;
         }
     }
-
-    public void clearCache() {
-        deleteCacheWithPattern("*");
+    /**
+     * @description <p>删除缓存</p>
+     * @return boolean 是否删除成功
+     * @author heshiyuan
+     * @date 2018/7/25 8:37
+     */
+    public boolean clear(){
+        logger.info("即将清理全部缓存");
+        return deleteByPattern("*");
     }
-
-    public void deleteByPrefix(String prex) {
-        if(org.springframework.util.StringUtils.isEmpty(prex)) {
-            throw new IllegalArgumentException("指定删除的key前缀不能为空");
-        } else {
-            Set<String> keys = this.getRedisTemplate().keys(prex + "*");
-            this.getRedisTemplate().delete(keys);
-        }
-    }
-    public void deleteBySuffix(String suffix) {
-        if(org.springframework.util.StringUtils.isEmpty(suffix)) {
-            throw new IllegalArgumentException("指定删除的key后缀不能为空");
-        } else {
-            Set<String> keys = this.getRedisTemplate().keys("*" + suffix);
-            this.getRedisTemplate().delete(keys);
-        }
-    }*/
 }

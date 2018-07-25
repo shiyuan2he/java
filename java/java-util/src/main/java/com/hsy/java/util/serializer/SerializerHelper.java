@@ -12,9 +12,8 @@ import java.util.List;
 
 /**
  * @author heshiyuan
- * @author shiyuan2he
  * @description <p></p>
- * @path java/com.hsy.javase.utils
+ * @path java/com.hsy.java.util.serializer
  * @date 2017/8/21 22:13
  * @github http://github.com/shiyuan2he
  * @email shiyuan4work@sina.com
@@ -24,9 +23,8 @@ import java.util.List;
 public class SerializerHelper {
     /**
      * 序列化对象
-     *
      * @param obj
-     * @return
+     * @return 序列化后的对象
      */
     public static <T> byte[] serialize(T obj) {
         if (obj == null) {
@@ -51,7 +49,7 @@ public class SerializerHelper {
      *
      * @param paramArrayOfByte
      * @param targetClass
-     * @return
+     * @return 反序列化后的对象
      */
     public static <T> T deserialize(byte[] paramArrayOfByte, Class<T> targetClass) {
         if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
@@ -71,7 +69,7 @@ public class SerializerHelper {
     /**
      * 序列化列表
      *
-     * @param objList
+     * @param objList 被序列化的列表
      * @return
      */
     public static <T> byte[] serializeList(List<T> objList) {
@@ -107,7 +105,7 @@ public class SerializerHelper {
      *
      * @param paramArrayOfByte
      * @param targetClass
-     * @return
+     * @return 反序列化后的列表
      */
     public static <T> List<T> deserializeList(byte[] paramArrayOfByte, Class<T> targetClass) {
         if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {

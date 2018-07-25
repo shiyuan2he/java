@@ -40,8 +40,6 @@ public abstract class AbstractSpringStringRedisCacheEnhance extends AbstractSpri
     private GeoOperations<String, String> geoOperations;
     private HyperLogLogOperations<String, String> hyperLogLogOperations;
 
-    public abstract StringRedisTemplate getStringRedisTemplate();
-
     @PostConstruct
     public void getValueOperation() {
         stringValueOperations = getStringRedisTemplate().opsForValue();
