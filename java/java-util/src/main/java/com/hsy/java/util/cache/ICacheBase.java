@@ -25,7 +25,7 @@ public interface ICacheBase {
      * @return 返回自增之后的值
      * @throws CacheException
      */
-    Long incrTimeOut(String key,Long value,final long liveTime,final TimeUnit timeUnit) throws CacheException;
+    //Long incrTimeOut(String key,Long value,final long liveTime,final TimeUnit timeUnit) throws CacheException;
 
     /**
      * 自增不超时
@@ -34,7 +34,7 @@ public interface ICacheBase {
      * @return
      * @throws CacheException
      */
-    Long incrNoTimeOut(String key,Long value) throws CacheException;
+//    Long incrNoTimeOut(String key,Long value) throws CacheException;
 
     /**
      * 保存或者更新
@@ -45,7 +45,7 @@ public interface ICacheBase {
      * @param timeUnit 存活时间单位
      * @throws CacheException
      */
-    <V> void saveOrUpdateTimeOut(final String key, final V value,final long liveTime,final TimeUnit timeUnit) throws CacheException;
+//    <V> void saveOrUpdateTimeOut(final String key, final V value,final long liveTime,final TimeUnit timeUnit) throws CacheException;
 
     /**
      * 保存或更新不设置超时时间
@@ -53,7 +53,7 @@ public interface ICacheBase {
      * @param value
      * @throws CacheException
      */
-    <V> void saveOrUpdateNoTimeOut(final String key, final V value) throws CacheException;
+//    <V> void saveOrUpdateNoTimeOut(final String key, final V value) throws CacheException;
 
     /**
      * @param key
@@ -61,7 +61,7 @@ public interface ICacheBase {
      * @return
      * @throws CacheException
      */
-     <V> V get(String key,Class<V> clazz,boolean isTimeOutKey)  throws CacheException;
+//     <V> V get(String key,Class<V> clazz,boolean isTimeOutKey)  throws CacheException;
 
     /**
      * 获取List
@@ -70,7 +70,7 @@ public interface ICacheBase {
      * @return
      * @throws CacheException
      */
-     <V> List<V> getList( String key,Class<V> clazz,boolean isTimeOutKey)  throws CacheException;
+//     <V> List<V> getList( String key,Class<V> clazz,boolean isTimeOutKey)  throws CacheException;
 
     /**
      * @description <p>添加进缓存当中</p>
@@ -80,7 +80,7 @@ public interface ICacheBase {
      * @author heshiyuan
      * @date 25/09/2017 3:27 PM
      */
-    <V> boolean putCache(String key, V obj) throws CacheException;
+//    <V> boolean putCache(String key, V obj) throws CacheException;
     /**
      * @description <p></p>
      * @param key 存入缓存的key
@@ -90,7 +90,7 @@ public interface ICacheBase {
      * @author heshiyuan
      * @date 25/09/2017 3:29 PM
      */
-    <V> boolean putCacheWithExpireTime(String key, V obj, final long expireTime) throws CacheException;
+//    <V> boolean putCacheWithExpireTime(String key, V obj, final long expireTime) throws CacheException;
 
     /**
      * @description <p>将list添加进缓存</p>
@@ -100,7 +100,7 @@ public interface ICacheBase {
      * @author heshiyuan
      * @date 25/09/2017 4:07 PM
      */
-    <V> boolean putListCache(String key, List<V> objList) throws CacheException;
+//    <V> boolean putListCache(String key, List<V> objList) throws CacheException;
     /**
      * @description <p>将list添加进缓存，带缓存过期时间</p>
      * @param key 存入缓存的key
@@ -110,7 +110,7 @@ public interface ICacheBase {
      * @author heshiyuan
      * @date 25/09/2017 4:09 PM
      */
-    <V> boolean putListCacheWithExpireTime(String key, List<V> objList, final long expireTime) throws CacheException;
+//    <V> boolean putListCacheWithExpireTime(String key, List<V> objList, final long expireTime) throws CacheException;
     /**
      * @description <p></p>
      * @param key 存入缓存的key
@@ -119,7 +119,7 @@ public interface ICacheBase {
      * @author heshiyuan
      * @date 25/09/2017 4:18 PM
      */
-    <V> V getCache(final String key, Class<V> targetClass) throws CacheException;
+//    <V> V getCache(final String key, Class<V> targetClass) throws CacheException;
     /**
      * @description <p></p>
      * @param key 存入缓存的key
@@ -128,44 +128,44 @@ public interface ICacheBase {
      * @author heshiyuan
      * @date 25/09/2017 4:18 PM
      */
-    <V> List<V> getListCache(final String key, Class<V> targetClass) throws CacheException;
+//    <V> List<V> getListCache(final String key, Class<V> targetClass) throws CacheException;
     /**
      * @description <p>根据key精确删除数据</p>
      * @param key
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    void delete(String key) throws CacheException;
+//    void delete(String key) throws CacheException;
     /**
      * @description <p>根据key精确删除数据</p>
      * @param key
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    void delete(String... key) throws CacheException;
+//    void delete(String... key) throws CacheException;
     /**
      * @description <p>根据key模糊删除数据</p>
      * @param pattern
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    void deleteWithPattern(String pattern) throws CacheException;
+//    void deleteWithPattern(String pattern) throws CacheException;
     /**
      * @description <p>删除所有key</p>
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    boolean clear() throws CacheException;
+//    boolean clear() throws CacheException;
     /**
      * @description <p>根据前缀模糊删除</p>
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    void deleteByPrefix(String prex)throws CacheException;
+//    void deleteByPrefix(String prex)throws CacheException;
     /**
      * @description <p>根据后缀模糊删除</p>
      * @author heshiyuan
      * @date 25/09/2017 4:25 PM
      */
-    void deleteBySuffix(String suffix) throws CacheException;
+//    void deleteBySuffix(String suffix) throws CacheException;
 }
