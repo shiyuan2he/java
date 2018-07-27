@@ -964,7 +964,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
             logger.info("操作成功！key={};", keyStr.toString());
             return true ;
         }catch (Exception e){
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            //logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
             return false;
         }
     }
