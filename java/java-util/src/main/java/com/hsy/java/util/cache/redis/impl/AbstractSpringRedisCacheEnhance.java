@@ -960,7 +960,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
             }else{
                 keyStr.append(TIMEEVER_PREFIX).append(key);
             }
-            getRedisTemplate().delete(key);
+            getRedisTemplate().delete(keyStr.toString());
             logger.info("操作成功！key={};", keyStr.toString());
             return true ;
         }catch (Exception e){
