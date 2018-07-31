@@ -2,11 +2,9 @@ package com.hsy.java.util.cache.redis.impl;
 
 import com.hsy.java.enums.CacheEnum;
 import com.hsy.java.exception.cache.CacheException;
-import com.hsy.java.util.serializer.SerializerHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.*;
 
 import javax.annotation.PostConstruct;
@@ -45,7 +43,10 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
         zSetOperations = getRedisTemplate().opsForZSet();
         geoOperations = getRedisTemplate().opsForGeo();
     }
+    public boolean tryLock(String key, long timeOut, TimeUnit timeUnit){
 
+        return Boolean.FALSE;
+    }
     /**
      * @param key   键
      * @param value 值

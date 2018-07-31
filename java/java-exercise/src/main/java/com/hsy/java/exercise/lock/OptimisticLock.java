@@ -14,11 +14,12 @@ import redis.clients.jedis.Transaction;
  * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class LockServiceImpl {
+public class OptimisticLock {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
     private TStockDaoImpl stockDao;
-
+    String key = "product:num";
+    String clientList = "client:list";//抢购到商品的顾客列表
     /**
      * @description <p>
      *     redis实现分布式锁
@@ -38,18 +39,11 @@ public class LockServiceImpl {
         String key = "TO:redisLock";
         Jedis jedis = RedisUtils.getInstance().getJedis();
         jedis.watch(key); //如果事务提交exec时发现监视的键值对发生变化，事务将被取消
-        Transaction transaction = jedis.multi();
-        if(redisRepository.getRedisTemplate().getConnectionFactory().getConnection().setNX(key.getBytes(), "redisLock".getBytes())){
-            redisRepository.getRedisTemplate().getConnectionFactory().getConnection().expire(key.getBytes(), 1000 * 300);
-            logger.info("进入lock区");
-            logger.info("获取到数据库锁");
-            if (stockDao.getCount(1l) > 0) {
-                // 减库存
-                stockDao.reduce();
-            }
-            redisRepository.getRedisTemplate().getConnectionFactory().getConnection().del(key.getBytes());
-        }else{
-            logger.info("没有拿到锁，请求返回");
+        int num = Integer.parseInt(jedis.get(key));
+        if(num > 0){
+            Transaction transaction = jedis.multi();
+            //(Jedis) transaction.set(key, String.valueOf(num-1));
+
         }
         logger.info("结束业务");
     }
