@@ -5,12 +5,9 @@ import com.hsy.java.exception.cache.CacheException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.properties.DeprecatedConfigurationProperty;
 import org.springframework.data.redis.core.*;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
