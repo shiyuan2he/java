@@ -1,9 +1,8 @@
-package com.hsy.java.exercise.lock;
+package com.hsy.java.exercise.lock.redis;
 
 import com.hsy.java.base.utils.ConcurrentMock;
+import com.hsy.java.exercise.lock.redis.PessimisticLock;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @author heshiyuan

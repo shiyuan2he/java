@@ -55,9 +55,47 @@
         <version.servlet.api>3.1.0</version.servlet.api>
         <version.aeonbits>1.0.9</version.aeonbits>
         <version.commons.dbutils>1.5</version.commons.dbutils>
+        <version.commons.dbcp2>2.5.0</version.commons.dbcp2>
+        <version.zookeeper>3.4.13</version.zookeeper>
+        <version.pool.c3po>0.9.1.2</version.pool.c3po>
     </properties>
     <dependencyManagement>
         <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-dbcp2</artifactId>
+                <version>${version.commons.dbcp2}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/c3p0/c3p0 -->
+            <dependency>
+                <groupId>c3p0</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>${version.pool.c3po}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${version.zookeeper}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
             <dependency>
                 <groupId>com.hsy.java</groupId>
                 <artifactId>java-thread</artifactId>

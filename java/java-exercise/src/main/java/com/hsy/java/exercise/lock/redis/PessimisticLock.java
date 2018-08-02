@@ -1,5 +1,6 @@
-package com.hsy.java.exercise.lock;
+package com.hsy.java.exercise.lock.redis;
 
+import com.hsy.java.exercise.lock.dao.TStockDaoImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;

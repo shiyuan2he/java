@@ -1,4 +1,4 @@
-package com.hsy.java.exercise.lock;
+package com.hsy.java.exercise.lock.redis;
 
 /**
  * @author heshiyuan

@@ -1,8 +1,13 @@
-package com.hsy.java.exercise.lock;
+package com.hsy.java.exercise.lock.dao;
+
+import com.hsy.java.util.jdbc.dbutils.C3p0Utils;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * @author heshiyuan
@@ -18,7 +23,7 @@ public class TStockDaoImpl {
     private PreparedStatement ps = null ;
 
     public int reduce(){
-        Connection connection = DBUtils.getConnetction();
+        Connection connection = C3p0Utils.getInstance().getConnection();
         try {
             ps = connection.prepareStatement("update t_stock set count = count-1 where id = 1");
             return ps.executeUpdate();
@@ -28,7 +33,7 @@ public class TStockDaoImpl {
     }
 
     public int getCount(long id){
-        Connection connection = DBUtils.getConnetction();
+        Connection connection = C3p0Utils.getInstance().getConnection();
         try {
             ps = connection.prepareStatement("select count from t_stock where id = ?");
             ps.setLong(1, id);
@@ -40,5 +45,19 @@ public class TStockDaoImpl {
             return 0;
         }
         return 0;
+    }
+    public Date getVersion(long id){
+        Connection connection = C3p0Utils.getInstance().getConnection();
+        try {
+            ps = connection.prepareStatement("select update_time from t_stock where id = ?");
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getDate(1);
+            }
+        } catch (SQLException e) {
+            return Calendar.getInstance().getTime();
+        }
+        return Calendar.getInstance().getTime();
     }
 }
