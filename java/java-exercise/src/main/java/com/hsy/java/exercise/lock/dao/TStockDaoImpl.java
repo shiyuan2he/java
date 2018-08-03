@@ -46,6 +46,20 @@ public class TStockDaoImpl {
         }
         return 0;
     }
+    public String getName(long id){
+        Connection connection = C3p0Utils.getInstance().getConnection();
+        try {
+            ps = connection.prepareStatement("select name from t_stock where id = ?");
+            ps.setLong(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                return rs.getString(1);
+            }
+        } catch (SQLException e) {
+            return null;
+        }
+        return null;
+    }
     public Date getVersion(long id){
         Connection connection = C3p0Utils.getInstance().getConnection();
         try {

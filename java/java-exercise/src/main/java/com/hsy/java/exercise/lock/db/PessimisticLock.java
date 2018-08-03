@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author heshiyuan
  * @description <p>悲观锁</p>
@@ -22,17 +25,31 @@ public class PessimisticLock {
     private TLockDaoImpl lockDao = new TLockDaoImpl();
     TStockDaoImpl stockDao = new TStockDaoImpl();
 
+    private Map<String, String> owner = new HashMap<>();
     public void lockService(){
         String lock = "dbLock" ;
-        if(lockDao.insert(lock,"数据库实现分布式锁")>0){
-            logger.info("获取到数据库锁");
-            if (stockDao.getCount(1l) > 0) {
-                // 减库存
-                stockDao.reduce();
+        //while (true){
+            if (lockDao.insert(lock, "数据库实现分布式锁") > 0) {
+                logger.info("获取到数据库锁");
+                if (stockDao.getCount(1l) > 0) {
+                    // 减库存
+                    stockDao.reduce();
+                    owner.put(Thread.currentThread().getName(), stockDao.getName(1l));
+                    lockDao.delete(lock);
+//                    break;
+                }else{
+//                    break;
+                }
+            } else {
+                logger.info("没有拿到锁，请求返回");
             }
-            lockDao.delete(lock);
-        }else{
-            logger.info("没有拿到锁，请求返回");
-        }
+        //}
+        printOwner();
+    }
+
+    private void printOwner() {
+        owner.forEach((key, value) -> {
+            logger.info("恭喜：{} 抢购：{}！", key, value);
+        });
     }
 }

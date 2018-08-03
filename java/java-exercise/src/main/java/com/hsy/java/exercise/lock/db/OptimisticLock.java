@@ -33,7 +33,6 @@ public class OptimisticLock {
      * @date 2018/8/2 15:59
      */
     public void lockService() throws InterruptedException {
-        String lock = "dbLock" ;
         while (true){
             Date version = stockDao.getVersion(1);
             // 模拟业务处理业务得时间
