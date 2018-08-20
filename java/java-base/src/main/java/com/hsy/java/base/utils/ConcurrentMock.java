@@ -63,7 +63,7 @@ public abstract class ConcurrentMock {
      * @author heshiyuan
      * @date 2018/1/29 16:04
      */
-    public abstract void doMethod() ;
+    public abstract void doMethod() throws InterruptedException;
     /**
      * @description <p>获取主线程休眠时间</p>
      * @return 主线程休眠时间
