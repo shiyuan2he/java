@@ -1,11 +1,8 @@
-package com.hsy.java.util.secure;
+package com.hsy.java.security.base64;
 
-import com.hsy.java.util.secure.Base64Helper;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.hsy.java.util.secure.Base64Helper;
 
 /**
  * @author heshiyuan

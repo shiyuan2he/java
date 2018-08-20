@@ -1,10 +1,8 @@
-package com.hsy.java.util.secure;
+package com.hsy.java.security.md5;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import static org.junit.Assert.*;
 
 /**
  * @author heshiyuan

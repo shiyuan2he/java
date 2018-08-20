@@ -1,4 +1,4 @@
-package com.hsy.java.util.secure;
+package com.hsy.java.security.aes;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

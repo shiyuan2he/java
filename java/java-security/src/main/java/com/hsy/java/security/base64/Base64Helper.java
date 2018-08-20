@@ -1,4 +1,4 @@
-package com.hsy.java.util.secure;
+package com.hsy.java.security.base64;
 
 import java.io.UnsupportedEncodingException;
 
@@ -6,8 +6,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.hsy.java.base.string.StringHelper;
 /**
  * 
  * @description 
@@ -42,7 +40,7 @@ public class Base64Helper {
 		byte[] b = null;
 		String targetStr = originStr;
 		try {
-		    if(StringHelper.isNotNullOrEmpty(originStr)){
+		    if(StringUtils.isNotBlank(originStr)){
                 b = originStr.getBytes(CHARSET);
             }
 		} catch (UnsupportedEncodingException e) {
@@ -101,7 +99,7 @@ public class Base64Helper {
         String targetStr = "";
         byte[] b = null;
         try {
-            if(StringHelper.isNotNullOrEmpty(originStr)){
+            if(StringUtils.isNotBlank(originStr)){
                 b = originStr.getBytes(CHARSET);
             }
             b = Base64.encodeBase64(b) ;
@@ -128,7 +126,7 @@ public class Base64Helper {
         String targetStr = "";
         byte[] b = null;
         try {
-            if(StringHelper.isNotNullOrEmpty(originStr)){
+            if(StringUtils.isNotBlank(originStr)){
                 b = originStr.getBytes(CHARSET);
             }
             b = Base64.decodeBase64(b) ;
@@ -155,7 +153,7 @@ public class Base64Helper {
         String targetStr = "";
         byte[] b = null;
         try {
-            if(StringHelper.isNotNullOrEmpty(originStr)){
+            if(StringUtils.isNotBlank(originStr)){
                 b = originStr.getBytes(CHARSET);
             }
             b = org.bouncycastle.util.encoders.Base64.encode(b);
@@ -183,7 +181,7 @@ public class Base64Helper {
         String targetStr = "";
         byte[] b = null;
         try {
-            if(StringHelper.isNotNullOrEmpty(originStr)){
+            if(StringUtils.isNotBlank(originStr)){
                 b = originStr.getBytes(CHARSET);
             }
             b = org.bouncycastle.util.encoders.Base64.decode(b);
