@@ -31,7 +31,7 @@ public class ZKCrud {
 
         try {
             conn = new ZookeeperConnection();
-            zk = conn.connect("localhost");
+            zk = conn.connect("localhost",2222);
             create(path, data); // Create the data to the specified path
             conn.close();
         } catch (Exception e) {

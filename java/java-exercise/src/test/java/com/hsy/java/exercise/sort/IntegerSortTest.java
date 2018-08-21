@@ -22,13 +22,9 @@ public class IntegerSortTest {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Test
     public void arrayJoinAndSort(){
-//        int[] arrayA = new int[]{1, 10, 46};
-//        int[] arrayB = new int[]{2, 40, 45, 100};
-
-        int[] arrayA = new int[]{1, 3, 4};
-        int[] arrayB = new int[]{2, 40, 45, 100};
+        int[] arrayA = new int[]{1, 3, 5};
+        int[] arrayB = new int[]{2, 3, 3, 4, 6};
         logger.info("{}", Arrays.toString(twoJoinOne3(arrayA, arrayB)));
-
     }
     /**
      * @description <p>合并两个数组</p>
@@ -50,6 +46,11 @@ public class IntegerSortTest {
         int k = 0;
         for(int i=0; i<arrayA.length; i++){
             for(int j=0; j<arrayB.length; j++){
+                if(arrayA[i] == arrayB[j]){
+                    arrayC[k] = arrayB[j];
+                    k++;
+                    continue;
+                }
                 if(arrayA[i] > arrayB[j] && arrayB[j]>arrayC[k-1]){
                     arrayC[k] = arrayB[j];
                     k++;
@@ -58,9 +59,11 @@ public class IntegerSortTest {
                     arrayC[k] = arrayA[i];
                     k++;
                     if(i == arrayA.length-1){
-                        for(int m=arrayA.length;m<arrayB.length-arrayA.length;m++){
-                            arrayC[k] = arrayB[m];
-                            k++;
+                        for(int m=0;m<arrayB.length;m++){
+                            if(arrayB[m] >= arrayA[arrayA.length-1]){
+                                arrayC[k] = arrayB[m];
+                                k++;
+                            }
                         }
                     }
                     break;
