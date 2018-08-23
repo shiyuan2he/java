@@ -5,9 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
-
-import static org.junit.Assert.*;
-
 /**
  * @author heshiyuan
  * @description <p></p>
@@ -20,11 +17,47 @@ import static org.junit.Assert.*;
  */
 public class IntegerSortTest {
     private Logger logger = LoggerFactory.getLogger(getClass());
+
+
+    @Test
+    public void shuffleArray(){
+        int[] array = new int[10];
+        for(int i=1;i<=10;i++){
+            array[i-1] = i;
+        }
+        logger.info("原数组：{}", Arrays.toString(array));
+        shuffleArray1(array);
+    }
+
     @Test
     public void arrayJoinAndSort(){
         int[] arrayA = new int[]{1, 3, 5};
         int[] arrayB = new int[]{2, 3, 3, 4, 6};
         logger.info("{}", Arrays.toString(twoJoinOne3(arrayA, arrayB)));
+    }
+    private void shuffleArray1(int[] array){
+        List list = Arrays.asList(array);
+        for(int i=0;i<10;i++){
+            Collections.shuffle(list);
+            list.parallelStream().forEach(aa -> logger.info("{}",aa));
+        }
+    }
+    private void shuffleArray2(int[] array){
+        Integer[] sortArray = new Integer[100];
+        for(int i=1;i<=100;i++){
+            sortArray[i-1] = i;
+        }
+        logger.info("原始数组{}", Arrays.toString(sortArray));
+
+        List list = new LinkedList();
+        list.add(Arrays.asList(sortArray));
+
+        for(int i=99;i>=0;i++){
+            int index = new Random().nextInt(i);
+            logger.info("{}", index);
+            sortArray[i] = (int) list.get(index);
+        }
+        logger.info("乱序后的数组{}", Arrays.toString(sortArray));
     }
     /**
      * @description <p>合并两个数组</p>
@@ -89,5 +122,36 @@ public class IntegerSortTest {
             }
         }
         return arrayC;
+    }
+    private int[] twoJoinOne3(){
+        int[] a = {1,3,5,7};
+        int[] b = {0,4,8};
+        int[] c = new int[a.length + b.length];
+        int index = 0;
+        int count = 0;
+        int times = 0;
+        for (int i = 0; i < b.length; i++) {
+
+            for(int j = count; j < a.length; j++) {
+                if(b[i] < a[j]) {
+                    c[index++] = b[i];
+                    times++;
+                    break;
+                } else {
+                    count++;
+                    c[index++] = a[j];
+                }
+            }
+
+        }
+        //判断如果短数组中还有未被利用的数据，则加入新数组的最后面
+        while(times < b.length) {
+            c[index++] = b[times++];
+        }
+
+        for(int i = 0; i< c.length; i++) {
+            System.out.println(c[i]);
+        }
+        return null;
     }
 }
