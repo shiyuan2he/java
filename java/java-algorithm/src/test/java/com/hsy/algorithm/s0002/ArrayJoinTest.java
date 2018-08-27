@@ -1,4 +1,4 @@
-package com.hsy.algorithm.s0001;
+package com.hsy.algorithm.s0002;
 
 import com.hsy.java.base.utils.ConcurrentMock;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 /**
  * @author heshiyuan
  * @description <p></p>
- * @path java/com.hsy.algorithm.s0001
+ * @path java/com.hsy.algorithm.s0002
  * @date 2018/8/25 11:46
  * @github http://github.com/shiyuan2he
  * @email shiyuan4work@sina.com
@@ -31,13 +31,17 @@ public class ArrayJoinTest extends ConcurrentMock{
 
     @Override
     public void doMethod() throws InterruptedException {
-//        logger.info(Arrays.toString(ArrayJoin.join(new int[]{1, 4, 2, 0}, new int[]{3, 10, 43}, null)));
-        logger.info(Arrays.toString(ArrayJoin.join(new int[]{1, 4, 2, 0}, null, null)));
+        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(new int[]{1, 3, 3, 5}, new int[]{2, 3, 3, 3, 3, 3, 10})));
+//        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(new int[]{2, 3, 3, 3, 3, 3, 10}, new int[]{1, 3, 3, 3, 5})));
+//        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(new int[]{}, new int[]{1, 3, 3, 3, 5})));
+//        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(new int[]{2, 3, 3, 3, 3, 3, 10}, new int[]{})));
+//        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(null, new int[]{1, 3, 3, 3, 5})));
+//        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(new int[]{2, 3, 3, 3, 3, 3, 10}, null)));
         logger.info("----------------");
     }
 
     @Override
     public int getSleepTime() {
-        return 1000 * 10;
+        return 1000 * 5;
     }
 }

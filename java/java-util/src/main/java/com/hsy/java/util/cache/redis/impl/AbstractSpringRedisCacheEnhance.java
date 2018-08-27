@@ -33,6 +33,8 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
     private ZSetOperations<String, Object> zSetOperations;
     private HashOperations hashOperations;
     private GeoOperations<String, Object> geoOperations;
+    private ClusterOperations<String, Object> clusterOperations;
+    private HyperLogLogOperations<String, Object> hyperLogLogOperations;
     @PostConstruct
     public void getValueOperation(){
         logger.info("正在初始化redis。。。");
@@ -42,6 +44,8 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
         setOperations = getRedisTemplate().opsForSet();
         zSetOperations = getRedisTemplate().opsForZSet();
         geoOperations = getRedisTemplate().opsForGeo();
+        clusterOperations = getRedisTemplate().opsForCluster();
+        hyperLogLogOperations = getRedisTemplate().opsForHyperLogLog();
     }
     public boolean tryLock(String key, long timeOut, TimeUnit timeUnit){
 
