@@ -19,9 +19,9 @@ public class BubbleSortTest {
 
     @Test
     public void bubbleSort() {
-        logger.info("最终结果：{}", BubbleSort.bubbleSort(SortUtils.generateNumberByASC(100)));
-        logger.info("最终结果：{}", BubbleSort.bubbleSort(SortUtils.generateNumberByDesc(100)));
         logger.info("最终结果：{}", BubbleSort.bubbleSort(SortUtils.generateRandomNumber(100)));
+        logger.info("最终结果：{}", BubbleSort.bubbleSort(SortUtils.generateNumberByDesc(100)));
+        logger.info("最终结果：{}", BubbleSort.bubbleSort(SortUtils.generateNumberByASC(100)));
     }
     @Test
     public void twoWayBubbleSort() {

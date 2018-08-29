@@ -60,6 +60,7 @@
         <version.pool.c3po>0.9.1.2</version.pool.c3po>
         <version.gson>2.8.2</version.gson>
         <version.net.json>2.4</version.net.json>
+        <version.logbok>1.18.2</version.logbok>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -294,6 +295,11 @@
                 <groupId>commons-dbutils</groupId>
                 <artifactId>commons-dbutils</artifactId>
                 <version>${version.commons.dbutils}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${version.logbok}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
