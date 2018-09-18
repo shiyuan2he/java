@@ -55,5 +55,13 @@ public class User {
 	public void setTestNamePassword(String testNamePassword) {
 		this.testNamePassword = testNamePassword;
 	}
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }
 
