@@ -23,10 +23,8 @@ import java.util.stream.Collectors;
  * @price ¥5    微信：hewei1109
  */
 @SuppressWarnings("Duplicates")
+@Slf4j
 public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedisCacheBase{
-
-    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
-
     private ValueOperations<String, Object> valueOperations;
     private ListOperations<String, Object> listOperations;
     private SetOperations<String, Object> setOperations;
@@ -37,7 +35,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
     private HyperLogLogOperations<String, Object> hyperLogLogOperations;
     @PostConstruct
     public void getValueOperation(){
-        logger.info("正在初始化redis。。。");
+        log.info("正在初始化redis。。。");
         valueOperations = getRedisTemplate().opsForValue();
         listOperations = getRedisTemplate().opsForList();
         hashOperations = getRedisTemplate().opsForHash();
@@ -48,12 +46,11 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
         hyperLogLogOperations = getRedisTemplate().opsForHyperLogLog();
     }
     public boolean tryLock(String key, long timeOut, TimeUnit timeUnit){
-
         return Boolean.FALSE;
     }
     /**
      * @param key   键
-     * @param value 值
+     * @param value 值oauth/token
      * @return boolean 保存是否成功
      * @description <p>保存字符串类型的值</p>
      * @author heshiyuan
@@ -64,25 +61,24 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public boolean valueSet(String key, Object value) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return false;
         }
         try {
             if (null == valueOperations) {
-                logger.info("正在初始化valueOperations");
+                log.info("正在初始化valueOperations");
                 valueOperations = getRedisTemplate().opsForValue();
             }
             valueOperations.set(TIMEEVER_PREFIX + key, value);
             consoleLog(TIMEEVER_PREFIX + key, 0, null);
             return true;
         } catch (Exception e) {
-            logger.error("设值缓存失败！失败信息：{}", e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION);
+            log.error("设值缓存失败！失败信息：{}", e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
-
     /**
-     * @description <p>采用默认 过期单位指定过期时间的值,此方法经测试有问题，不建议使用</p>
+     * @description <p>采用默认过期单位秒</p>
      * @param key     键
      * @param value   值
      * @param timeOut 过期时间
@@ -93,28 +89,9 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
      */
-    @Deprecated
     public boolean valueSet(String key, Object value, long timeOut) {
-        if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
-            return false;
-        }
-        StringBuilder keyStr = new StringBuilder();
-        try {
-            if (null == valueOperations) {
-                logger.info("正在初始化valueOperations");
-                valueOperations = getRedisTemplate().opsForValue();
-            }
-            keyStr.append(TIMEOUT_PREFIX).append(key);
-            valueOperations.set(keyStr.toString(), value, timeOut);
-            consoleLog(keyStr.toString(), timeOut, null);
-            return true;
-        } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION);
-        }
+        return this.valueSet(key, value, timeOut, TimeUnit.SECONDS);
     }
-
     /**
      * @param key      键
      * @param value    值
@@ -130,13 +107,13 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public boolean valueSet(String key, Object value, long timeOut, TimeUnit timeUnit) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return false;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == valueOperations) {
-                logger.info("正在初始化valueOperations");
+                log.info("正在初始化valueOperations");
                 valueOperations = getRedisTemplate().opsForValue();
             }
             keyStr.append(TIMEOUT_PREFIX).append(key);
@@ -144,8 +121,8 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
             consoleLog(keyStr.toString(), timeOut, timeUnit);
             return true;
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -159,13 +136,13 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Object valueGet(String key, boolean isTimeOutkey) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == valueOperations) {
-                logger.info("正在初始化valueOperations");
+                log.info("正在初始化valueOperations");
                 valueOperations = getRedisTemplate().opsForValue();
             }
             if (isTimeOutkey) {
@@ -173,11 +150,12 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
             } else {
                 keyStr.append(TIMEEVER_PREFIX).append(key);
             }
-            logger.info("操作成功！key={}", keyStr.toString());
-            return valueOperations.get(keyStr.toString());
+            Object object = valueOperations.get(keyStr.toString());
+            log.info("操作成功！key={}", keyStr.toString());
+            return object;
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -191,13 +169,13 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Object valueGetAndSet(String key, Object value, boolean isTimeOutKey) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == valueOperations) {
-                logger.info("正在初始化valueOperations");
+                log.info("正在初始化valueOperations");
                 valueOperations = getRedisTemplate().opsForValue();
             }
             if (isTimeOutKey) {
@@ -205,11 +183,11 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
             } else {
                 keyStr.append(TIMEEVER_PREFIX).append(key);
             }
-            logger.info("操作成功！key={}", keyStr.toString());
+            log.info("操作成功！key={}", keyStr.toString());
             return valueOperations.getAndSet(keyStr.toString(), value);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -223,13 +201,13 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public long valueIncrement(String key, long value, long timeLive, TimeUnit timeUnit) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return 0;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == valueOperations) {
-                logger.info("正在初始化valueOperations");
+                log.info("正在初始化valueOperations");
                 valueOperations = getRedisTemplate().opsForValue();
             }
             long newValue = 0l;
@@ -241,11 +219,11 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
                 keyStr.append(TIMEEVER_PREFIX).append(key);
                 newValue = valueOperations.increment(keyStr.toString(), value);
             }
-            logger.info("操作成功！key={}", keyStr.toString());
+            log.info("操作成功！key={}", keyStr.toString());
             return newValue;
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -261,13 +239,13 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public double valueIncrement(String key, double value, long timeLive, TimeUnit timeUnit) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return 0;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == valueOperations) {
-                logger.info("正在初始化valueOperations");
+                log.info("正在初始化valueOperations");
                 valueOperations = getRedisTemplate().opsForValue();
             }
             double newValue = 0.0;
@@ -279,11 +257,11 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
                 keyStr.append(TIMEEVER_PREFIX).append(key);
                 newValue = valueOperations.increment(keyStr.toString(), value);
             }
-            logger.info("操作成功！key={}", keyStr.toString());
+            log.info("操作成功！key={}", keyStr.toString());
             return newValue;
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -297,21 +275,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public long setAdd(String key, Object ... values) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return 0;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == setOperations) {
-                logger.info("正在初始化valueOperations");
+                log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
             keyStr.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key={}", keyStr.toString());
+            log.info("操作成功！key={}", keyStr.toString());
             return setOperations.add(keyStr.toString(), values);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -324,21 +302,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Object setPop(String key) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == setOperations) {
-                logger.info("正在初始化valueOperations");
+                log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
             keyStr.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key={}", keyStr.toString());
+            log.info("操作成功！key={}", keyStr.toString());
             return setOperations.pop(keyStr.toString());
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -352,23 +330,23 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Set<Object> setDifference(String key, String otherKey) {
         if (StringUtils.isBlank(key) || StringUtils.isBlank(otherKey)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         try {
             if (null == setOperations) {
-                logger.info("正在初始化valueOperations");
+                log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
             StringBuilder keyStr1 = new StringBuilder();
             StringBuilder keyStr2 = new StringBuilder();
             keyStr1.append(TIMEEVER_PREFIX).append(key);
             keyStr2.append(TIMEEVER_PREFIX).append(otherKey);
-            logger.info("操作成功！key1={};key2={}", keyStr1.toString(), keyStr2.toString());
-            return setOperations.difference(key, otherKey);
+            log.info("操作成功！key1={};key2={}", keyStr1.toString(), keyStr2.toString());
+            return setOperations.difference(keyStr1.toString(), keyStr2.toString());
         } catch (Exception e) {
-            logger.error("操作失败！失败信息：{}", e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作失败！失败信息：{}", e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -383,12 +361,12 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public long setDifferenceAndStore(String key, String otherKey, String storeKey) {
         if (StringUtils.isBlank(key) || StringUtils.isBlank(otherKey) || StringUtils.isBlank(storeKey)) {
-            logger.error("key is null");
+            log.error("key is null");
             return 0;
         }
         try {
             if (null == setOperations) {
-                logger.info("正在初始化valueOperations");
+                log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
             StringBuilder keyStr1 = new StringBuilder();
@@ -397,11 +375,11 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
             keyStr1.append(TIMEEVER_PREFIX).append(key);
             keyStr2.append(TIMEEVER_PREFIX).append(otherKey);
             keyStr3.append(TIMEEVER_PREFIX).append(storeKey);
-            logger.info("操作成功！key1={};key2={}", keyStr1.toString(), keyStr2.toString());
-            return setOperations.differenceAndStore(key, otherKey, keyStr3.toString());
+            log.info("操作成功！key1={};key2={}", keyStr1.toString(), keyStr2.toString());
+            return setOperations.differenceAndStore(keyStr1.toString(), keyStr2.toString(), keyStr3.toString());
         } catch (Exception e) {
-            logger.error("操作失败！失败信息：{}", e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作失败！失败信息：{}", e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -415,21 +393,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Object listIndex(String key, long index) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == listOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr1.toString());
-            return listOperations.index(key, index);
+            log.info("操作成功！key1={};", keyStr1.toString());
+            return listOperations.index(keyStr1.toString(), index);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -443,21 +421,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public long listLeftPush(String key, Object value) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return 0;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == listOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr1.toString());
+            log.info("操作成功！key1={};", keyStr1.toString());
             return listOperations.leftPush(keyStr1.toString(), value);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -471,21 +449,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public long listRightPush(String key, Object value) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return 0;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == listOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr1.toString());
+            log.info("操作成功！key1={};", keyStr1.toString());
             return listOperations.rightPush(keyStr1.toString(), value);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -498,21 +476,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Object listLeftPop(String key) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == listOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr1.toString());
+            log.info("操作成功！key1={};", keyStr1.toString());
             return listOperations.leftPop(keyStr1.toString());
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
@@ -525,21 +503,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Object listRightPop(String key) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == listOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr1.toString());
+            log.info("操作成功！key1={};", keyStr1.toString());
             return listOperations.rightPop(keyStr1.toString());
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -551,21 +529,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public long listSize(String key) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return 0;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == listOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr1.toString());
+            log.info("操作成功！key1={};", keyStr1.toString());
             return listOperations.size(keyStr1.toString());
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -577,21 +555,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public List<Object> listRange(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == listOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr1.toString());
+            log.info("操作成功！key1={};", keyStr1.toString());
             return listOperations.range(keyStr1.toString(), start, end);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -605,21 +583,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
     @Deprecated
     public long listRemove(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return 0;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == listOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr1.toString());
+            log.info("操作成功！key1={};", keyStr1.toString());
             return listOperations.remove(keyStr1.toString(), start, end);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -632,20 +610,20 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public void listSet(String key, long index, Object value) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == listOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr1.toString());
+            log.info("操作成功！key1={};", keyStr1.toString());
             listOperations.set(keyStr1.toString(), index, value);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -659,21 +637,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public boolean zSetAdd(String key, Object value, double score){
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return false;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == zSetOperations) {
-                logger.info("正在初始化zSetOperations");
+                log.info("正在初始化zSetOperations");
                 zSetOperations = getRedisTemplate().opsForZSet();
             }
             keyStr.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr.toString());
-            return zSetOperations.add(key, value, score);
+            log.info("操作成功！key1={};", keyStr.toString());
+            return zSetOperations.add(keyStr.toString(), value, score);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -686,21 +664,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public long zSetAdd(String key,Set<ZSetOperations.TypedTuple<Object>> values){
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return 0;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == zSetOperations) {
-                logger.info("正在初始化zSetOperations");
+                log.info("正在初始化zSetOperations");
                 zSetOperations = getRedisTemplate().opsForZSet();
             }
             keyStr.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr.toString());
-            return zSetOperations.add(key, values);
+            log.info("操作成功！key1={};", keyStr.toString());
+            return zSetOperations.add(keyStr.toString(), values);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -714,21 +692,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public double zSetIncrementScore(String key, Object value, double score){
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return 0;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == zSetOperations) {
-                logger.info("正在初始化zSetOperations");
+                log.info("正在初始化zSetOperations");
                 zSetOperations = getRedisTemplate().opsForZSet();
             }
             keyStr.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr.toString());
-            return zSetOperations.incrementScore(key, value, score);
+            log.info("操作成功！key1={};", keyStr.toString());
+            return zSetOperations.incrementScore(keyStr.toString(), value, score);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -740,21 +718,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Set<Object> zSetRange(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == zSetOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 zSetOperations = getRedisTemplate().opsForZSet();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr1.toString());
+            log.info("操作成功！key1={};", keyStr1.toString());
             return zSetOperations.range(keyStr1.toString(), start, end);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -766,21 +744,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Set<Object> zSetReverseRange(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == zSetOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 zSetOperations = getRedisTemplate().opsForZSet();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key1={};", keyStr1.toString());
+            log.info("操作成功！key1={};", keyStr1.toString());
             return zSetOperations.reverseRange(keyStr1.toString(), start, end);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -795,21 +773,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Set<ZSetOperations.TypedTuple<Object>> zSetRangeWithScores(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == zSetOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 zSetOperations = getRedisTemplate().opsForZSet();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key={};", keyStr1.toString());
+            log.info("操作成功！key={};", keyStr1.toString());
             return zSetOperations.rangeWithScores(keyStr1.toString(), start, end);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -824,21 +802,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Set<ZSetOperations.TypedTuple<Object>> zSetReverseRangeWithScores(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr1 = new StringBuilder();
         try {
             if (null == zSetOperations) {
-                logger.info("正在初始化listOperations");
+                log.info("正在初始化listOperations");
                 zSetOperations = getRedisTemplate().opsForZSet();
             }
             keyStr1.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key={};", keyStr1.toString());
+            log.info("操作成功！key={};", keyStr1.toString());
             return zSetOperations.reverseRangeWithScores(keyStr1.toString(), start, end);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr1.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -851,20 +829,20 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public void hashPut(String key, String hashKey, Object hashValue){
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == hashOperations) {
-                logger.info("正在初始化hashOperations");
+                log.info("正在初始化hashOperations");
                 hashOperations = getRedisTemplate().opsForHash();
             }
             keyStr.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key={};", keyStr.toString());
-            hashOperations.put(key, hashKey, hashValue);
+            log.info("操作成功！key={};", keyStr.toString());
+            hashOperations.put(keyStr.toString(), hashKey, hashValue);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -877,21 +855,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public boolean hashPutIfAbsent(String key, String hashKey, Object hashValue){
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return false;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == hashOperations) {
-                logger.info("正在初始化hashOperations");
+                log.info("正在初始化hashOperations");
                 hashOperations = getRedisTemplate().opsForHash();
             }
             keyStr.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key={};", keyStr.toString());
-            return hashOperations.putIfAbsent(key, hashKey, hashValue);
+            log.info("操作成功！key={};", keyStr.toString());
+            return hashOperations.putIfAbsent(keyStr.toString(), hashKey, hashValue);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -903,20 +881,20 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public void hashPutAll(String key, Map<String, Object> map){
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == hashOperations) {
-                logger.info("正在初始化hashOperations");
+                log.info("正在初始化hashOperations");
                 hashOperations = getRedisTemplate().opsForHash();
             }
             keyStr.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key={};", keyStr.toString());
-            hashOperations.putAll(key, map);
+            log.info("操作成功！key={};", keyStr.toString());
+            hashOperations.putAll(keyStr.toString(), map);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -929,21 +907,21 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public Object hashGet(String key, String hashKey){
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return null;
         }
         StringBuilder keyStr = new StringBuilder();
         try {
             if (null == hashOperations) {
-                logger.info("正在初始化hashOperations");
+                log.info("正在初始化hashOperations");
                 hashOperations = getRedisTemplate().opsForHash();
             }
             keyStr.append(TIMEEVER_PREFIX).append(key);
-            logger.info("操作成功！key={};", keyStr.toString());
-            return hashOperations.get(key, hashKey);
+            log.info("操作成功！key={};", keyStr.toString());
+            return hashOperations.get(keyStr.toString(), hashKey);
         } catch (Exception e) {
-            logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_INCREMENT_EXCEPTION);
+            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
     /**
@@ -955,7 +933,7 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public boolean delete(String key, boolean isTimeOutKey){
         if (StringUtils.isBlank(key)) {
-            logger.error("key is null");
+            log.error("key is null");
             return false;
         }
         StringBuilder keyStr = new StringBuilder();
@@ -966,10 +944,10 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
                 keyStr.append(TIMEEVER_PREFIX).append(key);
             }
             getRedisTemplate().delete(keyStr.toString());
-            logger.info("操作成功！key={};", keyStr.toString());
+            log.info("操作成功！key={};", keyStr.toString());
             return true ;
         }catch (Exception e){
-            //logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            //log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
             return false;
         }
     }
@@ -990,13 +968,13 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
                         throw new IllegalArgumentException("指定删除的key不能为空");
                     }
                     this.getRedisTemplate().delete(keys[0]);
-                    logger.info("操作成功！key={};", keyStr.toString());
+                    log.info("操作成功！key={};", keyStr.toString());
                 } else {
                     this.getRedisTemplate().delete(Arrays.asList(keys));
                 }
             }catch(Exception e){
-                logger.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-                throw new CacheException(CacheEnum.CACHE_HANDLE_SET_EXCEPTION) ;
+                log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+                throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION) ;
             }
         } else {
             throw new IllegalArgumentException("指定删除的key不能为空");
@@ -1017,12 +995,12 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
                 }else{
                     key += TIMEEVER_PREFIX;
                 }
-                logger.info("即将删除key={};", key);
+                log.info("即将删除key={};", key);
             });
             getRedisTemplate().delete(keys);
             return true ;
         }catch (Exception e){
-            logger.error("操作失败！失败信息：{}", e);
+            log.error("操作失败！失败信息：{}", e);
             return false;
         }
     }
@@ -1035,18 +1013,18 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      */
     public boolean deleteByPattern(String pattern){
         if(StringUtils.isBlank(pattern)){
-            logger.error("key is null");
+            log.error("key is null");
             return false;
         }
         try{
-            logger.info("正则范式：key={}", pattern);
+            log.info("正则范式：key={}", pattern);
             Set<String> keys = this.getRedisTemplate().keys(pattern);
-            keys.parallelStream().forEach(key -> logger.info("即将删除key={}", key));
+            keys.parallelStream().forEach(key -> log.info("即将删除key={}", key));
             getRedisTemplate().delete(keys.stream().collect(Collectors.toList()));
-            logger.info("操作成功！");
+            log.info("操作成功！");
             return true ;
         }catch (Exception e){
-            logger.error("操作失败！异常信息：{}", e);
+            log.error("操作失败！异常信息：{}", e);
             return false;
         }
     }
@@ -1057,7 +1035,8 @@ public abstract class AbstractSpringRedisCacheEnhance extends AbstractSpringRedi
      * @date 2018/7/25 8:37
      */
     public boolean clear(){
-        logger.info("即将清理全部缓存");
+        log.info("即将清理全部缓存");
         return deleteByPattern("*");
     }
+}
 }

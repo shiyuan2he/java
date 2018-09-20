@@ -26,6 +26,15 @@ public class ConvertHelperTest {
 		Map<String,Object> map = ConvertHelper.beanToMapByCommonsBeanUtils(user) ;
 		System.out.println(map.toString());
 	}
-
+    @Test
+    public void test2() {
+        String json = "{\n" +
+                "    \"serverCurrentTime\": \"1536823620684\",\n" +
+                "    \"code\": 1,\n" +
+                "    \"msg\": \"退订成功\",\n" +
+                "    \"data\": true\n" +
+                "}";
+        System.out.println(ConvertHelper.camel2LowerWithUnderscores(json));
+    }
 }
 
