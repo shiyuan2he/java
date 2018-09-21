@@ -27,6 +27,7 @@
         <module>java-exception</module>
         <module>java-util</module>
         <module>java-security</module>
+        <module>java-redis</module>
     </modules>
 
     <properties>
@@ -64,6 +65,12 @@
     </properties>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${version.lombok}</version>
+                <scope>provided</scope>
+            </dependency>
             <dependency>
                 <groupId>net.sf.json-lib</groupId>
                 <artifactId>json-lib</artifactId>
@@ -295,11 +302,6 @@
                 <groupId>commons-dbutils</groupId>
                 <artifactId>commons-dbutils</artifactId>
                 <version>${version.commons.dbutils}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${version.logbok}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
