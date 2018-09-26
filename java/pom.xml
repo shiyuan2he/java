@@ -27,7 +27,7 @@
         <module>java-exception</module>
         <module>java-util</module>
         <module>java-security</module>
-        <module>java-redis</module>
+        <module>java-cache</module>
     </modules>
 
     <properties>
@@ -303,6 +303,11 @@
                 <artifactId>commons-dbutils</artifactId>
                 <version>${version.commons.dbutils}</version>
             </dependency>
+            <dependency>
+                <groupId>com.hsy.java</groupId>
+                <artifactId>java-cache-base</artifactId>
+                <version>${version.hsy.java}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -314,8 +319,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>10</source>
+                    <target>10</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>

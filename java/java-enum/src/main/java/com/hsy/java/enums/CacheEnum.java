@@ -18,11 +18,7 @@ public enum CacheEnum {
     CACHE_KEY_TICKET("sso:ticket:","sso通票redis key,过期时间60秒",60l),
     CACHE_KEY_IMAGE_CODE("base:service:image:","base-service图形验证码key,过期时间2分钟",5 * 60l),
 
-    CACHE_HANDLE_SET_EXCEPTION("cache9999","缓存set异常"),
     CACHE_HANDLE_DO_EXCEPTION("cache9999","缓存操作异常"),
-    CACHE_HANDLE_INCREMENT_EXCEPTION("cache9999","INCREMENT异常"),
-    CACHE_HANDLE_GET_EXCEPTION("cache9999","缓存get异常"),
-    CACHE_HANDLE_DELETE_EXCEPTION("cache9999","缓存delete异常")
     ;
     private String code ;
     private String message ;

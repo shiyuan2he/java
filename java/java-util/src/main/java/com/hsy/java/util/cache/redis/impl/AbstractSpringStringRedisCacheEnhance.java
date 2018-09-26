@@ -2,6 +2,7 @@ package com.hsy.java.util.cache.redis.impl;
 
 import com.hsy.java.enums.CacheEnum;
 import com.hsy.java.exception.cache.CacheException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
