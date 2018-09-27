@@ -16,57 +16,57 @@ public interface IZSetOperationsBase extends ISpringRedisInterface {
 
 //    Long add(String key, Set<ZSetOperations.TypedTuple<String>> tuples);
 
-    Long remove(String key, Object... value, boolean isTimeOut);
+    Long remove(String key, boolean isTimeOut, Object... value);
 
-    Double incrementScore(String key, String value, double delta);
+    Double incrementScore(String key, String value, double delta, boolean isTimeOut);
 
-    Long rank(String key, Object value);
+    Long rank(String key, Object value, boolean isTimeOut);
 
-    Long reverseRank(String key, Object value);
+    Long reverseRank(String key, Object value, boolean isTimeOut);
 
-    Set<String> range(String key, long start, long end);
+    Set<String> range(String key, long start, long end, boolean isTimeOut);
 
-    Set<ZSetOperations.TypedTuple<String>> rangeWithScores(String key, long start, long end);
+    Set<ZSetOperations.TypedTuple<String>> rangeWithScores(String key, long start, long end, boolean isTimeOut);
 
-    Set<String> rangeByScore(String key, double start, double end);
+    Set<String> rangeByScore(String key, double start, double end, boolean isTimeOut);
 
-    Set<ZSetOperations.TypedTuple<String>> rangeByScoreWithScores(String var1, double var2, double var4);
+//    Set<ZSetOperations.TypedTuple<String>> rangeByScoreWithScores(String var1, double var2, double var4);
 
-    Set<String> rangeByScore(String key, double min, double max, long offset, long count);
+    Set<String> rangeByScore(String key, double min, double max, long offset, long count, boolean isTimeOut);
 
-    Set<ZSetOperations.TypedTuple<String>> rangeByScoreWithScores(String var1, double min, double max, long offset, long count);
+//    Set<ZSetOperations.TypedTuple<String>> rangeByScoreWithScores(String var1, double min, double max, long offset, long count);
 
-    Set<String> reverseRange(String key, long start, long end);
+    Set<String> reverseRange(String key, long start, long end, boolean isTimeOut);
 
-    Set<ZSetOperations.TypedTuple<String>> reverseRangeWithScores(String key, long start, long end);
+    Set<ZSetOperations.TypedTuple<String>> reverseRangeWithScores(String key, long start, long end, boolean isTimeOut);
 
-    Set<String> reverseRangeByScore(String key, double min, double max);
+    Set<String> reverseRangeByScore(String key, double min, double max, boolean isTimeOut);
 
-    Set<ZSetOperations.TypedTuple<String>> reverseRangeByScoreWithScores(String key, double min, double max);
+    Set<ZSetOperations.TypedTuple<String>> reverseRangeByScoreWithScores(String key, double min, double max, boolean isTimeOut);
 
-    Set<String> reverseRangeByScore(String key, double min, double max, long offset, long count);
+    Set<String> reverseRangeByScore(String key, double min, double max, long offset, long count, boolean isTimeOut);
 
-    Set<ZSetOperations.TypedTuple<String>> reverseRangeByScoreWithScores(String key, double min, double max, long offset, long count);
+//    Set<ZSetOperations.TypedTuple<String>> reverseRangeByScoreWithScores(String key, double min, double max, long offset, long count);
 
-    Long count(String key, double min, final double max);
+    Long count(String key, double min, final double max, boolean isTimeOut);
 
-    Long size(String key);
+    Long size(String key, boolean isTimeOut);
 
-    Long zCard(String key);
+    Long zCard(String key, boolean isTimeOut);
 
-    Double score(String key, Object value);
+    Double score(String key, Object value, boolean isTimeOut);
 
-    Long removeRange(String key, long start, long end);
+    Long removeRange(String key, long start, long end, boolean isTimeOut);
 
-    Long removeRangeByScore(String key, double min, double max);
+    Long removeRangeByScore(String key, double min, double max, boolean isTimeOut);
 
-    Long unionAndStore(String key, String otherKey, String destinationKey);
+    Long unionAndStore(String key, String otherKey, String destinationKey, boolean isTimeOut);
 
-    Long unionAndStore(String key, Collection<String> otherKeys, String destinationKey);
+    Long unionAndStore(String key, Collection<String> otherKeys, String destinationKey, boolean isTimeOut);
 
-    Long intersectAndStore(String key, String otherKey, String destinationKey);
+    Long intersectAndStore(String key, String otherKey, String destinationKey, boolean isTimeOut);
 
-    Long intersectAndStore(String key, Collection<String> otherKey, String destinationKey);
+    Long intersectAndStore(String key, Collection<String> otherKey, String destinationKey, boolean isTimeOut);
 
 //    Cursor<ZSetOperations.TypedTuple<String>> scan(String var1, ScanOptions var2);
 

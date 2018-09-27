@@ -14,19 +14,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public abstract class SpringRedisTemplateBase extends SpringBase {
-    /*abstract ValueOperations<String, Object> getValueOperations();
-    abstract ListOperations<String, Object> getListOperations();
-    abstract SetOperations<String, Object> getSetOperations();
-    abstract ZSetOperations<String, Object> getzSetOperations();
-    abstract HashOperations<String, Object, Object> getHashOperations();
-    abstract ClusterOperations<String, Object> getClusterOperations();
-    abstract GeoOperations<String, Object> getGeoOperations();
-    abstract HyperLogLogOperations<String, Object> getHyperLogLogOperations();
-
-    public boolean tryLock(String key, long timeOut, TimeUnit timeUnit){
-        return Boolean.FALSE;
-    }
-    *//**
+    /**
      * @param key   键
      * @param value 值oauth/token
      * @return boolean 保存是否成功
