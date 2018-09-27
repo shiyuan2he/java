@@ -11,68 +11,68 @@ import java.util.Collection;
 import java.util.Set;
 
 public interface IZSetOperationsBase extends ISpringRedisInterface {
-    Boolean add(String var1, String var2, double var3);
 
-    Long add(String var1, Set<ZSetOperations.TypedTuple<String>> var2);
+    Boolean add(String key, String value, double score, boolean isTimeOut);
 
-    Long remove(String var1, Object... var2);
+//    Long add(String key, Set<ZSetOperations.TypedTuple<String>> tuples);
 
-    Double incrementScore(String var1, String var2, double var3);
+    Long remove(String key, Object... value, boolean isTimeOut);
 
-    Long rank(String var1, Object var2);
+    Double incrementScore(String key, String value, double delta);
 
-    Long reverseRank(String var1, Object var2);
+    Long rank(String key, Object value);
 
-    Set<String> range(String var1, long var2, long var4);
+    Long reverseRank(String key, Object value);
 
-    Set<ZSetOperations.TypedTuple<String>> rangeWithScores(String var1, long var2, long var4);
+    Set<String> range(String key, long start, long end);
 
-    Set<String> rangeByScore(String var1, double var2, double var4);
+    Set<ZSetOperations.TypedTuple<String>> rangeWithScores(String key, long start, long end);
+
+    Set<String> rangeByScore(String key, double start, double end);
 
     Set<ZSetOperations.TypedTuple<String>> rangeByScoreWithScores(String var1, double var2, double var4);
 
-    Set<String> rangeByScore(String var1, double var2, double var4, long var6, long var8);
+    Set<String> rangeByScore(String key, double min, double max, long offset, long count);
 
-    Set<ZSetOperations.TypedTuple<String>> rangeByScoreWithScores(String var1, double var2, double var4, long var6, long var8);
+    Set<ZSetOperations.TypedTuple<String>> rangeByScoreWithScores(String var1, double min, double max, long offset, long count);
 
-    Set<String> reverseRange(String var1, long var2, long var4);
+    Set<String> reverseRange(String key, long start, long end);
 
-    Set<ZSetOperations.TypedTuple<String>> reverseRangeWithScores(String var1, long var2, long var4);
+    Set<ZSetOperations.TypedTuple<String>> reverseRangeWithScores(String key, long start, long end);
 
-    Set<String> reverseRangeByScore(String var1, double var2, double var4);
+    Set<String> reverseRangeByScore(String key, double min, double max);
 
-    Set<ZSetOperations.TypedTuple<String>> reverseRangeByScoreWithScores(String var1, double var2, double var4);
+    Set<ZSetOperations.TypedTuple<String>> reverseRangeByScoreWithScores(String key, double min, double max);
 
-    Set<String> reverseRangeByScore(String var1, double var2, double var4, long var6, long var8);
+    Set<String> reverseRangeByScore(String key, double min, double max, long offset, long count);
 
-    Set<ZSetOperations.TypedTuple<String>> reverseRangeByScoreWithScores(String var1, double var2, double var4, long var6, long var8);
+    Set<ZSetOperations.TypedTuple<String>> reverseRangeByScoreWithScores(String key, double min, double max, long offset, long count);
 
-    Long count(String var1, double var2, double var4);
+    Long count(String key, double min, final double max);
 
-    Long size(String var1);
+    Long size(String key);
 
-    Long zCard(String var1);
+    Long zCard(String key);
 
-    Double score(String var1, Object var2);
+    Double score(String key, Object value);
 
-    Long removeRange(String var1, long var2, long var4);
+    Long removeRange(String key, long start, long end);
 
-    Long removeRangeByScore(String var1, double var2, double var4);
+    Long removeRangeByScore(String key, double min, double max);
 
-    Long unionAndStore(String var1, String var2, String var3);
+    Long unionAndStore(String key, String otherKey, String destinationKey);
 
-    Long unionAndStore(String var1, Collection<String> var2, String var3);
+    Long unionAndStore(String key, Collection<String> otherKeys, String destinationKey);
 
-    Long intersectAndStore(String var1, String var2, String var3);
+    Long intersectAndStore(String key, String otherKey, String destinationKey);
 
-    Long intersectAndStore(String var1, Collection<String> var2, String var3);
+    Long intersectAndStore(String key, Collection<String> otherKey, String destinationKey);
 
-    Cursor<ZSetOperations.TypedTuple<String>> scan(String var1, ScanOptions var2);
+//    Cursor<ZSetOperations.TypedTuple<String>> scan(String var1, ScanOptions var2);
 
-    Set<String> rangeByLex(String var1, RedisZSetCommands.Range var2);
+//    Set<String> rangeByLex(String var1, RedisZSetCommands.Range var2);
 
-    Set<String> rangeByLex(String var1, RedisZSetCommands.Range var2, RedisZSetCommands.Limit var3);
+//    Set<String> rangeByLex(String var1, RedisZSetCommands.Range var2, RedisZSetCommands.Limit var3);
 
-    RedisOperations<String, String> getOperations();
-
+//    RedisOperations<String, String> getOperations();
 }
