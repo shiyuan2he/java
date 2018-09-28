@@ -1,60 +1,55 @@
 package com.hsy.java.cache.redis.spring.object;
 
 import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
-import org.springframework.data.redis.core.Cursor;
-import org.springframework.data.redis.core.RedisOperations;
-import org.springframework.data.redis.core.ScanOptions;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-
 public interface ISetOperationsBase extends ISpringRedisInterface{
-    Long add(String var1, Object... var2);
+    Long add(String key, Object... value);
 
-    Long remove(String var1, Object... var2);
+    Long remove(String key, Object... value);
 
-    Object pop(String var1);
+    Object pop(String key);
 
-    Boolean move(String var1, Object var2, String var3);
+    Boolean move(String key, Object value, String destinationKey);
 
-    Long size(String var1);
+    Long size(String key);
 
-    Boolean isMember(String var1, Object var2);
+    Boolean isMember(String key, Object value);
 
-    Set<Object> intersect(String var1, String var2);
+    Set<Object> intersect(String key, String otherKey);
 
-    Set<Object> intersect(String var1, Collection<String> var2);
+    Set<Object> intersect(String key, Collection<String> otherKeys);
 
-    Long intersectAndStore(String var1, String var2, String var3);
+    Long intersectAndStore(String key, String otherKey, String destinationKey);
 
-    Long intersectAndStore(String var1, Collection<String> var2, String var3);
+    Long intersectAndStore(String key, Collection<String> otherKeys, String destinationKey);
 
-    Set<Object> union(String var1, String var2);
+    Set<Object> union(String key, String otherKey);
 
-    Set<Object> union(String var1, Collection<String> var2);
+    Set<Object> union(String key, Collection<String> otherKeys);
 
-    Long unionAndStore(String var1, String var2, String var3);
+    Long unionAndStore(String key, String otherKey, String destiantionKey);
 
-    Long unionAndStore(String var1, Collection<String> var2, String var3);
+    Long unionAndStore(String key, Collection<String> otherKey, String destinationKey);
 
-    Set<Object> difference(String var1, String var2);
+    Set<Object> difference(String key, String otherKey);
 
-    Set<Object> difference(String var1, Collection<String> var2);
+    Set<Object> difference(String key, Collection<String> otherKeys);
 
-    Long differenceAndStore(String var1, String var2, String var3);
+    Long differenceAndStore(String key, String otherKey, String destinationKey);
 
-    Long differenceAndStore(String var1, Collection<String> var2, String var3);
+    Long differenceAndStore(String key, Collection<String> otherKeys, String destinationKey);
 
-    Set<Object> members(String var1);
+    Set<Object> members(String key);
 
-    Object randomMember(String var1);
+    Object randomMember(String key);
 
-    Set<Object> distinctRandomMembers(String var1, long var2);
+    Set<Object> distinctRandomMembers(String key, long count);
 
-    List<Object> randomMembers(String var1, long var2);
+    List<Object> randomMembers(String key, long count);
 
-    Cursor<Object> scan(String var1, ScanOptions var2);
+//    Cursor<Object> scan(String var1, ScanOptions var2);
 
-    RedisOperations<String, Object> getOperations();
+//    RedisOperations<String, Object> getOperations();
 }
