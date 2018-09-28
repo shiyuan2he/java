@@ -3,6 +3,7 @@
 */*/*.project
 */*/.settings/*
 */*/target/classes/*
+*/*/target/classes/*
 */devTools/*
 .idea
 .idea/*
@@ -10,17 +11,15 @@
 .idea/*/*.xml
 */*/*.iml
 */*.iml
-redis/redis-jedis/target
-*/*/target
 */target
-
-javase/.idea/libraries/*.xml
-javase/.idea/workspace.xml
-javase/*/target/*
-
-javaee/*/target/*
 */*/target/*
-
+*/*/*/target
+*.class
+*/*.class
+*/*/*.class
+*/*/*/*.class
+*/*/*/*/*.class
+*/*/*/*/*/*.class
 */redis/*
 */.idea
 

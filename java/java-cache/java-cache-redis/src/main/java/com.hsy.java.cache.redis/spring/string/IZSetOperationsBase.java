@@ -60,13 +60,13 @@ public interface IZSetOperationsBase extends ISpringRedisInterface {
 
     Long removeRangeByScore(String key, double min, double max, boolean isTimeOut);
 
-    Long unionAndStore(String key, String otherKey, String destinationKey, boolean isTimeOut);
+    Long unionAndStore(String key, String otherKey, String destinationKey);
 
-    Long unionAndStore(String key, Collection<String> otherKeys, String destinationKey, boolean isTimeOut);
+    Long unionAndStore(String key, Collection<String> otherKeys, String destinationKey);
 
-    Long intersectAndStore(String key, String otherKey, String destinationKey, boolean isTimeOut);
+    Long intersectAndStore(String key, String otherKey, String destinationKey);
 
-    Long intersectAndStore(String key, Collection<String> otherKey, String destinationKey, boolean isTimeOut);
+    Long intersectAndStore(String key, Collection<String> otherKey, String destinationKey);
 
 //    Cursor<ZSetOperations.TypedTuple<String>> scan(String var1, ScanOptions var2);
 
