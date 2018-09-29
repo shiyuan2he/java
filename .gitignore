@@ -9,8 +9,10 @@
 .idea/*
 .idea/*.xml
 .idea/*/*.xml
+*/*/*/*.iml
 */*/*.iml
 */*.iml
+*.iml
 */target
 */*/target/*
 */*/*/target
