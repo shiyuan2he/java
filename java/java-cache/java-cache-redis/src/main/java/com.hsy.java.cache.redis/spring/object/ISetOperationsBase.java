@@ -5,17 +5,17 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 public interface ISetOperationsBase extends ISpringRedisInterface{
-    Long add(String key, Object... value);
+    Long add(String key, boolean isTimeOut, Object... value);
 
-    Long remove(String key, Object... value);
+    Long remove(String key, boolean isTimeOut, Object... value);
 
-    Object pop(String key);
+    Object pop(String key, boolean isTimeOut);
 
     Boolean move(String key, Object value, String destinationKey);
 
-    Long size(String key);
+    Long size(String key, boolean isTimeOut);
 
-    Boolean isMember(String key, Object value);
+    Boolean isMember(String key, Object value, boolean isTimeOut);
 
     Set<Object> intersect(String key, String otherKey);
 
@@ -29,9 +29,9 @@ public interface ISetOperationsBase extends ISpringRedisInterface{
 
     Set<Object> union(String key, Collection<String> otherKeys);
 
-    Long unionAndStore(String key, String otherKey, String destiantionKey);
+    Long unionAndStore(String key, String otherKey, String destinationKey);
 
-    Long unionAndStore(String key, Collection<String> otherKey, String destinationKey);
+    Long unionAndStore(String key, Collection<String> otherKeys, String destinationKey);
 
     Set<Object> difference(String key, String otherKey);
 
@@ -41,13 +41,13 @@ public interface ISetOperationsBase extends ISpringRedisInterface{
 
     Long differenceAndStore(String key, Collection<String> otherKeys, String destinationKey);
 
-    Set<Object> members(String key);
+    Set<Object> members(String key, boolean isTimeOut);
 
-    Object randomMember(String key);
+    Object randomMember(String key, boolean isTimeOut);
 
-    Set<Object> distinctRandomMembers(String key, long count);
+    Set<Object> distinctRandomMembers(String key, long count, boolean isTimeOut);
 
-    List<Object> randomMembers(String key, long count);
+    List<Object> randomMembers(String key, long count, boolean isTimeOut);
 
 //    Cursor<Object> scan(String var1, ScanOptions var2);
 
