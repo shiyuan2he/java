@@ -11,5 +11,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="java-bean" />
+    <orderEntry type="module" module-name="java-enum" />
+    <orderEntry type="module" module-name="java-exception" />
   </component>
 </module>

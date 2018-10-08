@@ -1,21 +1,4 @@
-package com.hsy.java.util.cache.redis.impl;
-
-import com.hsy.java.enums.CacheEnum;
-import com.hsy.java.exception.cache.CacheException;
-import com.hsy.java.util.cache.ICacheBase;
-import com.hsy.java.util.serializer.SerializerHelper;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.core.*;
-
-import javax.annotation.PostConstruct;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-
+package com.hsy.java.cache.redis.spring.base;
 /**
  * @author heshiyuan
  * @description <p>spring-data-redis缓存工具类</p>
@@ -26,9 +9,9 @@ import java.util.concurrent.TimeUnit;
  * Copyright (c) 2017 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public abstract class AbstractSpringRedisCacheBase implements ICacheBase {
+public abstract class AbstractSpringRedisCacheBase {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
+    /*private final Logger logger = LoggerFactory.getLogger(this.getClass()) ;
     protected final static String TIMEOUT_PREFIX = "TO:";
     protected final static String TIMEEVER_PREFIX = "NO:";
     protected final static String LOCK_PREFIX = "LOCK:";
@@ -131,5 +114,5 @@ public abstract class AbstractSpringRedisCacheBase implements ICacheBase {
         }else{
             logger.info("设值缓存成功！key：{};", key);
         }
-    }
+    }*/
 }
