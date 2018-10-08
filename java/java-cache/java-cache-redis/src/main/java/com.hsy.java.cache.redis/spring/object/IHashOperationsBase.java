@@ -152,7 +152,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
     List<Object> values(String key, boolean isTimeOut);
     /**
      * @description <p></p>
-     * @param 
+     * @param
      * @return No such property: code for class: Script1
      * @author heshiyuan 
      * @date 08/10/2018 6:09 PM 
