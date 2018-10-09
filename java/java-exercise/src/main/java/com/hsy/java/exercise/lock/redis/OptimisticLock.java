@@ -36,7 +36,7 @@ public class OptimisticLock {
      * Copyright (c) 2016 shiyuan4work@sina.com All rights reserved
      */
     public void redisLock(){
-        logger.info("开始业务");
+        /*logger.info("开始业务");
         String key = "TO:redisLock";
         Jedis jedis = RedisUtils.getInstance().getJedis();
         jedis.watch(key); //如果事务提交exec时发现监视的键值对发生变化，事务将被取消
@@ -46,6 +46,6 @@ public class OptimisticLock {
             //(Jedis) transaction.set(key, String.valueOf(num-1));
 
         }
-        logger.info("结束业务");
+        logger.info("结束业务");*/
     }
 }

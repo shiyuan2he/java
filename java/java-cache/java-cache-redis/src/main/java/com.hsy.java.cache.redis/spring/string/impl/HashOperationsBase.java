@@ -7,14 +7,16 @@ import com.hsy.java.exception.cache.CacheException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.HashOperations;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 @Slf4j
 public abstract class HashOperationsBase extends SpringStringBase implements IHashOperationsBase {
-    private HashOperations hashOperations = getStringRedisTemplate().opsForHash();
+
+//    public abstract HashOperations<String, Object, String> hashOperations() ;
+//    private HashOperations<String, Object, String> hashOperations = hashOperations();
+    private HashOperations<String, Object, String> hashOperations = getStringRedisTemplate().opsForHash();
 
     @Override
     public Long delete(String key, boolean isTimeOut, Object... hashKey) {
@@ -98,7 +100,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public List<String> multiGet(String key, Collection<String> hashKeys, boolean isTimeOut) {
+    public List<String> multiGet(String key, Collection<Object> hashKeys, boolean isTimeOut) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -125,7 +127,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public Long increment(String key, String hashKey, long delta, boolean isTimeOut) {
+    public Long increment(String key, Object hashKey, long delta, boolean isTimeOut) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -152,7 +154,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public Double increment(String key, String hashKey, double delta, boolean isTimeOut) {
+    public Double increment(String key, Object hashKey, double delta, boolean isTimeOut) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -179,7 +181,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public Set<String> keys(String key, boolean isTimeOut) {
+    public Set<Object> keys(String key, boolean isTimeOut) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -196,7 +198,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
                 keyStr.append(TIMEEVER_PREFIX).append(key);
             }
             key = keyStr.toString();
-            Set<String> returnValue = hashOperations.keys(key);
+            Set<Object> returnValue = hashOperations.keys(key);
             log.info("操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
@@ -233,7 +235,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public void putAll(String key, Map<String, String> hashKeyMapValue, boolean isTimeOut) {
+    public void putAll(String key, Map<Object, String> hashKeyMapValue, boolean isTimeOut) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return;
@@ -260,7 +262,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public void put(String key, String hashKey, String hashValue, boolean isTimeOut) {
+    public void put(String key, Object hashKey, String hashValue, boolean isTimeOut) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return;
@@ -287,7 +289,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public Boolean putIfAbsent(String key, String hashKey, String hashValue, boolean isTimeOut) {
+    public Boolean putIfAbsent(String key, Object hashKey, String hashValue, boolean isTimeOut) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return false;
@@ -341,7 +343,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public Map<String, String> entries(String key, boolean isTimeOut) {
+    public Map<Object, String> entries(String key, boolean isTimeOut) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -358,7 +360,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
                 keyStr.append(TIMEEVER_PREFIX).append(key);
             }
             key = keyStr.toString();
-            Map<String, String> returnValue = hashOperations.entries(key);
+            Map<Object, String> returnValue = hashOperations.entries(key);
             log.info("操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {

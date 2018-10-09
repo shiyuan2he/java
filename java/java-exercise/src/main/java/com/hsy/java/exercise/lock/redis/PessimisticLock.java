@@ -19,7 +19,7 @@ public class PessimisticLock{
     private Logger logger = LoggerFactory.getLogger(getClass());
     TStockDaoImpl stockDao = new TStockDaoImpl();
     public void doLock(){
-        Jedis redis = RedisUtils.getInstance().getJedis();
+        /*Jedis redis = RedisUtils.getInstance().getJedis();
 
         String key = "lock" ;
         while (true){
@@ -37,6 +37,6 @@ public class PessimisticLock{
             } else {
                 logger.info("没有拿到锁");
             }
-        }
+        }*/
     }
 }

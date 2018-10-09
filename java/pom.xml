@@ -311,6 +311,19 @@
         </dependencies>
     </dependencyManagement>
 
+    <!--<repositories>
+        <repository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>mvnrepository</id>
+            <name>mvnrepository maven</name>
+            <url>http://mvnrepository.com/</url>
+        </repository>
+    </repositories>-->
+
     <build>
         <plugins>
             <!-- java编译插件 -->
