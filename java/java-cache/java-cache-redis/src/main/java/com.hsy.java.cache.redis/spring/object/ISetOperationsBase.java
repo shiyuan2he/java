@@ -1,21 +1,22 @@
 package com.hsy.java.cache.redis.spring.object;
+import com.askingdata.y.cache.redis.spring.ISpringRedisInterface;
 
-import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-public interface ISetOperationsBase extends ISpringRedisInterface{
-    Long add(String key, boolean isTimeOut, Object... value);
 
-    Long remove(String key, boolean isTimeOut, Object... value);
+public interface ISetOperationsBase extends ISpringRedisInterface {
+    Long add(String key, Object... value);
 
-    Object pop(String key, boolean isTimeOut);
+    Long remove(String key, Object... value);
+
+    Object pop(String key);
 
     Boolean move(String key, Object value, String destinationKey);
 
-    Long size(String key, boolean isTimeOut);
+    Long size(String key);
 
-    Boolean isMember(String key, Object value, boolean isTimeOut);
+    Boolean isMember(String key, Object value);
 
     Set<Object> intersect(String key, String otherKey);
 
@@ -41,13 +42,13 @@ public interface ISetOperationsBase extends ISpringRedisInterface{
 
     Long differenceAndStore(String key, Collection<String> otherKeys, String destinationKey);
 
-    Set<Object> members(String key, boolean isTimeOut);
+    Set<Object> members(String key);
 
-    Object randomMember(String key, boolean isTimeOut);
+    Object randomMember(String key);
 
-    Set<Object> distinctRandomMembers(String key, long count, boolean isTimeOut);
+    Set<Object> distinctRandomMembers(String key, long count);
 
-    List<Object> randomMembers(String key, long count, boolean isTimeOut);
+    List<Object> randomMembers(String key, long count);
 
 //    Cursor<Object> scan(String var1, ScanOptions var2);
 
