@@ -311,7 +311,16 @@
         </dependencies>
     </dependencyManagement>
 
-    <!--<repositories>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
         <repository>
             <id>alimaven</id>
             <name>aliyun maven</name>
@@ -322,7 +331,21 @@
             <name>mvnrepository maven</name>
             <url>http://mvnrepository.com/</url>
         </repository>
-    </repositories>-->
+        <repository>
+            <id>jboss</id>
+            <name>JBoss Repository</name>
+            <url>http://repository.jboss.com/maven2/</url>
+            <releases>
+                <updatePolicy>daily</updatePolicy><!-- never,always,interval n -->
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy><!-- fail,ignore -->
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
