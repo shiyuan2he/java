@@ -1,6 +1,6 @@
 package com.hsy.java.cache.redis.spring.object;
 
-import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
+import com.askingdata.y.cache.redis.spring.ISpringRedisInterface;
 
 import java.util.Collection;
 import java.util.Set;
@@ -16,39 +16,39 @@ import java.util.Set;
  * @price ¥5    微信：hewei1109
  */
 public interface IZSetOperationsBase extends ISpringRedisInterface {
-    Boolean add(String key, Object value, double score, boolean isTimeOut);
+    Boolean add(String key, Object value, double score);
 
-    Long remove(String key, boolean isTimeOut, Object... objects);
+    Long remove(String key, Object... objects);
 
-    Double incrementScore(String key, Object value, double score, boolean isTimeOut);
+    Double incrementScore(String key, Object value, double score);
 
-    Long rank(String key, Object value, boolean isTimeOut);
+    Long rank(String key, Object value);
 
-    Long reverseRank(String key, Object value, boolean isTimeOut);
+    Long reverseRank(String key, Object value);
 
-    Set<Object> range(String key, long start, long end, boolean isTimeOut);
+    Set<Object> range(String key, long start, long end);
 
-    Set<Object> rangeByScore(String key, double min, double max, boolean isTimeOut);
+    Set<Object> rangeByScore(String key, double min, double max);
 
-    Set<Object> rangeByScore(String key, double min, double max, long offset, long count, boolean isTimeOut);
+    Set<Object> rangeByScore(String key, double min, double max, long offset, long count);
 
-    Set<Object> reverseRange(String key, long start, long end, boolean isTimeOut);
+    Set<Object> reverseRange(String key, long start, long end);
 
-    Set<Object> reverseRangeByScore(String key, double min, double max, boolean isTimeOut);
+    Set<Object> reverseRangeByScore(String key, double min, double max);
 
-    Set<Object> reverseRangeByScore(String key, double min, double max, long offset, long count, boolean isTimeOut);
+    Set<Object> reverseRangeByScore(String key, double min, double max, long offset, long count);
 
-    Long count(String key, double min, double max, boolean isTimeOut);
+    Long count(String key, double min, double max);
 
-    Long size(String key, boolean isTimeOut);
+    Long size(String key);
 
-    Long zCard(String key, boolean isTimeOut);
+    Long zCard(String key);
 
-    Double score(String key, Object value, boolean isTimeOut);
+    Double score(String key, Object value);
 
-    Long removeRange(String key, long start, long end, boolean isTimeOut);
+    Long removeRange(String key, long start, long end);
 
-    Long removeRangeByScore(String key, double min, double max, boolean isTimeOut);
+    Long removeRangeByScore(String key, double min, double max);
 
     Long unionAndStore(String key, String key1, String key2);
 

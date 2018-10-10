@@ -1,9 +1,8 @@
 package com.hsy.java.cache.redis.spring.string.impl;
-
-import com.hsy.java.cache.redis.spring.string.IListOperationsBase;
-import com.hsy.java.cache.redis.spring.string.base.SpringStringBase;
-import com.hsy.java.enums.CacheEnum;
-import com.hsy.java.exception.cache.CacheException;
+import com.askingdata.y.cache.redis.spring.string.IListOperationsBase;
+import com.askingdata.y.cache.redis.spring.string.base.SpringStringBase;
+import com.askingdata.y.enums.CacheEnum;
+import com.askingdata.y.exception.CacheException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.ListOperations;
@@ -18,27 +17,23 @@ public abstract class ListOperationsBase extends SpringStringBase implements ILi
     private ListOperations<String, String> listOperations = getStringRedisTemplate().opsForList();
 
     @Override
-    public List<String> range(String key, boolean isTimeOut, long start, long end) {
+    public List<String> range(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == listOperations) {
                 log.info("initializing listOperations");
                 listOperations = getStringRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            List<String> returnValue = listOperations.range(keyStr.toString(), start, end);
-            log.info("操作成功！key={},start={},end={};", keyStr.toString(), start, end);
+
+            List<String> returnValue = listOperations.range(key, start, end);
+            log.info("操作成功！key={},start={},end={};", key, start, end);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={},start={},end={}失败！失败信息：{}", keyStr.toString(), start, end, e);
+            log.error("操作key={},start={},end={}失败！失败信息：{}", key, start, end, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -49,84 +44,72 @@ public abstract class ListOperationsBase extends SpringStringBase implements ILi
     }
 
     @Override
-    public Long size(String key, boolean isTimeOut) {
+    public Long size(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == listOperations) {
                 log.info("initializing listOperations");
                 listOperations = getStringRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            Long returnValue = listOperations.size(keyStr.toString());
-            log.info("操作成功！key={}", keyStr.toString());
+
+            Long returnValue = listOperations.size(key);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作失败！key={},失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={},失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
-    public Long leftPush(String key, boolean isTimeOut, String value) {
-        return this.leftPushAll(key, isTimeOut, value);
+    public Long leftPush(String key, String value) {
+        return this.leftPushAll(key, value);
     }
 
     @Override
-    public Long leftPushAll(String key, boolean isTimeOut, String... value) {
+    public Long leftPushAll(String key, String... value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == listOperations) {
                 log.info("initializing listOperations");
                 listOperations = getStringRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            Long returnValue = listOperations.leftPushAll(keyStr.toString(), value);
-            log.info("操作成功！key={}", keyStr.toString());
+
+            Long returnValue = listOperations.leftPushAll(key, value);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作失败！key={},失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={},失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
-    public Long leftPushAll(String key, boolean isTimeOut, Collection<String> value) {
+    public Long leftPushAll(String key, Collection<String> value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == listOperations) {
                 log.info("initializing listOperations");
                 listOperations = getStringRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            Long returnValue = listOperations.leftPushAll(keyStr.toString(), value);
-            log.info("操作成功！key={}", keyStr.toString());
+
+            Long returnValue = listOperations.leftPushAll(key, value);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作失败！key={},失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={},失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -142,58 +125,50 @@ public abstract class ListOperationsBase extends SpringStringBase implements ILi
     }
 
     @Override
-    public Long rightPush(String key, boolean isTimeOut, String value) {
-        return this.rightPushAll(key, isTimeOut, value);
+    public Long rightPush(String key, String value) {
+        return this.rightPushAll(key, value);
     }
 
     @Override
-    public Long rightPushAll(String key, boolean isTimeOut, String... value) {
+    public Long rightPushAll(String key, String... value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == listOperations) {
                 log.info("initializing listOperations");
                 listOperations = getStringRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            Long returnValue = listOperations.rightPushAll(keyStr.toString(), value);
-            log.info("操作成功！key={}", keyStr.toString());
+
+            Long returnValue = listOperations.rightPushAll(key, value);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作失败！key={},失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={},失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
-    public Long rightPushAll(String key, boolean isTimeOut, Collection<String> value) {
+    public Long rightPushAll(String key, Collection<String> value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == listOperations) {
                 log.info("initializing listOperations");
                 listOperations = getStringRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            Long returnValue = listOperations.rightPushAll(keyStr.toString(), value);
-            log.info("操作成功！key={}", keyStr.toString());
+
+            Long returnValue = listOperations.rightPushAll(key, value);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作失败！key={},失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={},失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -209,27 +184,23 @@ public abstract class ListOperationsBase extends SpringStringBase implements ILi
     }
 
     @Override
-    public void set(String key, long index, String value, boolean isTimeOut) {
+    public void set(String key, long index, String value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == listOperations) {
                 log.info("initializing listOperations");
                 listOperations = getStringRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            listOperations.set(keyStr.toString(), index, value);
-            log.info("操作成功！key={},index={}", keyStr.toString(), index);
+
+            listOperations.set(key, index, value);
+            log.info("操作成功！key={},index={}", key, index);
             return;
         } catch (Exception e) {
-            log.error("操作失败！key={},index={},失败信息：{}", keyStr.toString(), index, e);
+            log.error("操作失败！key={},index={},失败信息：{}", key, index, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -240,53 +211,45 @@ public abstract class ListOperationsBase extends SpringStringBase implements ILi
     }
 
     @Override
-    public String index(String key, long index, boolean isTimeOut) {
+    public String index(String key, long index) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == listOperations) {
                 log.info("initializing listOperations");
                 listOperations = getStringRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            String returnValue = listOperations.index(keyStr.toString(), index);
-            log.info("操作成功！key={},index={}", keyStr.toString(), index);
+
+            String returnValue = listOperations.index(key, index);
+            log.info("操作成功！key={},index={}", key, index);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作失败！key={},index={},失败信息：{}", keyStr.toString(), index, e);
+            log.error("操作失败！key={},index={},失败信息：{}", key, index, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
-    public String leftPop(String key, boolean isTimeOut) {
+    public String leftPop(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == listOperations) {
                 log.info("initializing listOperations");
                 listOperations = getStringRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            String returnValue = listOperations.leftPop(keyStr.toString());
-            log.info("操作成功！key={}", keyStr.toString());
+
+            String returnValue = listOperations.leftPop(key);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作失败！key={},失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={},失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -297,23 +260,18 @@ public abstract class ListOperationsBase extends SpringStringBase implements ILi
     }
 
     @Override
-    public String rightPop(String key, boolean isTimeOut) {
+    public String rightPop(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == listOperations) {
                 log.info("initializing listOperations");
                 listOperations = getStringRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             String returnValue = listOperations.rightPop(key);
             log.info("操作成功！key={}", key);
             return returnValue;

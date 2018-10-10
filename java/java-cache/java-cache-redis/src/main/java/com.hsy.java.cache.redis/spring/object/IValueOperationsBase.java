@@ -1,7 +1,5 @@
 package com.hsy.java.cache.redis.spring.object;
 
-import org.springframework.data.redis.core.RedisOperations;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package com.hsy.java.cache.redis.spring.object;
 
-import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
+import com.askingdata.y.cache.redis.spring.ISpringRedisInterface;
 
 import java.util.Collection;
 import java.util.List;
@@ -29,7 +29,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    List<Object> range(String key, long start, long end, boolean isTimeOut);
+    List<Object> range(String key, long start, long end);
     /**
      * @description <p></p>
      * @param key 键
@@ -42,7 +42,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    void trim(String key, long start, long end, boolean isTimeOut);
+    void trim(String key, long start, long end);
     /**
      * @description <p></p>
      * @param key 键
@@ -53,7 +53,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Long size(String key, boolean isTimeOut);
+    Long size(String key);
     /**
      * @description <p></p>
      * @param key
@@ -65,7 +65,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Long leftPush(String key, String value, boolean isTimeOut);
+    Long leftPush(String key, String value);
     /**
      * @description <p></p>
      * @param key 键
@@ -77,7 +77,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Long leftPushAll(String key, boolean isTimeOut, Object... vs);
+    Long leftPushAll(String key, Object... vs);
     /**
      * @description <p></p>
      * @param 
@@ -88,7 +88,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Long leftPushAll(String key, boolean isTimeOut, Collection<Object> collection);
+    Long leftPushAll(String key, Collection<Object> collection);
     /**
      * @description <p></p>
      * @param 
@@ -99,7 +99,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Long leftPushIfPresent(String key, boolean isTimeOut, String value);
+    Long leftPushIfPresent(String key, String value);
     /**
      * @description <p></p>
      * @param 
@@ -110,7 +110,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Long leftPush(String key, String pivot, String value, boolean isTimeOut);
+    Long leftPush(String key, String pivot, String value);
     /**
      * @description <p></p>
      * @param 
@@ -121,7 +121,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Long rightPush(String key, String value, boolean isTimeOut);
+    Long rightPush(String key, String value);
     /**
      * @description <p></p>
      * @param 
@@ -132,7 +132,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Long rightPushAll(String key, boolean isTimeOut, Object... values);
+    Long rightPushAll(String key, Object... values);
     /**
      * @description <p></p>
      * @param 
@@ -143,7 +143,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Long rightPushAll(String key, Collection<Object> collection, boolean isTimeOut);
+    Long rightPushAll(String key, Collection<Object> collection);
     /**
      * @description <p></p>
      * @param 
@@ -154,7 +154,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Long rightPushIfPresent(String key, String value, boolean isTimeOut);
+    Long rightPushIfPresent(String key, String value);
     /**
      * @description <p></p>
      * @param 
@@ -176,7 +176,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    void set(String key, long index, String value, boolean isTimeOut);
+    void set(String key, long index, String value);
     /**
      * @description <p></p>
      * @param 
@@ -187,7 +187,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Long remove(String key, long count, Object value, boolean isTimeOut);
+    Long remove(String key, long count, Object value);
     /**
      * @description <p></p>
      * @param 
@@ -198,7 +198,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Object index(String key, long index, boolean isTimeOut);
+    Object index(String key, long index);
     /**
      * @description <p></p>
      * @param 
@@ -209,7 +209,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Object leftPop(String key, boolean isTimeOut);
+    Object leftPop(String key);
     /**
      * @description <p></p>
      * @param 
@@ -231,7 +231,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      * @github https://github.com/shiyuan2he.git
      * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
      */
-    Object rightPop(String key, boolean isTimeOut);
+    Object rightPop(String key);
     /**
      * @description <p></p>
      * @param 

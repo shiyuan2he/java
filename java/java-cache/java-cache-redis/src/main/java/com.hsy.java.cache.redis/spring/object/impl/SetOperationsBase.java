@@ -1,9 +1,8 @@
 package com.hsy.java.cache.redis.spring.object.impl;
-
-import com.hsy.java.cache.redis.spring.object.ISetOperationsBase;
-import com.hsy.java.cache.redis.spring.object.base.SpringObjectBase;
-import com.hsy.java.enums.CacheEnum;
-import com.hsy.java.exception.cache.CacheException;
+import com.askingdata.y.cache.redis.spring.object.ISetOperationsBase;
+import com.askingdata.y.cache.redis.spring.object.base.SpringObjectBase;
+import com.askingdata.y.enums.CacheEnum;
+import com.askingdata.y.exception.CacheException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.SetOperations;
@@ -11,28 +10,24 @@ import org.springframework.data.redis.core.SetOperations;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+
 @Slf4j
 public abstract class SetOperationsBase extends SpringObjectBase implements ISetOperationsBase {
     private SetOperations<String, Object> setOperations = getRedisTemplate().opsForSet();
 
     @Override
-    public Long add(String key, boolean isTimeOut, Object... value) {
+    public Long add(String key, Object... value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = setOperations.add(key, value);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -43,23 +38,18 @@ public abstract class SetOperationsBase extends SpringObjectBase implements ISet
     }
 
     @Override
-    public Long remove(String key, boolean isTimeOut, Object... value) {
+    public Long remove(String key, Object... value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = setOperations.remove(key, value);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -70,23 +60,18 @@ public abstract class SetOperationsBase extends SpringObjectBase implements ISet
     }
 
     @Override
-    public Object pop(String key, boolean isTimeOut) {
+    public Object pop(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Object returnValue = setOperations.pop(key);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -113,23 +98,18 @@ public abstract class SetOperationsBase extends SpringObjectBase implements ISet
     }
 
     @Override
-    public Long size(String key, boolean isTimeOut) {
+    public Long size(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = setOperations.size(key);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -140,23 +120,18 @@ public abstract class SetOperationsBase extends SpringObjectBase implements ISet
     }
 
     @Override
-    public Boolean isMember(String key, Object value, boolean isTimeOut) {
+    public Boolean isMember(String key, Object value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Boolean returnValue = setOperations.isMember(key, value);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -407,23 +382,18 @@ public abstract class SetOperationsBase extends SpringObjectBase implements ISet
     }
 
     @Override
-    public Set<Object> members(String key, boolean isTimeOut) {
+    public Set<Object> members(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Set<Object> returnValue = setOperations.members(key);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -434,23 +404,18 @@ public abstract class SetOperationsBase extends SpringObjectBase implements ISet
     }
 
     @Override
-    public Object randomMember(String key, boolean isTimeOut) {
+    public Object randomMember(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Object returnValue = setOperations.randomMember(key);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -461,23 +426,18 @@ public abstract class SetOperationsBase extends SpringObjectBase implements ISet
     }
 
     @Override
-    public Set<Object> distinctRandomMembers(String key, long count, boolean isTimeOut) {
+    public Set<Object> distinctRandomMembers(String key, long count) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Set<Object> returnValue = setOperations.distinctRandomMembers(key, count);
             log.info("操作成功！key={}, count={}", key, count);
             return returnValue;
@@ -488,23 +448,18 @@ public abstract class SetOperationsBase extends SpringObjectBase implements ISet
     }
 
     @Override
-    public List<Object> randomMembers(String key, long count, boolean isTimeOut) {
+    public List<Object> randomMembers(String key, long count) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("正在初始化valueOperations");
                 setOperations = getRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             List<Object> returnValue = setOperations.randomMembers(key, count);
             log.info("操作成功！key={}, count={}", key, count);
             return returnValue;

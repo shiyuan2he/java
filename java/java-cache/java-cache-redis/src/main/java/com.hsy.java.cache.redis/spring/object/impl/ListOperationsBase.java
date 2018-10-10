@@ -1,9 +1,8 @@
 package com.hsy.java.cache.redis.spring.object.impl;
-
-import com.hsy.java.cache.redis.spring.object.IListOperationsBase;
-import com.hsy.java.cache.redis.spring.object.base.SpringObjectBase;
-import com.hsy.java.enums.CacheEnum;
-import com.hsy.java.exception.cache.CacheException;
+import com.askingdata.y.cache.redis.spring.object.IListOperationsBase;
+import com.askingdata.y.cache.redis.spring.object.base.SpringObjectBase;
+import com.askingdata.y.enums.CacheEnum;
+import com.askingdata.y.exception.CacheException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.ListOperations;
@@ -27,23 +26,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     private ListOperations<String, Object> listOperations = getRedisTemplate().opsForList();
 
     @Override
-    public List<Object> range(String key, long start, long end, boolean isTimeOut) {
+    public List<Object> range(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             List<Object> returnValue = listOperations.range(key, start, end);
             log.info("操作成功！key={},start={},end={};", key, start, end);
             return returnValue;
@@ -54,23 +48,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public void trim(String key, long start, long end, boolean isTimeOut) {
+    public void trim(String key, long start, long end) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             listOperations.trim(key, start, end);
             log.info("操作成功！key={},start={},end={};", key, start, end);
             return;
@@ -81,23 +70,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Long size(String key, boolean isTimeOut) {
+    public Long size(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = listOperations.size(key);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -108,23 +92,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Long leftPush(String key, String value, boolean isTimeOut) {
+    public Long leftPush(String key, String value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = listOperations.leftPush(key, value);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -135,23 +114,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Long leftPushAll(String key, boolean isTimeOut, Object... vs) {
+    public Long leftPushAll(String key, Object... vs) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = listOperations.leftPushAll(key, vs);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -162,23 +136,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Long leftPushAll(String key, boolean isTimeOut, Collection<Object> collection) {
+    public Long leftPushAll(String key, Collection<Object> collection) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = listOperations.leftPushAll(key, collection);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -189,23 +158,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Long leftPushIfPresent(String key, boolean isTimeOut, String value) {
+    public Long leftPushIfPresent(String key, String value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = listOperations.leftPushIfPresent(key, value);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -216,23 +180,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Long leftPush(String key, String pivot, String value, boolean isTimeOut) {
+    public Long leftPush(String key, String pivot, String value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = listOperations.leftPush(key, value);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -243,23 +202,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Long rightPush(String key, String value, boolean isTimeOut) {
+    public Long rightPush(String key, String value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = listOperations.rightPush(key, value);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -270,23 +224,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Long rightPushAll(String key, boolean isTimeOut, Object... values) {
+    public Long rightPushAll(String key, Object... values) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = listOperations.rightPushAll(key, values);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -297,23 +246,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Long rightPushAll(String key, Collection<Object> collection, boolean isTimeOut) {
+    public Long rightPushAll(String key, Collection<Object> collection) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = listOperations.rightPushAll(key, collection);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -324,23 +268,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Long rightPushIfPresent(String key, String value, boolean isTimeOut) {
+    public Long rightPushIfPresent(String key, String value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = listOperations.rightPushIfPresent(key, value);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -356,7 +295,7 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
@@ -373,23 +312,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public void set(String key, long index, String value, boolean isTimeOut) {
+    public void set(String key, long index, String value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return ;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             listOperations.set(key, index, value);
             log.info("操作成功！key={}", key);
             return;
@@ -400,23 +334,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Long remove(String key, long count, Object value, boolean isTimeOut) {
+    public Long remove(String key, long count, Object value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Long returnValue = listOperations.remove(key, count, value);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -427,23 +356,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Object index(String key, long index, boolean isTimeOut) {
+    public Object index(String key, long index) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Object returnValue = listOperations.index(key, index);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -454,23 +378,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Object leftPop(String key, boolean isTimeOut) {
+    public Object leftPop(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Object returnValue = listOperations.leftPop(key);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -486,14 +405,12 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            keyStr.append(TIMEOUT_PREFIX).append(key);
-            key = keyStr.toString();
             Object returnValue = listOperations.leftPop(key);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -504,23 +421,18 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
     }
 
     @Override
-    public Object rightPop(String key, boolean isTimeOut) {
+    public Object rightPop(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
+
             Object returnValue = listOperations.rightPop(key);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -536,14 +448,12 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            keyStr.append(TIMEOUT_PREFIX).append(key);
-            key = keyStr.toString();
             Object returnValue = listOperations.rightPop(key);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -559,14 +469,12 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+       
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            keyStr.append(TIMEOUT_PREFIX).append(key);
-            key = keyStr.toString();
             Object returnValue = listOperations.rightPopAndLeftPush(key, otherKey);
             log.info("操作成功！key={}, otherKey={}", key, otherKey);
             return returnValue;
@@ -582,17 +490,11 @@ public abstract class ListOperationsBase extends SpringObjectBase implements ILi
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
-        StringBuilder otherKeyStr = new StringBuilder();
         try {
             if (null == listOperations) {
                 log.info("正在初始化listOperations");
                 listOperations = getRedisTemplate().opsForList();
             }
-            keyStr.append(TIMEOUT_PREFIX).append(key);
-            otherKeyStr.append(TIMEOUT_PREFIX).append(key);
-            key = keyStr.toString();
-            otherKey = otherKeyStr.toString();
             Object returnValue = listOperations.rightPopAndLeftPush(key, otherKey);
             log.info("操作成功！key={}, otherKey={}", key, otherKey);
             return returnValue;
