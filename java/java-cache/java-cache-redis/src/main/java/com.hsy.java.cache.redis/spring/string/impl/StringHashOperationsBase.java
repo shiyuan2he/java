@@ -28,10 +28,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
                 hashOperations = getStringRedisTemplate().opsForHash();
             }
             Long returnValue = hashOperations.delete(key, hashKey);
-            log.info("操作成功！key={};", key);
+            log.info("delete操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("delete操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -48,10 +48,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
                 hashOperations = getStringRedisTemplate().opsForHash();
             }
             Boolean returnValue = hashOperations.hasKey(key, hashKey);
-            log.info("操作成功！key={};", key);
+            log.info("hasKey操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("hasKey操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -69,10 +69,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
                 hashOperations = getStringRedisTemplate().opsForHash();
             }
             String returnValue = (String) hashOperations.get(key, hashKey);
-            log.info("操作成功！key={};", key);
+            log.info("get操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("get操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -91,10 +91,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
             }
 
             List<String> returnValue = hashOperations.multiGet(key, hashKeys);
-            log.info("操作成功！key={};", key);
+            log.info("multiGet操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("multiGet操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -113,10 +113,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
             }
 
             Long returnValue = hashOperations.increment(key, hashKey, delta);
-            log.info("操作成功！key={};", key);
+            log.info("increment操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("increment操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -135,10 +135,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
             }
 
             Double returnValue = hashOperations.increment(key, hashKey, delta);
-            log.info("操作成功！key={};", key);
+            log.info("increment操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("increment操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -157,10 +157,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
             }
 
             Set<String> returnValue = hashOperations.keys(key);
-            log.info("操作成功！key={};", key);
+            log.info("keys操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("keys操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -179,10 +179,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
             }
 
             Long returnValue = hashOperations.size(key);
-            log.info("操作成功！key={};", key);
+            log.info("size操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("size操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -201,10 +201,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
             }
 
             hashOperations.putAll(key, hashKeyMapValue);
-            log.info("操作成功！key={};", key);
+            log.info("putAll操作成功！key={};", key);
             return;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("putAll操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -223,10 +223,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
             }
 
             hashOperations.put(key, hashKey, hashValue);
-            log.info("操作成功！key={};", key);
+            log.info("put操作成功！key={};", key);
             return;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("put操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -245,10 +245,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
             }
 
             boolean returnValue = hashOperations.putIfAbsent(key, hashKey, hashValue);
-            log.info("操作成功！key={};", key);
+            log.info("putIfAbsent操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("putIfAbsent操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -267,10 +267,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
             }
 
             List<String> returnValue = hashOperations.values(key);
-            log.info("操作成功！key={};", key);
+            log.info("values操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("values操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -289,10 +289,10 @@ public abstract class StringHashOperationsBase extends SpringStringBase implemen
             }
 
             Map<String, String> returnValue = hashOperations.entries(key);
-            log.info("操作成功！key={};", key);
+            log.info("entries操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("entries操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }

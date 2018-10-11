@@ -83,7 +83,7 @@ public abstract class StringValueOperationsBase extends SpringStringBase impleme
             log.info("操作成功！key={}", key);
             return flag;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -122,7 +122,7 @@ public abstract class StringValueOperationsBase extends SpringStringBase impleme
             log.info("操作成功！key={}", key);
             return flag;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -151,7 +151,7 @@ public abstract class StringValueOperationsBase extends SpringStringBase impleme
                this.multiSet(keyValue);
             }
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyValue.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", keyValue.toString(), e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }*/
@@ -188,7 +188,7 @@ public abstract class StringValueOperationsBase extends SpringStringBase impleme
             log.info("操作成功！key={}", newMap.toString());
             return ;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyValue.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", keyValue.toString(), e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -216,7 +216,7 @@ public abstract class StringValueOperationsBase extends SpringStringBase impleme
                 return this.multiSetIfAbsent(keyValue);
             }
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyValue.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", keyValue.toString(), e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -253,7 +253,7 @@ public abstract class StringValueOperationsBase extends SpringStringBase impleme
             log.info("操作成功！key={}", newMap.toString());
             return flag;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyValue.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", keyValue.toString(), e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -274,7 +274,7 @@ public abstract class StringValueOperationsBase extends SpringStringBase impleme
             log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -315,7 +315,7 @@ public abstract class StringValueOperationsBase extends SpringStringBase impleme
             log.info("操作成功！key={}", key);
             return valueOperations.get(key);
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -356,7 +356,7 @@ public abstract class StringValueOperationsBase extends SpringStringBase impleme
             log.info("操作成功！key={}", key);
             return newValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -397,7 +397,7 @@ public abstract class StringValueOperationsBase extends SpringStringBase impleme
             log.info("操作成功！key={}", key);
             return newValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -418,7 +418,7 @@ public abstract class StringValueOperationsBase extends SpringStringBase impleme
             log.info("操作成功！key={}", key);
             return count;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
