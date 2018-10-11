@@ -36,9 +36,7 @@ public abstract class SpringStringBase extends SpringBase implements ISpringRedi
             log.error("key is null");
             return null;
         }
-
         try {
-
             Boolean returnValue = getStringRedisTemplate().expire(key, timeOut, timeUnit);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -53,9 +51,7 @@ public abstract class SpringStringBase extends SpringBase implements ISpringRedi
             log.error("key is null");
             return;
         }
-
         try {
-
             getStringRedisTemplate().delete(key);
             log.info("操作成功！key={}", key);
             return;
@@ -65,15 +61,8 @@ public abstract class SpringStringBase extends SpringBase implements ISpringRedi
         }
     }
 
-    public void delete(boolean isTimeOut, String... keys) {
+    public void delete(String... keys) {
         if (null != keys && keys.length != 0) {
-            for (int i = 0; i < keys.length; i++) {
-                if (isTimeOut) {
-                    keys[i] += TIMEOUT_PREFIX;
-                } else {
-                    keys[i] += TIMEEVER_PREFIX;
-                }
-            }
             try {
                 this.getStringRedisTemplate().delete(Arrays.asList(keys));
                 log.info("操作成功！key={}", Arrays.toString(keys));

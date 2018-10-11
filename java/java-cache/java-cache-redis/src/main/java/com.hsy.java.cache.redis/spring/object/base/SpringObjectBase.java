@@ -82,7 +82,6 @@ public abstract class SpringObjectBase extends SpringBase implements ISpringRedi
             return;
         }
         try {
-
             getRedisTemplate().delete(keys);
             log.info("操作成功！key={}", Arrays.toString(keys.toArray()));
             return;
