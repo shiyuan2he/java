@@ -1,5 +1,5 @@
 package com.hsy.java.cache.redis.spring.base;
-import com.askingdata.y.cache.redis.spring.ISpringRedisInterface;
+import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;

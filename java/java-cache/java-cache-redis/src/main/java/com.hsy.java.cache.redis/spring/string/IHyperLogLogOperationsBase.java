@@ -1,6 +1,6 @@
 package com.hsy.java.cache.redis.spring.string;
 
-import com.askingdata.y.cache.redis.spring.ISpringRedisInterface;
+import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
 
 public interface IHyperLogLogOperationsBase extends ISpringRedisInterface {
     Long add(String var1, String... var2);

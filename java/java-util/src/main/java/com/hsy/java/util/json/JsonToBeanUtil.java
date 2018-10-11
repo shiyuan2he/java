@@ -38,7 +38,7 @@ public class JsonToBeanUtil {
      * @date 2017/11/2 08:44
      */
     public static  <T> T responseJsonToBeanEnhance(String json,Class<T> clazz) throws ParamTransformException {
-        if(null == json || "".equals(json)){
+       /* if(null == json || "".equals(json)){
             return  null;
         }
         //防注入
@@ -54,7 +54,8 @@ public class JsonToBeanUtil {
         }catch(Exception e){
             _logger.error("请求参数解析错误,json数据是:{}",json);
             throw  new ParamTransformException(WebEnum.PARAM_TRANSFORM_EXCEPTION.getCode(),"响应json解析错误,json数据是:"+json);
-        }
+        }*/
+       return null;
     }
     /**
      * @description <p></p>
@@ -87,7 +88,7 @@ public class JsonToBeanUtil {
      * @date 2017/11/2 08:56
      */
     public static  <T> T requestJsonToBeanEnhance(String json,Class<T> clazz) throws ParamTransformException {
-        if(null == json || "".equals(json)){
+        /*if(null == json || "".equals(json)){
             return  null;
         }
         //防注入
@@ -102,8 +103,8 @@ public class JsonToBeanUtil {
         }catch(Exception e){
             _logger.error("请求参数解析错误,json数据是:{}",json);
             throw  new ParamTransformException(WebEnum.PARAM_TRANSFORM_EXCEPTION.getCode(),"请求参数解析错误,json数据是:"+json);
-        }
-
+        }*/
+        return null;
     }
     /**
      * @description <p></p>

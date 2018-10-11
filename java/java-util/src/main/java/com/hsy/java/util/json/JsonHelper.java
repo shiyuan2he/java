@@ -3,7 +3,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author heshiyuan
@@ -44,7 +43,7 @@ public class JsonHelper {
         return JSON.toJSONString(obj) ;
     }
 
-
+/*
     public static <T> T json2ObjStrong(String json, Class<T> clazz) {
         net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(json);
         return (T) net.sf.json.JSONObject.toBean(jsonObject, clazz);
@@ -53,7 +52,7 @@ public class JsonHelper {
     public static <T> T json2ObjStrong(String json, Class<T> clazz, Map<String, Class<?>> classMap) {
         net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(json);
         return (T) net.sf.json.JSONObject.toBean(jsonObject, clazz, classMap);
-    }
+    }*/
 
     public static <T> T json2ObjStrong2(String json, Class<T> clazz) {
         return JSONObject.parseObject(json, clazz);

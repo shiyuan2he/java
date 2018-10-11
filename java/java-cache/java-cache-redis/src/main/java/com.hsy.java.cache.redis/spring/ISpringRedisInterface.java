@@ -1,5 +1,5 @@
 package com.hsy.java.cache.redis.spring;
-import com.askingdata.y.cache.base.ICacheBase;
+import com.hsy.java.cache.base.ICacheBase;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

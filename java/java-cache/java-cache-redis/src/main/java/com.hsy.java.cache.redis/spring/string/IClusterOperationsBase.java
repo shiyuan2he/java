@@ -1,6 +1,5 @@
 package com.hsy.java.cache.redis.spring.string;
-
-import com.askingdata.y.cache.redis.spring.ISpringRedisInterface;
+import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
 import org.springframework.data.redis.connection.RedisClusterNode;
 
 import java.util.Collection;
