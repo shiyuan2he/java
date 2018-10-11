@@ -20,13 +20,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return false;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Boolean returnValue = zSetOperations.add(key, value, score);
             log.info("操作成功！key={};", key);
             return returnValue;
@@ -42,13 +40,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Long returnValue = zSetOperations.remove(key, value);
             log.info("操作成功！key={};", key);
             return returnValue;
@@ -64,13 +60,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Double returnValue = zSetOperations.incrementScore(key, value, delta);
             log.info("操作成功！key={};", key);
             return returnValue;
@@ -86,13 +80,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Long returnValue = zSetOperations.rank(key, value);
             log.info("操作成功！key={};", key);
             return returnValue;
@@ -108,13 +100,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Long returnValue = zSetOperations.reverseRank(key, value);
             log.info("操作成功！key={};", key);
             return returnValue;
@@ -130,13 +120,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Set<String> returnValue = zSetOperations.range(key, start, end);
             log.info("操作成功！key={},start={},end={};", key, start, end);
             return returnValue;
@@ -152,13 +140,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Set<ZSetOperations.TypedTuple<String>> returnValue = zSetOperations.rangeWithScores(key, start, end);
             log.info("操作成功！key={},start={},end={};", key, start, end);
             return returnValue;
@@ -174,13 +160,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Set<String> returnValue = zSetOperations.rangeByScore(key, start, end);
             log.info("操作成功！key={},start={},end={};", key, start, end);
             return returnValue;
@@ -196,13 +180,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Set<String> returnValue = zSetOperations.rangeByScore(key, min, max, offset, count);
             log.info("操作成功！key={},min={},max={},offset={},count={};", key, min, max, offset, count);
             return returnValue;
@@ -218,13 +200,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Set<String> returnValue = zSetOperations.reverseRange(key, start, end);
             log.info("操作成功！key={},start={},end={}", key,  start, end);
             return returnValue;
@@ -245,13 +225,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Set<String> returnValue = zSetOperations.reverseRangeByScore(key, min, max);
             log.info("操作成功！key={},min={},max={}", key, min, max);
             return returnValue;
@@ -272,13 +250,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Set<String> returnValue = zSetOperations.reverseRangeByScore(key, min, max, offset, count);
             log.info("操作成功！key={},min={},max={},offset={},count={}", key, min, max, offset, count);
             return returnValue;
@@ -294,13 +270,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Long returnValue = zSetOperations.count(key, min, max);
             log.info("操作成功！key={},min={},max={}", key, min, max);
             return returnValue;
@@ -316,13 +290,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Long returnValue = zSetOperations.size(key);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -343,13 +315,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Double returnValue = zSetOperations.score(key, value);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -365,13 +335,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Long returnValue = zSetOperations.removeRange(key, start, end);
             log.info("操作成功！key={},start={},end={}", key, start, end);
             return returnValue;
@@ -387,13 +355,11 @@ public abstract class ZSetOperationsBase extends SpringStringBase implements IZS
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == zSetOperations) {
                 log.info("initializing zSetOperations");
                 zSetOperations = getStringRedisTemplate().opsForZSet();
             }
-
             Long returnValue = zSetOperations.removeRangeByScore(key, min, max);
             log.info("操作成功！key={},min={},max={}", key, min, max);
             return returnValue;

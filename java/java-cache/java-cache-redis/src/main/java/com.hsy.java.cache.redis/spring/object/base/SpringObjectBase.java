@@ -1,5 +1,6 @@
 package com.hsy.java.cache.redis.spring.object.base;
 import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
+import com.hsy.java.cache.redis.spring.base.SpringBase;
 import com.hsy.java.enums.CacheEnum;
 import com.hsy.java.exception.cache.CacheException;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  * @price ¥5    微信：hewei1109
  */
 @Slf4j
-public abstract class SpringObjectBase implements ISpringRedisInterface {
+public abstract class SpringObjectBase extends SpringBase implements ISpringRedisInterface {
     // 泛型
     public abstract RedisTemplate<String, Object> getRedisTemplate();
 
@@ -35,9 +36,7 @@ public abstract class SpringObjectBase implements ISpringRedisInterface {
             log.error("key is null");
             return null;
         }
-
         try {
-
             Boolean returnValue = getRedisTemplate().expire(key, timeOut, timeUnit);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -52,9 +51,7 @@ public abstract class SpringObjectBase implements ISpringRedisInterface {
             log.error("key is null");
             return;
         }
-
         try {
-
             getRedisTemplate().delete(key);
             log.info("操作成功！key={}", key);
             return;
@@ -64,15 +61,8 @@ public abstract class SpringObjectBase implements ISpringRedisInterface {
         }
     }
 
-    public void delete(boolean isTimeOut, String... keys) {
+    public void delete(String... keys) {
         if (null != keys && keys.length != 0) {
-            for (int i = 0; i < keys.length; i++) {
-                if (isTimeOut) {
-                    keys[i] += TIMEOUT_PREFIX;
-                } else {
-                    keys[i] += TIMEEVER_PREFIX;
-                }
-            }
             try {
                 this.getRedisTemplate().delete(Arrays.asList(keys));
                 log.info("操作成功！key={}", Arrays.toString(keys));

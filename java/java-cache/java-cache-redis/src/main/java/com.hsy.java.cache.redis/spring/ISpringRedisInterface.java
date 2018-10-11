@@ -40,7 +40,7 @@ public interface ISpringRedisInterface extends ICacheBase {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    void delete(boolean isTimeOut, String... key);
+    void delete(String... key);
     /**
      * @description <p></p>
      * @author heshiyuan

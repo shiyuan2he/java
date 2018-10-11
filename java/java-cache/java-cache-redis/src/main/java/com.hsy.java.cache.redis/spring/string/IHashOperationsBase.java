@@ -16,7 +16,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    Long delete(String key, Object... hashKey);
+    Long delete(String key, String... hashKey);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -25,7 +25,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    Boolean hasKey(String key, Object hashKey);
+    Boolean hasKey(String key, String hashKey);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -34,7 +34,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    String get(String key, Object hashKey);
+    String get(String key, String hashKey);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -43,7 +43,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    List<String> multiGet(String key, Collection<Object> hashKeys);
+    List<String> multiGet(String key, Collection<String> hashKeys);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -52,7 +52,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    Long increment(String key, Object hashKey, long delta);
+    Long increment(String key, String hashKey, long delta);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -61,7 +61,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    Double increment(String key, Object hashKey, double delta);
+    Double increment(String key, String hashKey, double delta);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -70,7 +70,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    Set<Object> keys(String key);
+    Set<String> keys(String key);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -88,7 +88,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    void putAll(String key, Map<Object, String> hashKeyMapValue);
+    void putAll(String key, Map<String, String> hashKeyMapValue);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -97,7 +97,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    void put(String key, Object hashKey, String hashValue);
+    void put(String key, String hashKey, String hashValue);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -106,7 +106,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    Boolean putIfAbsent(String key, Object hashKey, String hashValue);
+    Boolean putIfAbsent(String key, String hashKey, String hashValue);
     /**
      * @description <p>返回key下的hashKey list</p>
      * @author heshiyuan
@@ -124,7 +124,7 @@ public interface IHashOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    Map<Object, String> entries(String key);
+    Map<String, String> entries(String key);
 
 //    Cursor<Map.Entry<String , String >> scan(String var1, ScanOptions var2);
 

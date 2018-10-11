@@ -14,24 +14,19 @@ import java.util.Set;
 
 @Slf4j
 public abstract class HashOperationsBase extends SpringStringBase implements IHashOperationsBase {
-
-//    public abstract HashOperations<String, Object, String> hashOperations() ;
-//    private HashOperations<String, Object, String> hashOperations = hashOperations();
-    private HashOperations<String, Object, String> hashOperations = getStringRedisTemplate().opsForHash();
+    private HashOperations<String, String, String> hashOperations = getStringRedisTemplate().opsForHash();
 
     @Override
-    public Long delete(String key, Object... hashKey) {
+    public Long delete(String key, String... hashKey) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == hashOperations) {
                 log.info("initializing hashOperations");
                 hashOperations = getStringRedisTemplate().opsForHash();
             }
-
             Long returnValue = hashOperations.delete(key, hashKey);
             log.info("操作成功！key={};", key);
             return returnValue;
@@ -42,18 +37,16 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public Boolean hasKey(String key, Object hashKey) {
+    public Boolean hasKey(String key, String hashKey) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-
         try {
             if (null == hashOperations) {
                 log.info("initializing hashOperations");
                 hashOperations = getStringRedisTemplate().opsForHash();
             }
-
             Boolean returnValue = hashOperations.hasKey(key, hashKey);
             log.info("操作成功！key={};", key);
             return returnValue;
@@ -64,7 +57,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public String get(String key, Object hashKey) {
+    public String get(String key, String hashKey) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -75,7 +68,6 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
                 log.info("initializing hashOperations");
                 hashOperations = getStringRedisTemplate().opsForHash();
             }
-
             String returnValue = (String) hashOperations.get(key, hashKey);
             log.info("操作成功！key={};", key);
             return returnValue;
@@ -86,7 +78,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public List<String> multiGet(String key, Collection<Object> hashKeys) {
+    public List<String> multiGet(String key, Collection<String> hashKeys) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -108,7 +100,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public Long increment(String key, Object hashKey, long delta) {
+    public Long increment(String key, String hashKey, long delta) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -130,7 +122,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public Double increment(String key, Object hashKey, double delta) {
+    public Double increment(String key, String hashKey, double delta) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -152,7 +144,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public Set<Object> keys(String key) {
+    public Set<String> keys(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -164,7 +156,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
                 hashOperations = getStringRedisTemplate().opsForHash();
             }
 
-            Set<Object> returnValue = hashOperations.keys(key);
+            Set<String> returnValue = hashOperations.keys(key);
             log.info("操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
@@ -196,7 +188,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public void putAll(String key, Map<Object, String> hashKeyMapValue) {
+    public void putAll(String key, Map<String, String> hashKeyMapValue) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return;
@@ -218,7 +210,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public void put(String key, Object hashKey, String hashValue) {
+    public void put(String key, String hashKey, String hashValue) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return;
@@ -240,7 +232,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public Boolean putIfAbsent(String key, Object hashKey, String hashValue) {
+    public Boolean putIfAbsent(String key, String hashKey, String hashValue) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return false;
@@ -284,7 +276,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
     }
 
     @Override
-    public Map<Object, String> entries(String key) {
+    public Map<String, String> entries(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -296,7 +288,7 @@ public abstract class HashOperationsBase extends SpringStringBase implements IHa
                 hashOperations = getStringRedisTemplate().opsForHash();
             }
 
-            Map<Object, String> returnValue = hashOperations.entries(key);
+            Map<String, String> returnValue = hashOperations.entries(key);
             log.info("操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
