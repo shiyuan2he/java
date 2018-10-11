@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public abstract class SetOperationsBase extends SpringStringBase implements ISetOperationsBase {
+public abstract class StringSetOperationsBase extends SpringStringBase implements ISetOperationsBase {
     private SetOperations<String, String> setOperations = getStringRedisTemplate().opsForSet();
 
     @Override

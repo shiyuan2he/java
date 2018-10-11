@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Set;
 
 @Slf4j
-public abstract class ZSetOperationsBase extends SpringStringBase implements IZSetOperationsBase {
+public abstract class StringZSetOperationsBase extends SpringStringBase implements IZSetOperationsBase {
     private ZSetOperations<String, String> zSetOperations = getStringRedisTemplate().opsForZSet();
 
     @Override

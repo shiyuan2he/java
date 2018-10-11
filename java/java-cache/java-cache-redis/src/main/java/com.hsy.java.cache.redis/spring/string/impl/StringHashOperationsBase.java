@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Slf4j
-public abstract class HashOperationsBase extends SpringStringBase implements IHashOperationsBase {
+public abstract class StringHashOperationsBase extends SpringStringBase implements IHashOperationsBase {
     private HashOperations<String, String, String> hashOperations = getStringRedisTemplate().opsForHash();
 
     @Override

@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("Duplicates")
 @Slf4j
-public abstract class ListOperationsBase extends SpringStringBase implements IListOperationsBase {
+public abstract class StringListOperationsBase extends SpringStringBase implements IListOperationsBase {
     private ListOperations<String, String> listOperations = getStringRedisTemplate().opsForList();
 
     @Override

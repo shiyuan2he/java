@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public abstract class ValueOperationsBase extends SpringStringBase implements IValueOperationsBase {
+public abstract class StringValueOperationsBase extends SpringStringBase implements IValueOperationsBase {
     private ValueOperations<String, String> valueOperations = getStringRedisTemplate().opsForValue();
 
     @Override
