@@ -29,7 +29,7 @@ public abstract class StringZSetOperationsBase extends SpringStringBase implemen
             log.info("操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -49,7 +49,7 @@ public abstract class StringZSetOperationsBase extends SpringStringBase implemen
             log.info("操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -69,7 +69,7 @@ public abstract class StringZSetOperationsBase extends SpringStringBase implemen
             log.info("操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -89,7 +89,7 @@ public abstract class StringZSetOperationsBase extends SpringStringBase implemen
             log.info("操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -109,7 +109,7 @@ public abstract class StringZSetOperationsBase extends SpringStringBase implemen
             log.info("操作成功！key={};", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -129,7 +129,7 @@ public abstract class StringZSetOperationsBase extends SpringStringBase implemen
             log.info("操作成功！key={},start={},end={};", key, start, end);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -149,7 +149,7 @@ public abstract class StringZSetOperationsBase extends SpringStringBase implemen
             log.info("操作成功！key={},start={},end={};", key, start, end);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -169,7 +169,7 @@ public abstract class StringZSetOperationsBase extends SpringStringBase implemen
             log.info("操作成功！key={},start={},end={};", key, start, end);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", key, e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
