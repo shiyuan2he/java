@@ -19,5 +19,16 @@ public class DateHelperTest {
 		//System.out.println(DateHelper.getStrFromDateOfFormate(new Date(), "yyyy-MM-dd"));
 		System.out.println(DateHelper.getDateFromStrOfFormate("2017-08-26", "yyyy-MM-dd")) ;
 	}
+	@Test
+	public void getUTCTime(){
+        System.out.println(DateHelper.getUTCTime());
+    }
+    @Test
+    public void getMillSecond(){
+        System.out.println(DateHelper.getUTCTimeByLocalTime("2018-09-26 12:55","yyyy-MM-dd HH:mm"));
+        System.out.println(DateHelper.getMillSecond("yyyy-MM-dd HH:mm", DateHelper.getUTCTimeByLocalTime("2018-09-26 12:55","yyyy-MM-dd HH:mm")));
+        // 1537937700000
+        // 1537908900000
+    }
 }
 

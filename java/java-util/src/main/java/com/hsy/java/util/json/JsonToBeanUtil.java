@@ -47,7 +47,8 @@ public class JsonToBeanUtil {
         classMap.put("data",clazz);
         // 如果json三层，在classMap多放一个参数
         try{
-            ResponseBodyBean<T> responseBodyBean = JsonHelper.json2ObjStrong(json, ResponseBodyBean.class, classMap);
+//            ResponseBodyBean<T> responseBodyBean = JsonHelper.json2ObjStrong(json, ResponseBodyBean.class, classMap);
+            ResponseBodyBean<T> responseBodyBean = null;
             if(!responseBodyBean.isSuccess()) throw new BusinessException(BusinessEnum.RESPONSE_DATA_IS_NULL_EXCEPTION) ;
             T params = responseBodyBean.getData() ;
             return params;

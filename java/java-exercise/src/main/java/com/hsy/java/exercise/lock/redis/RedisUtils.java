@@ -1,6 +1,4 @@
 package com.hsy.java.exercise.lock.redis;
-
-import com.hsy.java.util.cache.redis.impl.AbstractJedisCacheBase;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 

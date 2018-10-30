@@ -71,11 +71,11 @@
                 <version>${version.lombok}</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
+           <!-- <dependency>
                 <groupId>net.sf.json-lib</groupId>
                 <artifactId>json-lib</artifactId>
                 <version>${version.net.json}</version>
-            </dependency>
+            </dependency>-->
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>

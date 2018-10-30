@@ -46,13 +46,15 @@ public class JsonHelper {
 
 
     public static <T> T json2ObjStrong(String json, Class<T> clazz) {
-        net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(json);
-        return (T) net.sf.json.JSONObject.toBean(jsonObject, clazz);
+      /*  net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(json);
+        return (T) net.sf.json.JSONObject.toBean(jsonObject, clazz);*/
+      return null;
     }
 
     public static <T> T json2ObjStrong(String json, Class<T> clazz, Map<String, Class<?>> classMap) {
-        net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(json);
-        return (T) net.sf.json.JSONObject.toBean(jsonObject, clazz, classMap);
+        /*net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(json);
+        return (T) net.sf.json.JSONObject.toBean(jsonObject, clazz, classMap);*/
+        return null;
     }
 
     public static <T> T json2ObjStrong2(String json, Class<T> clazz) {
