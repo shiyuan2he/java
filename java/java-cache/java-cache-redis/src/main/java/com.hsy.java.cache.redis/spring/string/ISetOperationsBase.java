@@ -1,5 +1,6 @@
 package com.hsy.java.cache.redis.spring.string;
 import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -68,7 +69,7 @@ public interface ISetOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    Long remove(String key, boolean isTimeOut, String value);
+    Long remove(String key, String value);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -77,7 +78,7 @@ public interface ISetOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    Long remove(String key, boolean isTimeOut, String... value);
+    Long remove(String key, String... value);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -86,7 +87,7 @@ public interface ISetOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    String pop(String key, boolean isTimeOut);
+    String pop(String key);
     /**
      * @description <p>将key下的value移动到destinationKey下</p>
      * <p>此操作不会自动拼接上TO、NO。请注意</p>
@@ -105,7 +106,7 @@ public interface ISetOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    Long size(String key, boolean isTimeOut);
+    Long size(String key);
     /**
      * @description <p>判断某个value是否是这个key中的元素</p>
      * @author heshiyuan
@@ -114,7 +115,7 @@ public interface ISetOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    boolean isMember(String key, String value, boolean isTimeOut);
+    boolean isMember(String key, String value);
     /**
      * @description <p>将两个key对应的数据合并返回</p>
      * <p>请注意：此key不会自动拼接NO、TO等前缀</p>
@@ -237,7 +238,7 @@ public interface ISetOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    Set<String> members(String key, boolean isTimeOut);
+    Set<String> members(String key);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -246,7 +247,7 @@ public interface ISetOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    String randomMember(String key, boolean isTimeOut);
+    String randomMember(String key);
     /**
      * @description <p>指定key的随机count个元素</p>
      * @author heshiyuan
@@ -255,7 +256,7 @@ public interface ISetOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    Set<String> distinctRandomMembers(String key, long count, boolean isTimeOut);
+    Set<String> distinctRandomMembers(String key, long count);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -264,7 +265,7 @@ public interface ISetOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    List<String> randomMembers(String key, long count, boolean isTimeOut);
+    List<String> randomMembers(String key, long count);
     /**
      * @description <p>暂不实现</p>
      * @author heshiyuan

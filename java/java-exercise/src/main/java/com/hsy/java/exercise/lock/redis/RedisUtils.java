@@ -1,6 +1,4 @@
 package com.hsy.java.exercise.lock.redis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
 
 /**
  * @author heshiyuan
@@ -12,9 +10,9 @@ import redis.clients.jedis.JedisPoolConfig;
  * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class RedisUtils extends AbstractJedisCacheBase {
+public class RedisUtils {
     private static RedisUtils redisUtils = new RedisUtils();
-    @Override
+    /*@Override
     public JedisPool getJedisPool() {
         JedisPool pool = new JedisPool();
         JedisPoolConfig config = new JedisPoolConfig();
@@ -28,7 +26,7 @@ public class RedisUtils extends AbstractJedisCacheBase {
         config.setTestOnBorrow(true);
         pool = new JedisPool(config, "10.62.245.11", 6379, 100000);
         return pool;
-    }
+    }*/
 
     public static RedisUtils getInstance(){
         return redisUtils ;

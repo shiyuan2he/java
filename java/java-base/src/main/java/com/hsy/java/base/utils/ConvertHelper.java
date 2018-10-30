@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 
 /**
@@ -25,8 +26,62 @@ import org.apache.commons.beanutils.PropertyUtils;
  */
 public class ConvertHelper {
 	private ConvertHelper(){}
-	
-	public static Map<String,Object> beanToMap(Object... object){
+
+    /**
+     * @description <p>Map<String, String> map入参支持</p>
+     * @param
+     * @return No such property: code for class: Script1
+     * @author heshiyuan
+     * @date 18/10/2018 14:23
+     * @email shiyuan4work@sina.com
+     * @github https://github.com/shiyuan2he.git
+     * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
+     */
+    public static <T> T map2BeanWrapper(Map<String, String> map, Class<T> clazz) {
+        Map<String, Object> returnMap = new HashMap<>();
+        map.forEach((key, value) -> returnMap.put(key, value));
+        return map2Bean(returnMap, clazz);
+    }
+    /**
+     * @description <p>Map<Object, Object> map入参支持</p>
+     * @param
+     * @return No such property: code for class: Script1
+     * @author heshiyuan
+     * @date 18/10/2018 14:24
+     * @email shiyuan4work@sina.com
+     * @github https://github.com/shiyuan2he.git
+     * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
+     */
+    public static <T> T map2BeanWrapperEnhance(Map<Object, Object> map, Class<T> clazz) {
+        Map<String, Object> returnMap = new HashMap<>();
+        map.forEach((key, value) -> returnMap.put((String) key, value));
+        return map2Bean(returnMap, clazz);
+    }
+    /**
+     * @description <p>Map转换层Bean，使用泛型免去了类型转换的麻烦。 </p>
+     * @param
+     * @return 转成的bean
+     * @author heshiyuan
+     * @date 18/10/2018 14:10
+     * @email shiyuan4work@sina.com
+     * @github https://github.com/shiyuan2he.git
+     * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved
+     */
+    public static <T> T map2Bean(Map<String, Object> map, Class<T> clazz) {
+        T bean = null;
+        try {
+            bean = clazz.newInstance();
+            BeanUtils.populate(bean, map);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return bean;
+    }
+    public static Map<String,Object> beanToMap(Object... object){
 		Map<String,Object> returnMap = new HashMap<>() ;
 		try {
 			for(Object obj : object){

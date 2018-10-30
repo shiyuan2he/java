@@ -14,7 +14,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    List<String> range(String key, boolean isTimeOut, long start, long end);
+    List<String> range(String key, long start, long end);
 
     void trim(String key, long start, long end);
     /**
@@ -25,7 +25,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    Long size(String key, boolean isTimeOut);
+    Long size(String key);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -34,7 +34,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    Long leftPush(String key, boolean isTimeOut, String value);
+    Long leftPush(String key, String value);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -43,7 +43,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    Long leftPushAll(String key, boolean isTimeOut, String ... value);
+    Long leftPushAll(String key, String... value);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -52,7 +52,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    Long leftPushAll(String key, boolean isTimeOut, Collection<String> value);
+    Long leftPushAll(String key, Collection<String> value);
 
     Long leftPushIfPresent(String var1, String var2);
 
@@ -65,7 +65,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    Long rightPush(String key, boolean isTimeOut, String value);
+    Long rightPush(String key, String value);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -74,7 +74,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    Long rightPushAll(String key, boolean isTimeOut, String ... value);
+    Long rightPushAll(String key, String... value);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -83,7 +83,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    Long rightPushAll(String key, boolean isTimeOut, Collection<String> value);
+    Long rightPushAll(String key, Collection<String> value);
 
     Long rightPushIfPresent(String var1, String var2);
 
@@ -96,7 +96,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    void set(String key, long index, String value, boolean isTimeOut);
+    void set(String key, long index, String value);
     /**
      * TODO
      * @description <p></p>
@@ -115,7 +115,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    String index(String key, long index, boolean isTimeOut);
+    String index(String key, long index);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -124,7 +124,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    String leftPop(String key, boolean isTimeOut);
+    String leftPop(String key);
     /**
      * @author heshiyuan
      * 2018/9/27 19:20
@@ -139,7 +139,7 @@ public interface IListOperationsBase extends ISpringRedisInterface {
      *  I'm glad to share my knowledge with you all.
      *  @price 3毛    微信：hewei1109
      */
-    String rightPop(String key, boolean isTimeOut);
+    String rightPop(String key);
 
     String rightPop(String var1, long var2, TimeUnit var4);
     /**

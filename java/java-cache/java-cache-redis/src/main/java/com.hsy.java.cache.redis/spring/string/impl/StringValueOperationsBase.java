@@ -1,5 +1,4 @@
 package com.hsy.java.cache.redis.spring.string.impl;
-
 import com.hsy.java.cache.redis.spring.string.IValueOperationsBase;
 import com.hsy.java.cache.redis.spring.string.base.SpringStringBase;
 import com.hsy.java.enums.CacheEnum;
@@ -12,7 +11,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public abstract class ValueOperationsBase extends SpringStringBase implements IValueOperationsBase {
+public abstract class StringValueOperationsBase extends SpringStringBase implements IValueOperationsBase {
     private ValueOperations<String, String> valueOperations = getStringRedisTemplate().opsForValue();
 
     @Override
@@ -37,13 +36,13 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
                 valueOperations = getStringRedisTemplate().opsForValue();
             }
             if (timeOut <= 0 || timeUnit == null) {
-                valueOperations.set(TIMEEVER_PREFIX + key, value);
+                valueOperations.set(key, value);
             } else if (timeOut > 0 && null == timeUnit) {
-                valueOperations.set(TIMEOUT_PREFIX + key, value, timeOut, TimeUnit.SECONDS);
+                valueOperations.set(key, value, timeOut, TimeUnit.SECONDS);
             } else {
-                valueOperations.set(TIMEOUT_PREFIX + key, value, timeOut, timeUnit);
+                valueOperations.set(key, value, timeOut, timeUnit);
             }
-            consoleLog(TIMEEVER_PREFIX + key, timeOut, timeUnit);
+            consoleLog(key, timeOut, timeUnit);
             return true;
         } catch (Exception e) {
             log.error("设值缓存失败！失败信息：{}", e);
@@ -65,7 +64,7 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
             log.error("key is null");
             return false;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == valueOperations) {
                 log.info("initializing valueOperations");
@@ -73,21 +72,18 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
             }
             boolean flag ;
             if (timeOut > 0 && null != timeUnit) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-                flag = valueOperations.setIfAbsent(keyStr.toString(), value);
-                this.getStringRedisTemplate().expire(keyStr.toString(), timeOut, timeUnit);
+                flag = valueOperations.setIfAbsent(key, value);
+                this.getStringRedisTemplate().expire(key, timeOut, timeUnit);
             } else if (timeOut > 0 && null == timeUnit) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-                flag = valueOperations.setIfAbsent(keyStr.toString(), value);
-                this.getStringRedisTemplate().expire(keyStr.toString(), timeOut, TimeUnit.SECONDS);
+                flag = valueOperations.setIfAbsent(key, value);
+                this.getStringRedisTemplate().expire(key, timeOut, TimeUnit.SECONDS);
             } else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-                flag = valueOperations.setIfAbsent(keyStr.toString(), value);
+                flag = valueOperations.setIfAbsent(key, value);
             }
-            log.info("操作成功！key={}", keyStr.toString());
+            log.info("操作成功！key={}", key);
             return flag;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -95,32 +91,6 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
     @Override
     public int append(String key, String value) {
         return this.append(key, value, -1, null);
-    }
-    @Override
-    public int append(String key, String value, boolean isTimeOut) {
-        if (StringUtils.isBlank(key)) {
-            log.error("key is null");
-            return -1;
-        }
-        StringBuilder keyStr = new StringBuilder();
-        try {
-            if (null == valueOperations) {
-                log.info("initializing valueOperations");
-                valueOperations = getStringRedisTemplate().opsForValue();
-            }
-            int flag ;
-            if (isTimeOut) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            } else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            flag = valueOperations.append(keyStr.toString(), value);
-            log.info("操作成功！key={}", keyStr.toString());
-            return flag;
-        } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
-        }
     }
 
     @Override
@@ -134,7 +104,6 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
             log.error("key is null");
             return -1;
         }
-        StringBuilder keyStr = new StringBuilder();
         try {
             if (null == valueOperations) {
                 log.info("initializing valueOperations");
@@ -142,21 +111,18 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
             }
             int flag ;
             if (timeOut > 0 && null != timeUnit) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-                flag = valueOperations.append(keyStr.toString(), value);
-                this.getStringRedisTemplate().expire(keyStr.toString(), timeOut, timeUnit);
+                flag = valueOperations.append(key, value);
+                this.getStringRedisTemplate().expire(key, timeOut, timeUnit);
             } else if (timeOut > 0 && null == timeUnit) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-                flag = valueOperations.append(keyStr.toString(), value);
-                this.getStringRedisTemplate().expire(keyStr.toString(), timeOut, TimeUnit.SECONDS);
+                flag = valueOperations.append(key, value);
+                this.getStringRedisTemplate().expire(key, timeOut, TimeUnit.SECONDS);
             } else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-                flag = valueOperations.append(keyStr.toString(), value);
+                flag = valueOperations.append(key, value);
             }
-            log.info("操作成功！key={}", keyStr.toString());
+            log.info("操作成功！key={}", key);
             return flag;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -166,8 +132,8 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
         this.multiSet(keyValue, -1, null);
     }
 
-    @Override
-    public void multiSet(Map<String, String> keyValue, boolean isTimeOut) {
+    /*@Override
+    public void multiSet(Map<String, String> keyValue) {
         if (Objects.isNull(keyValue)) {
             log.error("keyValue is null");
             return ;
@@ -185,10 +151,10 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
                this.multiSet(keyValue);
             }
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyValue.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", keyValue.toString(), e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
-    }
+    }*/
 
     @Override
     public void multiSet(Map<String, String> keyValue, long timeOut) {
@@ -208,21 +174,21 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
             }
             Map<String, String> newMap = Collections.EMPTY_MAP;
             if (timeOut > 0 && null != timeUnit) {
-                keyValue.forEach((key, value) -> newMap.put(TIMEOUT_PREFIX + key, value));
+                keyValue.forEach((key, value) -> newMap.put(key, value));
                 valueOperations.multiSet(newMap);
                 newMap.keySet().stream().forEach(key -> this.getStringRedisTemplate().expire(key, timeOut, timeUnit));
             } else if (timeOut > 0 && null == timeUnit) {
-                keyValue.forEach((key, value) -> newMap.put(TIMEOUT_PREFIX + key, value));
+                keyValue.forEach((key, value) -> newMap.put(key, value));
                 valueOperations.multiSet(newMap);
                 newMap.keySet().stream().forEach(key -> this.getStringRedisTemplate().expire(key, timeOut, TimeUnit.SECONDS));
             } else {
-                keyValue.forEach((key, value) -> newMap.put(TIMEEVER_PREFIX + key, value));
+                keyValue.forEach((key, value) -> newMap.put(key, value));
                 valueOperations.multiSet(newMap);
             }
             log.info("操作成功！key={}", newMap.toString());
             return ;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyValue.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", keyValue.toString(), e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -250,7 +216,7 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
                 return this.multiSetIfAbsent(keyValue);
             }
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyValue.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", keyValue.toString(), e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -273,93 +239,52 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
             boolean flag;
             Map<String, String> newMap = Collections.EMPTY_MAP;
             if (timeOut > 0 && null != timeUnit) {
-                keyValue.forEach((key, value) -> newMap.put(TIMEOUT_PREFIX + key, value));
+                keyValue.forEach((key, value) -> newMap.put(key, value));
                 flag = valueOperations.multiSetIfAbsent(newMap);
                 newMap.keySet().stream().forEach(key -> this.getStringRedisTemplate().expire(key, timeOut, timeUnit));
             } else if (timeOut > 0 && null == timeUnit) {
-                keyValue.forEach((key, value) -> newMap.put(TIMEOUT_PREFIX + key, value));
+                keyValue.forEach((key, value) -> newMap.put(key, value));
                 flag = valueOperations.multiSetIfAbsent(newMap);
                 newMap.keySet().stream().forEach(key -> this.getStringRedisTemplate().expire(key, timeOut, TimeUnit.SECONDS));
             } else {
-                keyValue.forEach((key, value) -> newMap.put(TIMEEVER_PREFIX + key, value));
+                keyValue.forEach((key, value) -> newMap.put(key, value));
                 flag = valueOperations.multiSetIfAbsent(newMap);
             }
             log.info("操作成功！key={}", newMap.toString());
             return flag;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyValue.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", keyValue.toString(), e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
     public String getAndSet(String key, String value) {
-        return this.getAndSet(key, value, false);
-    }
-
-    @Override
-    public String getAndSet(String key, String value, boolean isTimeOutKey) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == valueOperations) {
                 log.info("initializing valueOperations");
                 valueOperations = getStringRedisTemplate().opsForValue();
             }
-            if (isTimeOutKey) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            } else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            log.info("操作成功！key={}", keyStr.toString());
-            return valueOperations.getAndSet(keyStr.toString(), value);
+            String returnValue = valueOperations.getAndSet(key, value);
+            log.info("操作成功！key={}", key);
+            return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
     public List<String> multiGet(List<String> keyList) {
-        return this.multiGet(keyList, false);
-    }
-
-    @Override
-    public List<String> multiGet(List<String> keyList, boolean isTimeOutKey) {
         if (null!=keyList && keyList.size()>0) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
-        try {
-            if (null == valueOperations) {
-                log.info("initializing valueOperations");
-                valueOperations = getStringRedisTemplate().opsForValue();
-            }
-            if (isTimeOutKey) {
-                keyList.stream().forEach(key -> key = TIMEOUT_PREFIX + key);
-            } else {
-                keyList.stream().forEach(key -> key = TIMEEVER_PREFIX + key);
-            }
-            List<String> resultList = valueOperations.multiGet(keyList);
-            log.info("操作成功！key={}", Arrays.toString(keyList.toArray()));
-            return resultList;
-        } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
-            throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
-        }
-    }
-
-    @Override
-    public List<String> multiGetOfOriginal(List<String> keyList) {
-        if (null!=keyList && keyList.size()>0) {
-            log.error("key is null");
-            return null;
-        }
-        StringBuilder keyStr = new StringBuilder();
         try {
             if (null == valueOperations) {
                 log.info("initializing valueOperations");
@@ -369,37 +294,28 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
             log.info("操作成功！key={}", Arrays.toString(keyList.toArray()));
             return resultList;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！失败信息：{}", e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
     public String get(String key) {
-        return this.get(key, false);
-    }
-
-    @Override
-    public String get(String key, boolean isTimeOutkey) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == valueOperations) {
                 log.info("initializing valueOperations");
                 valueOperations = getStringRedisTemplate().opsForValue();
             }
-            if (isTimeOutkey) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            } else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            log.info("操作成功！key={}", keyStr.toString());
-            return valueOperations.get(keyStr.toString());
+
+            log.info("操作成功！key={}", key);
+            return valueOperations.get(key);
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -420,7 +336,7 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
             log.error("key is null");
             return 0;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == valueOperations) {
                 log.info("initializing valueOperations");
@@ -429,21 +345,18 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
             long newValue = 0l;
             //noinspection Duplicates
             if (timeLive > 0 && null != timeUnit) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-                newValue = valueOperations.increment(keyStr.toString(), value);
-                this.getStringRedisTemplate().expire(keyStr.toString(), timeLive, timeUnit);
+                newValue = valueOperations.increment(key, value);
+                this.getStringRedisTemplate().expire(key, timeLive, timeUnit);
             } else if (timeLive > 0 && null == timeUnit) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-                newValue = valueOperations.increment(keyStr.toString(), value);
-                this.getStringRedisTemplate().expire(keyStr.toString(), timeLive, TimeUnit.SECONDS);
+                newValue = valueOperations.increment(key, value);
+                this.getStringRedisTemplate().expire(key, timeLive, TimeUnit.SECONDS);
             } else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-                newValue = valueOperations.increment(keyStr.toString(), value);
+                newValue = valueOperations.increment(key, value);
             }
-            log.info("操作成功！key={}", keyStr.toString());
+            log.info("操作成功！key={}", key);
             return newValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -464,7 +377,7 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
             log.error("key is null");
             return 0;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == valueOperations) {
                 log.info("initializing valueOperations");
@@ -473,52 +386,39 @@ public abstract class ValueOperationsBase extends SpringStringBase implements IV
             double newValue = 0l;
             //noinspection Duplicates
             if (timeLive > 0 && null != timeUnit) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-                newValue = valueOperations.increment(keyStr.toString(), value);
-                this.getStringRedisTemplate().expire(keyStr.toString(), timeLive, timeUnit);
+                newValue = valueOperations.increment(key, value);
+                this.getStringRedisTemplate().expire(key, timeLive, timeUnit);
             } else if (timeLive > 0 && null == timeUnit) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-                newValue = valueOperations.increment(keyStr.toString(), value);
-                this.getStringRedisTemplate().expire(keyStr.toString(), timeLive, TimeUnit.SECONDS);
+                newValue = valueOperations.increment(key, value);
+                this.getStringRedisTemplate().expire(key, timeLive, TimeUnit.SECONDS);
             } else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-                newValue = valueOperations.increment(keyStr.toString(), value);
+                newValue = valueOperations.increment(key, value);
             }
-            log.info("操作成功！key={}", keyStr.toString());
+            log.info("操作成功！key={}", key);
             return newValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
-
     @Override
     public long size(String key) {
-        return this.size(key, false);
-    }
-
-    @Override
-    public long size(String key, boolean isTimeOut) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return -1;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == valueOperations) {
                 log.info("initializing valueOperations");
                 valueOperations = getStringRedisTemplate().opsForValue();
             }
-            if (isTimeOut) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            } else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            long count = valueOperations.size(keyStr.toString());
-            log.info("操作成功！key={}", keyStr.toString());
+
+            long count = valueOperations.size(key);
+            log.info("操作成功！key={}", key);
             return count;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }

@@ -1,8 +1,10 @@
 package com.hsy.java.cache.redis.spring.string;
 import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
 public interface IValueOperationsBase extends ISpringRedisInterface {
     /**
      * @param key   键
@@ -79,15 +81,7 @@ public interface IValueOperationsBase extends ISpringRedisInterface {
      *  @price 3毛    微信：hewei1109
      */
     int append(String key, String value);
-    /**
-     * @description <p>不改变原来key的过期时间</p>
-     * @author heshiyuan
-     * @dateTime 2018/9/26 19:34
-     * @copyright Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
-     *  I'm glad to share my knowledge with you all.
-     *  @price 3毛    微信：hewei1109
-     */
-    int append(String key, String value, boolean isTimeOut);
+
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -115,15 +109,6 @@ public interface IValueOperationsBase extends ISpringRedisInterface {
      *  @price 3毛    微信：hewei1109
      */
     void multiSet(Map<String, String> keyValue);
-    /**
-     * @description <p>是否使用原生的api，不用循环map</p>
-     * @author heshiyuan
-     * @dateTime 2018/9/26 19:53
-     * @copyright Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
-     *  I'm glad to share my knowledge with you all.
-     *  @price 3毛    微信：hewei1109
-     */
-    void multiSet(Map<String, String> keyValue, boolean isOriginal);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -187,15 +172,7 @@ public interface IValueOperationsBase extends ISpringRedisInterface {
      *  @price 3毛    微信：hewei1109
      */
     String get(String key);
-    /**
-     * @description <p></p>
-     * @author heshiyuan
-     * @dateTime 2018/9/26 20:20
-     * @copyright Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
-     *  I'm glad to share my knowledge with you all.
-     *  @price 3毛    微信：hewei1109
-     */
-    String get(String key, boolean isTimeOutkey);
+
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -205,15 +182,7 @@ public interface IValueOperationsBase extends ISpringRedisInterface {
      *  @price 3毛    微信：hewei1109
      */
     String getAndSet(String key, String value);
-    /**
-     * @description <p></p>
-     * @author heshiyuan
-     * @dateTime 2018/9/26 20:20
-     * @copyright Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
-     *  I'm glad to share my knowledge with you all.
-     *  @price 3毛    微信：hewei1109
-     */
-    String getAndSet(String key, String value, boolean isTimeOutKey);
+
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -223,24 +192,7 @@ public interface IValueOperationsBase extends ISpringRedisInterface {
      *  @price 3毛    微信：hewei1109
      */
     List<String> multiGet(List<String> keyList);
-    /**
-     * @description <p></p>
-     * @author heshiyuan
-     * @dateTime 2018/9/26 20:21
-     * @copyright Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
-     *  I'm glad to share my knowledge with you all.
-     *  @price 3毛    微信：hewei1109
-     */
-    List<String> multiGet(List<String> keyList, boolean isTimeOutKey);
-    /**
-     * @description <p>原生的multiGet api</p>
-     * @author heshiyuan
-     * @dateTime 2018/9/26 20:11
-     * @copyright Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
-     *  I'm glad to share my knowledge with you all.
-     *  @price 3毛    微信：hewei1109
-     */
-    List<String> multiGetOfOriginal(List<String> keyList);
+
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -304,15 +256,7 @@ public interface IValueOperationsBase extends ISpringRedisInterface {
      *  @price 3毛    微信：hewei1109
      */
     long size(String key);
-    /**
-     * @description <p></p>
-     * @author heshiyuan
-     * @dateTime 2018/9/26 20:21
-     * @copyright Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
-     *  I'm glad to share my knowledge with you all.
-     *  @price 3毛    微信：hewei1109
-     */
-    long size(String key, boolean isTimeOut);
+
     /**
      * @description <p>
      *     暂时不实现其接口

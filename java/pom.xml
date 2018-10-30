@@ -31,6 +31,8 @@
     </modules>
 
     <properties>
+        <version.jdk>11</version.jdk>
+        <version.encoding>UTF-8</version.encoding>
         <junit.vsersion>4.12</junit.vsersion>
         <beanutils.version>1.9.3</beanutils.version>
         <collections.version>3.2.2</collections.version>
@@ -319,16 +321,16 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <source>10</source>
-                    <target>10</target>
-                    <encoding>UTF-8</encoding>
+                    <source>${version.jdk}</source>
+                    <target>${version.jdk}</target>
+                    <encoding>${version.encoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
-                    <encoding>UTF-8</encoding>
+                    <encoding>${version.encoding}</encoding>
                     <useDefaultDelimiters>false</useDefaultDelimiters>
                     <escapeString>\</escapeString>
                     <delimiters>

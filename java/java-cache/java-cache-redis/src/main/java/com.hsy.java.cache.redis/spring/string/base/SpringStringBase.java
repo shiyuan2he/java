@@ -1,19 +1,16 @@
 package com.hsy.java.cache.redis.spring.string.base;
-
 import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
 import com.hsy.java.cache.redis.spring.base.SpringBase;
 import com.hsy.java.enums.CacheEnum;
 import com.hsy.java.exception.cache.CacheException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.redis.core.*;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 /**
  * @author heshiyuan
@@ -30,23 +27,16 @@ public abstract class SpringStringBase extends SpringBase implements ISpringRedi
     // 字符型
     public abstract StringRedisTemplate getStringRedisTemplate();
 
-    public Boolean expire(String key, long timeOut, boolean isTimeOut) {
-        return this.expire(key, timeOut, TimeUnit.SECONDS, isTimeOut);
+    public Boolean expire(String key, long timeOut) {
+        return this.expire(key, timeOut, TimeUnit.SECONDS);
     }
 
-    public Boolean expire(String key, long timeOut, TimeUnit timeUnit, boolean isTimeOut) {
+    public Boolean expire(String key, long timeOut, TimeUnit timeUnit) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
         try {
-            if (isTimeOut) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            } else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
             Boolean returnValue = getStringRedisTemplate().expire(key, timeOut, timeUnit);
             log.info("操作成功！key={}", key);
             return returnValue;
@@ -56,19 +46,12 @@ public abstract class SpringStringBase extends SpringBase implements ISpringRedi
         }
     }
 
-    public void delete(String key, boolean isTimeOut) {
+    public void delete(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return;
         }
-        StringBuilder keyStr = new StringBuilder();
         try {
-            if (isTimeOut) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            } else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            key = keyStr.toString();
             getStringRedisTemplate().delete(key);
             log.info("操作成功！key={}", key);
             return;
@@ -78,15 +61,8 @@ public abstract class SpringStringBase extends SpringBase implements ISpringRedi
         }
     }
 
-    public void delete(boolean isTimeOut, String... keys) {
+    public void delete(String... keys) {
         if (null != keys && keys.length != 0) {
-            for (int i = 0; i < keys.length; i++) {
-                if (isTimeOut) {
-                    keys[i] += TIMEOUT_PREFIX;
-                } else {
-                    keys[i] += TIMEEVER_PREFIX;
-                }
-            }
             try {
                 this.getStringRedisTemplate().delete(Arrays.asList(keys));
                 log.info("操作成功！key={}", Arrays.toString(keys));
@@ -100,25 +76,17 @@ public abstract class SpringStringBase extends SpringBase implements ISpringRedi
     }
 
     @Override
-    public void delete(List<String> keys, boolean isTimeOut) {
+    public void delete(List<String> keys) {
         if (null == keys || keys.size() <= 0) {
             log.error("key is null");
             return;
         }
-        List<String> newKeyList = new ArrayList<>();
         try {
-            keys.stream().forEach(key -> {
-                if (isTimeOut) {
-                    newKeyList.add(TIMEOUT_PREFIX + key);
-                } else {
-                    newKeyList.add(TIMEEVER_PREFIX + key);
-                }
-            });
-            getStringRedisTemplate().delete(newKeyList);
-            log.info("操作成功！key={}", Arrays.toString(newKeyList.toArray()));
+            getStringRedisTemplate().delete(keys);
+            log.info("操作成功！key={}", Arrays.toString(keys.toArray()));
             return;
         } catch (Exception e) {
-            log.error("操作失败！key={};失败信息：{}", Arrays.toString(newKeyList.toArray()), e);
+            log.error("操作失败！key={};失败信息：{}", Arrays.toString(keys.toArray()), e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }

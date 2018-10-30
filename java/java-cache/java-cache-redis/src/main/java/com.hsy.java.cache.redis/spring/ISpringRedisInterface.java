@@ -1,5 +1,4 @@
 package com.hsy.java.cache.redis.spring;
-
 import com.hsy.java.cache.base.ICacheBase;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public interface ISpringRedisInterface extends ICacheBase {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    Boolean expire(String key, long timeout, boolean isTimeOut);
+    Boolean expire(String key, long timeout);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -23,7 +22,7 @@ public interface ISpringRedisInterface extends ICacheBase {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    Boolean expire(String key, long timeout, TimeUnit timeUnit, boolean isTimeOut);
+    Boolean expire(String key, long timeout, TimeUnit timeUnit);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -32,7 +31,7 @@ public interface ISpringRedisInterface extends ICacheBase {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    void delete(String key, boolean isTimeOut);
+    void delete(String key);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -41,7 +40,7 @@ public interface ISpringRedisInterface extends ICacheBase {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    void delete(boolean isTimeOut, String... key);
+    void delete(String... key);
     /**
      * @description <p></p>
      * @author heshiyuan
@@ -50,7 +49,7 @@ public interface ISpringRedisInterface extends ICacheBase {
      *  I'm glad to share my knowledge with you all. 
      *  @price 3毛    微信：hewei1109
      */
-    void delete(List<String> keys, boolean isTimeOut);
+    void delete(List<String> keys);
     /**
      * @description <p></p>
      * @author heshiyuan

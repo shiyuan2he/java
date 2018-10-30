@@ -1,5 +1,4 @@
 package com.hsy.java.cache.redis.spring.string.impl;
-
 import com.hsy.java.cache.redis.spring.string.ISetOperationsBase;
 import com.hsy.java.cache.redis.spring.string.base.SpringStringBase;
 import com.hsy.java.enums.CacheEnum;
@@ -8,10 +7,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.redis.core.SetOperations;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
 @Slf4j
-public abstract class SetOperationsBase extends SpringStringBase implements ISetOperationsBase {
+public abstract class StringSetOperationsBase extends SpringStringBase implements ISetOperationsBase {
     private SetOperations<String, String> setOperations = getStringRedisTemplate().opsForSet();
 
     @Override
@@ -46,7 +49,7 @@ public abstract class SetOperationsBase extends SpringStringBase implements ISet
             log.error("key is null");
             return 0l;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("initializing valueOperations");
@@ -54,78 +57,66 @@ public abstract class SetOperationsBase extends SpringStringBase implements ISet
             }
             Long returnValue = 0l;
             if (timeOut > 0 && null != timeUnit) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-                returnValue = setOperations.add(keyStr.toString(), value);
-                this.getStringRedisTemplate().expire(keyStr.toString(), timeOut, timeUnit);
+                returnValue = setOperations.add(key, value);
+                this.getStringRedisTemplate().expire(key, timeOut, timeUnit);
             } else if (timeOut > 0 && null == timeUnit) {
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-                returnValue = setOperations.add(keyStr.toString(), value) ;
-                this.getStringRedisTemplate().expire(keyStr.toString(), timeOut, TimeUnit.SECONDS);
+                returnValue = setOperations.add(key, value) ;
+                this.getStringRedisTemplate().expire(key, timeOut, TimeUnit.SECONDS);
             } else {
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-                returnValue = setOperations.add(keyStr.toString(), value) ;
+                returnValue = setOperations.add(key, value) ;
             }
-            log.info("操作成功！key={}", keyStr.toString());
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
-    @Override
-    public Long remove(String key, boolean isTimeOut, String value) {
-        return this.remove(key, isTimeOut, value);
+    public Long remove(String key, String value) {
+        return this.remove(key, value);
     }
 
     @Override
-    public Long remove(String key, boolean isTimeOut, String... value) {
+    public Long remove(String key, String... value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return 0l;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("initializing valueOperations");
                 setOperations = getStringRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            Long returnValue = setOperations.remove(keyStr.toString());
-            log.info("操作成功！key={}", keyStr.toString());
+
+            Long returnValue = setOperations.remove(key);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
-    public String pop(String key, boolean isTimeOut) {
+    public String pop(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("initializing valueOperations");
                 setOperations = getStringRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            String returnValue = setOperations.pop(keyStr.toString());
-            log.info("操作成功！key={}", keyStr.toString());
+
+            String returnValue = setOperations.pop(key);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -136,69 +127,61 @@ public abstract class SetOperationsBase extends SpringStringBase implements ISet
             log.error("key is null");
             return false;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("initializing valueOperations");
                 setOperations = getStringRedisTemplate().opsForSet();
             }
             boolean returnValue = setOperations.move(key, value, destinationKey);
-            log.info("操作成功！key={}", keyStr.toString());
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
-    public Long size(String key, boolean isTimeOut) {
+    public Long size(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("initializing valueOperations");
                 setOperations = getStringRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            Long returnValue = setOperations.size(keyStr.toString());
-            log.info("操作成功！key={}", keyStr.toString());
+
+            Long returnValue = setOperations.size(key);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
-    public boolean isMember(String key, String value, boolean isTimeOut) {
+    public boolean isMember(String key, String value) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return false;
         }
-        StringBuilder keyStr = new StringBuilder();
+
         try {
             if (null == setOperations) {
                 log.info("initializing valueOperations");
                 setOperations = getStringRedisTemplate().opsForSet();
             }
-            if(isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            boolean returnValue = setOperations.isMember(keyStr.toString(), value);
-            log.info("操作成功！key={}", keyStr.toString());
+
+            boolean returnValue = setOperations.isMember(key, value);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}", keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}", key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
@@ -412,7 +395,7 @@ public abstract class SetOperationsBase extends SpringStringBase implements ISet
     }
 
     @Override
-    public Set<String> members(String key, boolean isTimeOut) {
+    public Set<String> members(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -423,22 +406,17 @@ public abstract class SetOperationsBase extends SpringStringBase implements ISet
                 log.info("initializing valueOperations");
                 setOperations = getStringRedisTemplate().opsForSet();
             }
-            if (isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            Set<String> returnValue = setOperations.members(keyStr.toString());
-            log.info("操作成功！key={}", keyStr.toString());
+            Set<String> returnValue = setOperations.members(key);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}",  keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}",  key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
-    public String randomMember(String key, boolean isTimeOut) {
+    public String randomMember(String key) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -449,22 +427,17 @@ public abstract class SetOperationsBase extends SpringStringBase implements ISet
                 log.info("initializing valueOperations");
                 setOperations = getStringRedisTemplate().opsForSet();
             }
-            if (isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            String returnValue = setOperations.randomMember(keyStr.toString());
-            log.info("操作成功！key={}", keyStr.toString());
+            String returnValue = setOperations.randomMember(key);
+            log.info("操作成功！key={}", key);
             return returnValue;
         } catch (Exception e) {
-            log.error("操作key={}失败！失败信息：{}",  keyStr.toString(), e);
+            log.error("操作失败！key={};失败信息：{}",  key, e);
             throw new CacheException(CacheEnum.CACHE_HANDLE_DO_EXCEPTION);
         }
     }
 
     @Override
-    public Set<String> distinctRandomMembers(String key, long count, boolean isTimeOut) {
+    public Set<String> distinctRandomMembers(String key, long count) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -475,13 +448,8 @@ public abstract class SetOperationsBase extends SpringStringBase implements ISet
                 log.info("initializing valueOperations");
                 setOperations = getStringRedisTemplate().opsForSet();
             }
-            if (isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            Set<String> returnValue = setOperations.distinctRandomMembers(keyStr.toString(), count);
-            log.info("操作成功！key={},count={}", keyStr.toString(), count);
+            Set<String> returnValue = setOperations.distinctRandomMembers(key, count);
+            log.info("操作成功！key={},count={}", key, count);
             return returnValue;
         } catch (Exception e) {
             log.error("操作key={},count={}失败！失败信息：{}",  key, count, e);
@@ -490,7 +458,7 @@ public abstract class SetOperationsBase extends SpringStringBase implements ISet
     }
 
     @Override
-    public List<String> randomMembers(String key, long count, boolean isTimeOut) {
+    public List<String> randomMembers(String key, long count) {
         if (StringUtils.isBlank(key)) {
             log.error("key is null");
             return null;
@@ -501,13 +469,8 @@ public abstract class SetOperationsBase extends SpringStringBase implements ISet
                 log.info("initializing valueOperations");
                 setOperations = getStringRedisTemplate().opsForSet();
             }
-            if (isTimeOut){
-                keyStr.append(TIMEOUT_PREFIX).append(key);
-            }else{
-                keyStr.append(TIMEEVER_PREFIX).append(key);
-            }
-            List<String> returnValue = setOperations.randomMembers(keyStr.toString(), count);
-            log.info("操作成功！key={},count={}", keyStr.toString(), count);
+            List<String> returnValue = setOperations.randomMembers(key, count);
+            log.info("操作成功！key={},count={}", key, count);
             return returnValue;
         } catch (Exception e) {
             log.error("操作key={},count={}失败！失败信息：{}",  key, count, e);

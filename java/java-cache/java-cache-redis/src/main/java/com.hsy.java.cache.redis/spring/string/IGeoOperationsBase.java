@@ -1,12 +1,9 @@
 package com.hsy.java.cache.redis.spring.string;
-
 import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
 import org.springframework.data.geo.*;
 import org.springframework.data.redis.connection.RedisGeoCommands;
-
 import java.util.List;
 import java.util.Map;
-
 public interface IGeoOperationsBase extends ISpringRedisInterface {
     Long geoAdd(String var1, Point var2, String var3);
 

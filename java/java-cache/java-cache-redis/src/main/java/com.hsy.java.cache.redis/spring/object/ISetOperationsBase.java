@@ -1,10 +1,12 @@
 package com.hsy.java.cache.redis.spring.object;
 
 import com.hsy.java.cache.redis.spring.ISpringRedisInterface;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-public interface ISetOperationsBase extends ISpringRedisInterface{
+
+public interface ISetOperationsBase extends ISpringRedisInterface {
     Long add(String key, Object... value);
 
     Long remove(String key, Object... value);
@@ -29,9 +31,9 @@ public interface ISetOperationsBase extends ISpringRedisInterface{
 
     Set<Object> union(String key, Collection<String> otherKeys);
 
-    Long unionAndStore(String key, String otherKey, String destiantionKey);
+    Long unionAndStore(String key, String otherKey, String destinationKey);
 
-    Long unionAndStore(String key, Collection<String> otherKey, String destinationKey);
+    Long unionAndStore(String key, Collection<String> otherKeys, String destinationKey);
 
     Set<Object> difference(String key, String otherKey);
 

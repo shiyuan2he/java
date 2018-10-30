@@ -44,7 +44,6 @@ public class JsonHelper {
         return JSON.toJSONString(obj) ;
     }
 
-
     public static <T> T json2ObjStrong(String json, Class<T> clazz) {
       /*  net.sf.json.JSONObject jsonObject = net.sf.json.JSONObject.fromObject(json);
         return (T) net.sf.json.JSONObject.toBean(jsonObject, clazz);*/
@@ -56,7 +55,6 @@ public class JsonHelper {
         return (T) net.sf.json.JSONObject.toBean(jsonObject, clazz, classMap);*/
         return null;
     }
-
     public static <T> T json2ObjStrong2(String json, Class<T> clazz) {
         return JSONObject.parseObject(json, clazz);
     }
