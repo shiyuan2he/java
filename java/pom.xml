@@ -65,14 +65,28 @@
         <version.net.json>2.4</version.net.json>
         <version.lombok>1.18.2</version.lombok>
     </properties>
+    <dependencies>
+        <!-- logback + slf4j start -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${version.lombok}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- logback + slf4j end -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.vsersion}</version>
+        </dependency>
+    </dependencies>
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${version.lombok}</version>
-                <scope>provided</scope>
-            </dependency>
            <!-- <dependency>
                 <groupId>net.sf.json-lib</groupId>
                 <artifactId>json-lib</artifactId>
@@ -124,11 +138,6 @@
                 <version>${version.hsy.java}</version>
             </dependency>
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.vsersion}</version>
-            </dependency>
-            <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${version.commons.io}</version>
@@ -149,13 +158,6 @@
                 <artifactId>fastjson</artifactId>
                 <version>${version.fastjson}</version>
             </dependency>
-            <!-- logback + slf4j start -->
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${logback.version}</version>
-            </dependency>
-            <!-- logback + slf4j end -->
             <!--序列化，反序列化工具包-->
             <dependency>
                 <groupId>com.dyuproject.protostuff</groupId>
