@@ -138,6 +138,11 @@
                 <version>${version.hsy.java}</version>
             </dependency>
             <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.vsersion}</version>
+            </dependency>
+            <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${version.commons.io}</version>
@@ -158,6 +163,13 @@
                 <artifactId>fastjson</artifactId>
                 <version>${version.fastjson}</version>
             </dependency>
+            <!-- logback + slf4j start -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <!-- logback + slf4j end -->
             <!--序列化，反序列化工具包-->
             <dependency>
                 <groupId>com.dyuproject.protostuff</groupId>
@@ -323,8 +335,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.7.0</version>
                 <configuration>
-                    <source>${version.jdk}</source>
-                    <target>${version.jdk}</target>
+                    <source>11</source>
+                    <target>11</target>
                     <encoding>${version.encoding}</encoding>
                 </configuration>
             </plugin>
