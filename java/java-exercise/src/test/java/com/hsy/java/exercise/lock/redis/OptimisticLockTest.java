@@ -17,8 +17,8 @@ import java.util.Set;
  * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class OptimisticLockTest extends ConcurrentMock {
-    String key = "product:num";
+public class OptimisticLockTest {
+    /*String key = "product:num";
     String clientList = "client:list";//抢购到商品的顾客列表
     @Test
     public void redisLock() throws InterruptedException {
@@ -33,9 +33,9 @@ public class OptimisticLockTest extends ConcurrentMock {
         System.out.println("程序运行时间 ： " + (int)time + "ms");
     }
 
-    /**
+    *//**
      * 打印抢购结果
-     */
+     *//*
     public void printResult() {
         Jedis jedis = RedisUtils.getInstance().getJedis();
         Set<String> set = jedis.smembers(clientList);
@@ -72,5 +72,5 @@ public class OptimisticLockTest extends ConcurrentMock {
     @Override
     public int getSleepTime() {
         return 10000;
-    }
+    }*/
 }
