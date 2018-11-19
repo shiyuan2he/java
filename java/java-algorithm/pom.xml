@@ -24,17 +24,15 @@
     </build>
 
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
+       <dependency>
             <groupId>com.hsy.java</groupId>
             <artifactId>java-base</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+           <exclusions>
+               <exclusion>
+                   <groupId>*</groupId>
+                   <artifactId>*</artifactId>
+               </exclusion>
+           </exclusions>
         </dependency>
     </dependencies>
 </project>
