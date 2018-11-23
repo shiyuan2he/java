@@ -31,7 +31,7 @@
     </modules>
 
     <properties>
-        <version.jdk>11</version.jdk>
+        <version.jdk>8</version.jdk>
         <version.encoding>UTF-8</version.encoding>
         <junit.vsersion>4.12</junit.vsersion>
         <beanutils.version>1.9.3</beanutils.version>
@@ -63,7 +63,7 @@
         <version.pool.c3po>0.9.1.2</version.pool.c3po>
         <version.gson>2.8.2</version.gson>
         <version.net.json>2.4</version.net.json>
-        <version.lombok>1.18.2</version.lombok>
+        <version.lombok>1.18.4</version.lombok>
     </properties>
     <dependencies>
         <!-- logback + slf4j start -->
@@ -76,7 +76,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${version.lombok}</version>
-            <scope>provided</scope>
+            <!--<scope>provided</scope>-->
         </dependency>
         <!-- logback + slf4j end -->
         <dependency>
@@ -333,10 +333,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.0</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>${version.jdk}</source>
+                    <target>${version.jdk}</target>
                     <encoding>${version.encoding}</encoding>
                 </configuration>
             </plugin>
