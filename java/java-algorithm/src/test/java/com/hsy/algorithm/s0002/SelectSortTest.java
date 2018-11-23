@@ -18,9 +18,9 @@ public class SelectSortTest {
     @Test
     public void selectSort() {
         try {
-            log.info("最终结果：{}", SelectSort.selectSort(SortUtils.generateRandomNumber(100)));
+           /* log.info("最终结果：{}", SelectSort.selectSort(SortUtils.generateRandomNumber(100)));
             log.info("最终结果：{}", SelectSort.selectSort(SortUtils.generateNumberByDesc(100)));
-            log.info("最终结果：{}", SelectSort.selectSort(SortUtils.generateNumberByASC(100)));
+            log.info("最终结果：{}", SelectSort.selectSort(SortUtils.generateNumberByASC(100)));*/
         }catch (Exception e){
             e.printStackTrace();
         }
