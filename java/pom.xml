@@ -36,7 +36,8 @@
         <junit.vsersion>4.12</junit.vsersion>
         <beanutils.version>1.9.3</beanutils.version>
         <collections.version>3.2.2</collections.version>
-        <logback.version>1.2.3</logback.version>
+        <version.slf4j>1.7.25</version.slf4j>
+        <version.logback>1.2.3</version.logback>
         <protostuff.version>1.0.8</protostuff.version>
         <version.commons.lang3>3.6</version.commons.lang3>
         <version.velocity>1.7</version.velocity>
@@ -63,14 +64,25 @@
         <version.pool.c3po>0.9.1.2</version.pool.c3po>
         <version.gson>2.8.2</version.gson>
         <version.net.json>2.4</version.net.json>
-        <version.lombok>1.18.4</version.lombok>
+        <version.lombok>1.18.2</version.lombok>
     </properties>
     <dependencies>
         <!-- logback + slf4j start -->
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${version.slf4j}</version>
+        </dependency>
+        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
+            <version>${version.logback}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
