@@ -1,4 +1,9 @@
 package com.hsy.java.base.bean;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * @description <p>类文件描述</p>
  * @author heshiyuan @date 2017年3月11日 下午3:11:47
@@ -8,52 +13,18 @@ package com.hsy.java.base.bean;
  * @email heshiyuan@chtwm.com
  * @callnumber 15910868535
  */
-public class User {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class User implements Comparable<User>{
 	private String username ;
 	private String password ;
 	private String testNamePassword ;
+	private Integer age;
 
-	public User() {}
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
-	}
-
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return username;
-	}
-	/**
-	 * @param username the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	/**
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
-	/**
-	 * @param password the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	/**
-	 * @return the testNamePassword
-	 */
-	public String getTestNamePassword() {
-		return testNamePassword;
-	}
-	/**
-	 * @param testNamePassword the testNamePassword to set
-	 */
-	public void setTestNamePassword(String testNamePassword) {
-		this.testNamePassword = testNamePassword;
 	}
 
     @Override
@@ -63,5 +34,10 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+	@Override
+	public int compareTo(User o) {
+		return o.getAge().compareTo(this.age);
+	}
 }
 

@@ -52,7 +52,7 @@ public class BubbleSort {
 //                    logger.info("交换后数组：{}", Arrays.toString(arrayA));
                 }
             }
-            right -- ;
+            right --  ;
             for(int i=right;i>left;i--){
                 if(arrayA[i-1] > arrayA[i]){
 //                    logger.info("比较{}跟{}，{}>{},交换位置", arrayA[i-1], arrayA[i], arrayA[i-1], arrayA[i]);
