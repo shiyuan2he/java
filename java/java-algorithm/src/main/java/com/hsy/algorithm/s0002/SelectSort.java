@@ -15,7 +15,7 @@ import java.util.Arrays;
  */
 @Slf4j
 public class SelectSort {
-    public static int[] selectSort(int[] arrayA){
+    /*public static int[] selectSort(int[] arrayA){
         if(null == arrayA || arrayA.length <= 0) return null;
         long start = System.currentTimeMillis();
         log.info("原始数组：{}" ,Arrays.toString(arrayA));
@@ -35,5 +35,5 @@ public class SelectSort {
         long end = System.currentTimeMillis();
         log.info("耗时：{}", (end-start));
         return arrayA;
-    }
+    }*/
 }

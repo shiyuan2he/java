@@ -34,7 +34,7 @@ public class FixedThreadPool {
     volatile private static FixedThreadPool instance ;
 
     volatile private ExecutorService fixedThreadPool;
-    private final int poolSize = 50 ;
+    private final int poolSize = Runtime.getRuntime().availableProcessors() * 2 + 1 ;
 
     private FixedThreadPool() {
         ExecutorService result = fixedThreadPool ;

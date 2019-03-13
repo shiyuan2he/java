@@ -1,10 +1,7 @@
 package com.hsy.algorithm.s0002;
-
 import com.hsy.java.base.utils.ConcurrentMock;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.Arrays;
 
 /**
@@ -17,31 +14,14 @@ import java.util.Arrays;
  * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class ArrayJoinTest extends ConcurrentMock{
-    private static final Logger logger = LoggerFactory.getLogger(ArrayJoinTest.class);
+@Slf4j
+public class ArrayJoinTest{
+
     @Test
-    public void join() throws InterruptedException {
-        execute();
-    }
-
-    @Override
-    public int getConcurrentNo() {
-        return 1;
-    }
-
-    @Override
-    public void doMethod() throws InterruptedException {
-        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(new int[]{1, 3, 3, 5}, new int[]{2, 3, 3, 3, 3, 3, 10})));
-//        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(new int[]{2, 3, 3, 3, 3, 3, 10}, new int[]{1, 3, 3, 3, 5})));
-//        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(new int[]{}, new int[]{1, 3, 3, 3, 5})));
-//        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(new int[]{2, 3, 3, 3, 3, 3, 10}, new int[]{})));
-//        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(null, new int[]{1, 3, 3, 3, 5})));
-//        logger.info(Arrays.toString(ArrayJoin.joinOfJdk(new int[]{2, 3, 3, 3, 3, 3, 10}, null)));
-        logger.info("----------------");
-    }
-
-    @Override
-    public int getSleepTime() {
-        return 1000 * 5;
+    public void doMethod(){
+        int[] a = {1, 3, 5, 7};
+        int[] b = {2, 4, 6, 8, 10};
+//        log.debug(Arrays.toString(ArrayJoin.mergeArray(a, b)));
+        log.debug(Arrays.toString(ArrayJoin.mergeArrayByFor(a, b)));
     }
 }
