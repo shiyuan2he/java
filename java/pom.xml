@@ -28,6 +28,7 @@
         <module>java-util</module>
         <module>java-security</module>
         <module>java-cache</module>
+        <module>java-poi</module>
     </modules>
 
     <properties>
