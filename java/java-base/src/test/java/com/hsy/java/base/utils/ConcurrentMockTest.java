@@ -23,33 +23,14 @@ public class ConcurrentMockTest extends ConcurrentMock {
     }
 
     public void testThreadLocal(int i) {
-        //Common.testThreadLocal = new ThreadLocal<>();
-        int aaa = RandomHelper.generateRandomByLength(2);
-        Object[] objects = new Object[10];
-        objects[0] = i + aaa;
-        objects[1] = i + aaa;
-        objects[2] = i + aaa;
-        objects[3] = i + aaa;
-        objects[4] = i + aaa;
+        Integer aaa = RandomHelper.generateRandomByLength(4);
 
-        Common.testThreadLocal = new ThreadLocal<Object[]>() {
-            @Override
-            protected Object[] initialValue() {
-                return objects;
-            }
-        };
-        //Common.testThreadLocal.set(objects);
-
-        Object[] objects2 = Common.testThreadLocal.get();
-        objects2[5] = i + aaa +1;
-        objects2[6] = i + aaa +1;
-        objects2[7] = i + aaa +1;
-        objects2[8] = i + aaa +1;
-        objects2[9] = i + aaa +1;
-        Common.testThreadLocal.set(objects2);
-
-        Object[] array = Common.testThreadLocal.get() ;
-        System.out.println(Arrays.toString(array));
+        Common.testThreadLocal.set(aaa);
+        if(!aaa.equals(Common.testThreadLocal.get())){
+            System.out.println(aaa + "  " +Common.testThreadLocal.get());
+        }else{
+            System.out.println("一致");
+        }
     }
 
     @Override

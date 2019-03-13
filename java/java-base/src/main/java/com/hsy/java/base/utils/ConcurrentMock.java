@@ -1,6 +1,7 @@
 package com.hsy.java.base.utils;
 
 import com.hsy.java.thread.pool.CachedThreadPool;
+import com.hsy.java.thread.pool.FixedThreadPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,9 +28,20 @@ public abstract class ConcurrentMock {
         // 并发数
         int concurrencyNumber = getConcurrentNo() ;
         final CountDownLatch latch = new CountDownLatch(1);
-        final CountDownLatch latch2 = new CountDownLatch(concurrencyNumber);
+        final CountDownLatch latch2 = new CountDownLatch(10);
         for (int i = 0; i < concurrencyNumber; i++) {
-            CachedThreadPool.getInstance().getCachedThreadPool().submit(()->{
+            /*CachedThreadPool.getInstance().getCachedThreadPool().submit(()->{
+                try {
+                    _logger.info("线程{}到达闸门",Thread.currentThread().getName());
+                    latch2.countDown();
+                    latch.await();
+                    doMethod();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            });*/
+
+            FixedThreadPool.getInstince(10).getFixedThreadPool().submit(()->{
                 try {
                     _logger.info("线程{}到达闸门",Thread.currentThread().getName());
                     latch2.countDown();

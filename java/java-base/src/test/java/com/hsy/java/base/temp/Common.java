@@ -11,5 +11,5 @@ package com.hsy.java.base.temp;
  * @price ¥5    微信：hewei1109
  */
 public class Common {
-    public static ThreadLocal<Object[]> testThreadLocal = null;
+    public static ThreadLocal<Integer> testThreadLocal = new ThreadLocal<>();
 }
