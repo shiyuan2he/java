@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author heshiyuan
@@ -24,6 +25,19 @@ public class ListSteamTest {
         pageList(1, 20);
     }
 
+    @Test
+    public void testListStream3(){
+        List<User> list = generateList(10);
+        list.stream().forEach(entity -> entity.setPassword("444"));
+
+        long t0 = System.currentTimeMillis();
+        list = list.stream().filter(entity -> "555".equals(entity.getPassword())).collect(Collectors.toList());
+        long t1 = System.currentTimeMillis();
+        System.out.println("stream " + (t1-t0));
+        long count = list.stream().count();
+        System.out.println(count);
+    }
+
     private void pageList(int pageCurrent, int pageSize) {
         List list = generateList(10000);
         int lastCount = list.size() % pageSize;
@@ -35,6 +49,25 @@ public class ListSteamTest {
             System.out.println();
         }
         System.out.print(Arrays.toString(list.subList(list.size()-lastCount, list.size()).toArray()));
+    }
+
+    @Test
+    public void testListStream2(){
+        List<User> list = generateList(10);
+        List<User> list2 = generateList(10);
+
+        long t2 = System.currentTimeMillis();
+        for(User user : list){
+            user.setPassword("444");
+        }
+        long t3 = System.currentTimeMillis();
+        System.out.println("for " + (t3-t2));
+
+        long t0 = System.currentTimeMillis();
+        list2.stream().forEach(entity -> entity.setPassword("444"));
+        long t1 = System.currentTimeMillis();
+        System.out.println("stream " + (t1-t0));
+
     }
 
     private List<User> generateList(int count) {
