@@ -74,5 +74,37 @@ public class StringHelperTest {
             e.printStackTrace();
         }
     }
+    @Test
+    public void testEquals(){
+        String s1 = "a";
+        String s2 = "b";
+        String s3 = "ab";
+        String s4 = s1 + s2;
+        String s5 = new String("ab");
+        _logger.info("{}",s3 == s4);
+        _logger.info("{}",s3.equals(s1 + s2));
+        _logger.info("{}",s3 == s5);
+        _logger.info("{}",s3.equals(s5));
+    }
+
+    @Test
+    public void testEquals2(){
+        String s1 = "a";
+        String s2 = "a";
+
+        String s3 = new String("a");
+        String s4 = new String("a");
+        _logger.info("{}",s1 == s2);
+        _logger.info("{}",s1.equals(s2));
+        _logger.info("{}",s3 == s4);
+        _logger.info("{}",s3.equals(s4));
+        _logger.info("{}",s1 == s4);
+        _logger.info("{}",s1.equals(s4));
+
+        Double d1 = 1.0;
+        Double d2 = 1.0;
+        System.out.println("d1==d2\t" + (d1 == d2));
+        System.out.println("d1==d2\t" + (2.0 == d1+d2));
+    }
 }
 
