@@ -1,9 +1,6 @@
 package com.hsy.java.base.utils;
-
-import com.hsy.java.thread.pool.CachedThreadPool;
 import com.hsy.java.thread.pool.FixedThreadPool;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -17,8 +14,8 @@ import java.util.concurrent.CountDownLatch;
  * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
+@Slf4j
 public abstract class ConcurrentMock {
-    private static final Logger _logger = LoggerFactory.getLogger(ConcurrentMock.class) ;
     /**
      * @description <p>并发模拟</p>
      * @author heshiyuan
@@ -30,20 +27,9 @@ public abstract class ConcurrentMock {
         final CountDownLatch latch = new CountDownLatch(1);
         final CountDownLatch latch2 = new CountDownLatch(10);
         for (int i = 0; i < concurrencyNumber; i++) {
-            /*CachedThreadPool.getInstance().getCachedThreadPool().submit(()->{
-                try {
-                    _logger.info("线程{}到达闸门",Thread.currentThread().getName());
-                    latch2.countDown();
-                    latch.await();
-                    doMethod();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });*/
-
             FixedThreadPool.getInstince(10).getFixedThreadPool().submit(()->{
                 try {
-                    _logger.info("线程{}到达闸门",Thread.currentThread().getName());
+                    log.info("线程{}到达闸门",Thread.currentThread().getName());
                     latch2.countDown();
                     latch.await();
                     doMethod();
@@ -53,14 +39,14 @@ public abstract class ConcurrentMock {
             });
         }
         latch2.await();
-        _logger.info("开闸，线程抢占开始");
+        log.info("开闸，线程抢占开始");
         latch.countDown();
         if(0 != getSleepTime()){
             Thread.sleep(getSleepTime());
         }else{
             Thread.sleep(10000);
         }
-        _logger.info("所有线程执行完毕...");
+        log.info("所有线程执行完毕...");
     }
 
     /**

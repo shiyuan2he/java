@@ -19,6 +19,16 @@ import java.io.UnsupportedEncodingException;
 public class StringHelperTest {
 	private static final Logger _logger = LoggerFactory.getLogger(StringHelperTest.class) ;
 	@Test
+    public void lineToHump(){
+        _logger.info("", StringHelper.lineToHump("dict"));
+        _logger.info("", StringHelper.lineToHump("t_dict"));
+    }
+	@Test
+	public void toUpperCaseFirstOne(){
+	    _logger.info("", StringHelper.toUpperCaseFirstOne("dict"));
+	    _logger.info("", StringHelper.toUpperCaseFirstOne("t_dict"));
+    }
+	@Test
 	public void testIsNullOrEmpty() {
 		//_logger.info("\"\":"+StringHelper.isNullOrEmpty(""));
 		//_logger.info("\" \":"+StringHelper.isNullOrEmpty(" "));

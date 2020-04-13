@@ -9,5 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>java-enum</artifactId>
+    <artifactId>java-pinyin</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.belerweb</groupId>
+            <artifactId>pinyin4j</artifactId>
+            <version>2.5.1</version>
+        </dependency>
+    </dependencies>
 </project>

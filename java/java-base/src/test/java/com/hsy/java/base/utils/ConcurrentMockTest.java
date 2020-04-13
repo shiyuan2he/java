@@ -1,10 +1,5 @@
 package com.hsy.java.base.utils;
-
-import com.hsy.java.base.temp.Common;
 import org.junit.Test;
-
-import java.util.Arrays;
-
 /**
  * @author heshiyuan
  * @description <p></p>
@@ -16,21 +11,11 @@ import java.util.Arrays;
  * @price ¥5    微信：hewei1109
  */
 public class ConcurrentMockTest extends ConcurrentMock {
+    public static ThreadLocal<Integer> testThreadLocal = new ThreadLocal<>();
 
     @Test
     public void testMain() throws InterruptedException {
         execute();
-    }
-
-    public void testThreadLocal(int i) {
-        Integer aaa = RandomHelper.generateRandomByLength(4);
-
-        Common.testThreadLocal.set(aaa);
-        if(!aaa.equals(Common.testThreadLocal.get())){
-            System.out.println(aaa + "  " +Common.testThreadLocal.get());
-        }else{
-            System.out.println("一致");
-        }
     }
 
     @Override
@@ -40,9 +25,7 @@ public class ConcurrentMockTest extends ConcurrentMock {
 
     @Override
     public void doMethod() {
-        for (int i = 0; i < 10; i++) {
-            testThreadLocal(i);
-        }
+
     }
 
     @Override

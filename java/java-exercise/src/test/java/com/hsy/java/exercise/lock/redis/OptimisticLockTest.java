@@ -1,12 +1,5 @@
 package com.hsy.java.exercise.lock.redis;
 
-import com.hsy.java.base.utils.ConcurrentMock;
-import com.hsy.java.exercise.lock.redis.RedisUtils;
-import org.junit.Test;
-import redis.clients.jedis.Jedis;
-
-import java.util.Set;
-
 /**
  * @author heshiyuan
  * @description <p></p>

@@ -103,9 +103,7 @@ public class AESHelper {
             //7.初始化密码器，第一个参数为加密(Encrypt_mode)或者解密(Decrypt_mode)操作，第二个参数为使用的KEY
             cipher.init(Cipher.DECRYPT_MODE, key);
             //8.将加密并编码后的内容解码成字节数组
-            byte[] byte_content = new Base64().decodeBuffer(content);
-
-//            byte[] byte_content = Base64.getDecoder().decode(content);
+            byte[] byte_content = Base64.getDecoder().decode(content);
             /*
              * 解密
              */
