@@ -1,5 +1,6 @@
 package com.hsy.java.exercise.lock.db;
 
+import com.hsy.java.base.utils.ConcurrentMock;
 import org.junit.Test;
 /**
  * @author heshiyuan
@@ -11,7 +12,7 @@ import org.junit.Test;
  * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class PessimisticLockTest extends ConcurrentMock{
+public class PessimisticLockTest extends ConcurrentMock {
 
     @Test
     public void lockService() throws InterruptedException {

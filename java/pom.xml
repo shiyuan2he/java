@@ -30,12 +30,11 @@
         <module>java-cache</module>
         <module>java-poi</module>
         <module>java-pinyin</module>
-        <module>../java-file</module>
         <module>java-file</module>
     </modules>
 
     <properties>
-        <version.jdk>13</version.jdk>
+        <version.jdk>14</version.jdk>
         <version.encoding>UTF-8</version.encoding>
         <junit.vsersion>4.12</junit.vsersion>
         <beanutils.version>1.9.3</beanutils.version>
@@ -362,8 +361,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>${version.jdk}</source>
-                    <target>${version.jdk}</target>
+                    <source>13</source>
+                    <target>13</target>
                     <encoding>${version.encoding}</encoding>
                 </configuration>
             </plugin>

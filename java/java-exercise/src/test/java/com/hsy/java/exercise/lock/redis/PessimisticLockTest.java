@@ -1,5 +1,6 @@
 package com.hsy.java.exercise.lock.redis;
 
+import com.hsy.java.base.utils.ConcurrentMock;
 import org.junit.Test;
 
 /**

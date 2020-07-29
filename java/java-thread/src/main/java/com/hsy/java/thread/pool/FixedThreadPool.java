@@ -67,7 +67,7 @@ public class FixedThreadPool {
         }
     }
 
-    private FixedThreadPool(int threadPoolNum, String threadName) {
+    private FixedThreadPool(int threadPoolNum, final String threadName) {
         ExecutorService result = fixedThreadPool ;
         if(null == result) {
             synchronized (ExecutorService.class) {

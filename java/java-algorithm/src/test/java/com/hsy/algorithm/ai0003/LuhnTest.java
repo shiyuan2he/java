@@ -2,12 +2,8 @@ package com.hsy.algorithm.ai0003;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import sun.rmi.runtime.Log;
 
 import java.util.Scanner;
-
-import static org.junit.Assert.*;
-
 /**
  * @author heshiyuan
  * @description <p></p>
