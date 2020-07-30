@@ -1,6 +1,10 @@
+*/*/.factorypath
+*/*/*/.factorypath
+*/*/*/*.classpath
 */*/*.classpath
 */*/*.gitignore
 */*/*.project
+*/*/*/*.project
 */*/.settings/*
 */*/target/classes/*
 */*/target/classes/*
