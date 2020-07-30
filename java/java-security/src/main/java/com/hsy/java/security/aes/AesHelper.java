@@ -37,6 +37,9 @@ public class AesHelper {
     private static final String MODE_AES = "ECB";
     private static final String PADDING_AES = "PKCS5Padding";
 
+    // 支持：128, 192, 256，生成一个128位的随机源,根据传入的字节数组
+    private static final Integer[] SECRET_LENGTH = {128, 192, 256};
+
     /**
      * 加密
      * 1.构造密钥生成器
@@ -55,11 +58,11 @@ public class AesHelper {
             KeyGenerator keygen = KeyGenerator.getInstance(ALGORITHM_AES);
             /**
              * 2.根据saltCode规则初始化密钥生成器
-             * 支持：128, 192, 256，生成一个128位的随机源,根据传入的字节数组
+             *
              */
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
             random.setSeed(null==saltCode?initSaltCode.getBytes():saltCode.getBytes());
-            keygen.init(128, random);
+            keygen.init(SECRET_LENGTH[0], random);
             //3.产生原始对称密钥
             SecretKey original_key = keygen.generateKey();
             //4.获得原始对称密钥的字节数组
