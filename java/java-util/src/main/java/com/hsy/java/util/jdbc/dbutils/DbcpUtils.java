@@ -1,6 +1,5 @@
 package com.hsy.java.util.jdbc.dbutils;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbcp2.BasicDataSourceFactory;
 
 import javax.sql.DataSource;

@@ -2,11 +2,6 @@ package com.hsy.java.util.json;
 
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.*;
-
 /**
  * @author heshiyuan
  * @description <p></p>

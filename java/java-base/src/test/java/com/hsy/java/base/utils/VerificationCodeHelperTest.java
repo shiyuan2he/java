@@ -1,7 +1,4 @@
 package com.hsy.java.base.utils;
-
-import com.hsy.java.base.utils.RandomHelper;
-import com.hsy.java.base.utils.VerificationCodeHelper;
 import org.junit.Test;
 
 import javax.imageio.ImageIO;
@@ -21,7 +18,7 @@ public class VerificationCodeHelperTest {
     @Test
     public void testGenerateImageCode() throws IOException {
         VerificationCodeHelper verificationCodeHelper = VerificationCodeHelper.getInstance() ;
-        OutputStream os = new FileOutputStream("/Users/heshiyuan/Desktop/"+RandomHelper.generateRandomByLength(3)+".jpeg");
+        OutputStream os = new FileOutputStream("/Users/heshiyuan/data/devTools/repo/git/java/java/java-base/src/test/java/com/hsy/java/base/utils/code/"+RandomHelper.generateRandomByLength(3)+".jpeg");
         ImageIO.write(verificationCodeHelper.getImage(),"JPEG",os) ;
         os.flush();
         os.close();
