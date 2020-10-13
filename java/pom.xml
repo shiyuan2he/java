@@ -36,7 +36,7 @@
     <properties>
         <version.jdk>14</version.jdk>
         <version.encoding>UTF-8</version.encoding>
-        <junit.vsersion>4.12</junit.vsersion>
+        <junit.vsersion>4.13.1</junit.vsersion>
         <beanutils.version>1.9.3</beanutils.version>
         <collections.version>3.2.2</collections.version>
         <version.slf4j>1.7.25</version.slf4j>
