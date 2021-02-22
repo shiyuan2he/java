@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.hsy.java</groupId>
+    <groupId>org.hsy.java</groupId>
     <artifactId>java</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
@@ -25,10 +25,10 @@
         <module>java-poi</module>
         <module>java-pinyin</module>
         <module>java-file</module>
+        <module>java-jdbc</module>
     </modules>
 
     <properties>
-        <version.jdk>14</version.jdk>
         <version.encoding>UTF-8</version.encoding>
         <junit.vsersion>4.12</junit.vsersion>
         <beanutils.version>1.9.3</beanutils.version>
@@ -181,7 +181,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>${logback.version}</version>
+                <version>${version.logback}</version>
             </dependency>
             <!-- logback + slf4j end -->
             <!--序列化，反序列化工具包-->
@@ -355,8 +355,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>13</source>
-                    <target>13</target>
+                    <source>14</source>
+                    <target>14</target>
                     <encoding>${version.encoding}</encoding>
                 </configuration>
             </plugin>

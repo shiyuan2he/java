@@ -8,6 +8,16 @@
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <groupId>org.hsy.java</groupId>
+    <artifactId>java-jdbc</artifactId>
+    <packaging>jar</packaging>
 
-    <artifactId>java-enum</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>2.7.2</version>
+        </dependency>
+    </dependencies>
 </project>
