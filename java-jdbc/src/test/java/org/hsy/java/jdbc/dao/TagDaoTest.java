@@ -1,6 +1,9 @@
 package org.hsy.java.jdbc.dao;
 
 import org.hsy.java.jdbc.entity.Tag;
+import org.hsy.java.jdbc.utils.C3p0Helper;
+import org.hsy.java.jdbc.utils.DbHelper;
+import org.hsy.java.jdbc.utils.DbcpHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,7 +12,7 @@ import org.junit.Test;
  * @date 2021/2/22 14:44
  */
 public class TagDaoTest {
-    TagDao tagDao = new TagDao();
+    TagDao tagDao = new TagDao(C3p0Helper.getInstance());
 
     @Test
     public void insert() {
@@ -43,7 +46,7 @@ public class TagDaoTest {
     @Test
     public void testTransaction(){
         Tag tag = new Tag();
-        tag.setId(5L);
+        tag.setId(100L);
         tagDao.testTransaction(tag);
     }
 }

@@ -1,5 +1,6 @@
 package org.hsy.java.jdbc.utils;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
@@ -8,7 +9,8 @@ import java.util.Properties;
 /**
  * @author heshiyuan
  */
-public class DbHelper {
+public class DbHelper extends BaseHelper{
+    private static DbHelper dbHelper = new DbHelper();
     private static final String USERNAME_KEY = "username";
     private static String USERNAME = "";
     private static final String PASSWORD_KEY = "password";
@@ -47,7 +49,13 @@ public class DbHelper {
         System.out.println(DRIVER);
     }
 
-    public static Connection getConnection() {
+    @Override
+    protected DataSource dataSource() {
+        return null;
+    }
+
+    @Override
+    public Connection getConnection() {
         Connection conn = null;
         try {
             Class.forName(DRIVER);
@@ -60,5 +68,9 @@ public class DbHelper {
             e.printStackTrace();
         }
         return conn;
+    }
+
+    public static DbHelper getInstance(){
+        return dbHelper;
     }
 }
