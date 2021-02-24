@@ -1,19 +1,34 @@
 package org.hsy.java.jdbc.dao;
 
 import org.hsy.java.jdbc.entity.Tag;
-import org.hsy.java.jdbc.utils.C3p0Helper;
 import org.hsy.java.jdbc.utils.DbHelper;
 import org.hsy.java.jdbc.utils.DbcpHelper;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.concurrent.Executors;
+import java.util.logging.Logger;
+import java.util.stream.IntStream;
+
 /**
  * @author heshiyuan
  * @date 2021/2/22 14:44
  */
-public class TagDaoTest {
-    TagDao tagDao = new TagDao(C3p0Helper.getInstance());
-
+public class DbcpTest {
+    Logger logger = Logger.getLogger(DbcpTest.class.getName());
+    TagDao tagDao = new TagDao(DbcpHelper.getInstance());
+    // 2.391s, 2.131s, 2.375s
+    // 4.299s 4.188s 3.486s
+    // 4.913s 5.001s 4.5s
+    @Test
+    public void batchInsert() {
+        IntStream.range(1, 3001).forEach(i -> {
+            Tag tag = new Tag();
+            tag.setName("insert" + i);
+            tag.setDescription("我是描述 insert" + i);
+            logger.info("threadId = "+Thread.currentThread().getId()+", 第 "+i+" 次，result = " + tagDao.insert(tag));
+        });
+    }
     @Test
     public void insert() {
         Tag tag = new Tag();
@@ -40,7 +55,7 @@ public class TagDaoTest {
     }
     @Test
     public void findList() {
-        System.out.println(tagDao.findList(new Tag()));
+        logger.info(tagDao.findList(new Tag()).toString());
     }
 
     @Test

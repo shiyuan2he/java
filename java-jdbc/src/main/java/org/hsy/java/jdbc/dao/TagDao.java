@@ -14,13 +14,12 @@ import java.util.List;
 public class TagDao {
 
     BaseHelper baseHelper;
-    Connection connection;
     public TagDao(BaseHelper baseHelper) {
         this.baseHelper = baseHelper;
-        connection = baseHelper.getConnection();
     }
 
     public int testTransaction(Tag tag) {
+        Connection connection = baseHelper.getConnection();
         Savepoint savepoint1=null, savepoint2=null, savepoint3 = null;
         PreparedStatement ps = null;
         PreparedStatement ps2 = null;
@@ -60,11 +59,12 @@ public class TagDao {
      * @return
      */
     public int insert(Tag tag) {
+        Connection connection = baseHelper.getConnection();
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement(
-                    "INSERT INTO biz_tags (id, name, description, create_time, update_time) " +
-                            "VALUES ("+tag.getId()+", '"+tag.getName()+"', '"+tag.getDescription()+"', now(), now());");
+                    "INSERT INTO biz_tags (name, description, create_time, update_time) " +
+                            "VALUES ('"+tag.getName()+"', '"+tag.getDescription()+"', now(), now());");
             return ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,6 +75,7 @@ public class TagDao {
     }
 
     public int delete(Long id){
+        Connection connection = baseHelper.getConnection();
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = connection.prepareStatement("delete from biz_tags where id = ?");
@@ -94,6 +95,7 @@ public class TagDao {
      * @return
      */
     public int update(Tag tag){
+        Connection connection = baseHelper.getConnection();
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement(
@@ -110,6 +112,7 @@ public class TagDao {
         return 0;
     }
     public Tag findOne(Long id){
+        Connection connection = baseHelper.getConnection();
         PreparedStatement ps = null;
         ResultSet resultSet = null;
         try {
@@ -139,6 +142,7 @@ public class TagDao {
     }
 
     public List<Tag> findList(Tag tag){
+        Connection connection = baseHelper.getConnection();
         PreparedStatement ps = null;
         ResultSet resultSet = null;
         try {
