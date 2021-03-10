@@ -1,11 +1,8 @@
-package com.hsy.java.file;
+package com.hsy.java.io;
 
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 /**
  * @author heshiyuan

@@ -24,12 +24,12 @@
         <module>java-cache</module>
         <module>java-poi</module>
         <module>java-pinyin</module>
-        <module>java-file</module>
+        <module>java-io</module>
         <module>java-jdbc</module>
     </modules>
 
     <properties>
-        <version.jdk>14</version.jdk>
+        <version.jdk>1.8</version.jdk>
         <version.encoding>UTF-8</version.encoding>
         <junit.vsersion>4.12</junit.vsersion>
         <beanutils.version>1.9.3</beanutils.version>
