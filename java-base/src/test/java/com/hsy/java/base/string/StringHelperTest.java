@@ -106,10 +106,10 @@ public class StringHelperTest {
         String s3 = "ab";
         String s4 = s1 + s2;
         String s5 = new String("ab");
-        _logger.info("{}",s3 == s4);
-        _logger.info("{}",s3.equals(s1 + s2));
-        _logger.info("{}",s3 == s5);
-        _logger.info("{}",s3.equals(s5));
+        _logger.info("{}",s3 == s4); // false
+        _logger.info("{}",s3.equals(s1 + s2)); // true
+        _logger.info("{}",s3 == s5);// false
+        _logger.info("{}",s3.equals(s5));// true
     }
 
     @Test
@@ -119,17 +119,31 @@ public class StringHelperTest {
 
         String s3 = new String("a");
         String s4 = new String("a");
-        _logger.info("{}",s1 == s2);
-        _logger.info("{}",s1.equals(s2));
-        _logger.info("{}",s3 == s4);
-        _logger.info("{}",s3.equals(s4));
-        _logger.info("{}",s1 == s4);
-        _logger.info("{}",s1.equals(s4));
+        _logger.info("{}",s1 == s2);// true
+        _logger.info("{}",s1.equals(s2)); //true
+        _logger.info("{}",s3 == s4);// false
+        _logger.info("{}",s3.equals(s4));//true
+        _logger.info("{}",s1 == s4);// false
+        _logger.info("{}",s1.equals(s4));// true
+        s3 = s3.intern();
+        _logger.info("{}",s3 == s4);// false
+        _logger.info("{}",s3 == s1);// true
+        _logger.info("{}",s3 == s2);// true
 
         Double d1 = 1.0;
         Double d2 = 1.0;
-        System.out.println("d1==d2\t" + (d1 == d2));
-        System.out.println("d1==d2\t" + (2.0 == d1+d2));
+        System.out.println("d1==d2\t" + (d1 == d2));// false
+        System.out.println("d1==d2\t" + (2.0 == d1+d2));// true
+    }
+    @Test
+    public void testEquals3(){
+        String s3 = new String("a");
+        s3 = s3.intern();
+        String s1 = "a";
+        String s2 = "a";
+
+        _logger.info("{}",s1 == s2);// true
+        _logger.info("{}",s1==s3); //true
     }
 }
 

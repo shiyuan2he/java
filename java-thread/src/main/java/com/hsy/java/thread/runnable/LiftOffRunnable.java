@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * Copyright (c) 2018 shiyuan4work@sina.com All rights reserved.
  * @price ¥5    微信：hewei1109
  */
-public class LiftOffRunnable implements Runnable{
+public final class LiftOffRunnable implements Runnable{
     private Logger logger = LoggerFactory.getLogger(getClass());
     protected int countDown = 10 ;
     private static int taskCount = 0;

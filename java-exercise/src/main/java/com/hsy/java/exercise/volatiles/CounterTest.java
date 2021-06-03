@@ -27,17 +27,23 @@ public class CounterTest {
         for (int i = 0; i < 10000; i++) {
             new Thread(() -> {
                 count ++ ;
+            }).start();
+            new Thread(() -> {
                 counter.increment();
+            }).start();
+            new Thread(() -> {
                 atomicInteger.incrementAndGet();
+            }).start();
+            new Thread(() -> {
                 countValue ++ ;
             }).start();
         }
 
         Thread.sleep(15000);
 
-        _logger.info("count==>",count);
-        _logger.info("counter==>",counter.getCount());
-        _logger.info("atomicInteger==>",atomicInteger.intValue());
-        _logger.info("countValue==>",countValue);
+        _logger.info("count==>{}",count);
+        _logger.info("counter==>{}",counter.getCount());
+        _logger.info("atomicInteger==>{}",atomicInteger.intValue());
+        _logger.info("countValue==>{}",countValue);
     }
 }
