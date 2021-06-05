@@ -1,8 +1,7 @@
-package com.hsy.java.security.aes;
+package org.hsy.java.security.aes;
 
+import org.hsy.java.security.aes.AesHelper;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @author heshiyuan

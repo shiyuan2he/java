@@ -1,8 +1,7 @@
-package com.hsy.java.io;
+package org.hsy.java.io;
 
+import org.hsy.java.io.WriteFile;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  * @author heshiyuan

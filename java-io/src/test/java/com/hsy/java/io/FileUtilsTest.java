@@ -1,5 +1,6 @@
-package com.hsy.java.io;
+package org.hsy.java.io;
 
+import org.hsy.java.io.FileUtils;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;

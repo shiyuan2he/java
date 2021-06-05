@@ -1,4 +1,4 @@
-package com.hsy.java.java.swing.common;
+package org.hsy.java.java.swing.common;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -9,7 +9,7 @@ import javax.swing.*;
 /**
  * @author heshiyuan
  * @description <p></p>
- * @path java/com.hsy.java.swing.common
+ * @path java/org.hsy.java.swing.common
  * @date 12/10/2017 1:36 PM
  * @github http://github.com/shiyuan2he
  * @email shiyuan4work@sina.com

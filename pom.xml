@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.hsy.java</groupId>
+    <groupId>org.hsy</groupId>
     <artifactId>java</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
@@ -11,12 +11,10 @@
     <modules>
         <module>java-enum</module>
         <module>java-bean</module>
-        <module>java-algorithm</module>
         <module>java-exercise</module>
         <module>java-resource</module>
         <module>java-base</module>
         <module>java-swing</module>
-        <module>java-thread</module>
         <module>java-httpclient</module>
         <module>java-exception</module>
         <module>java-util</module>
@@ -26,6 +24,8 @@
         <module>java-pinyin</module>
         <module>java-io</module>
         <module>java-jdbc</module>
+        <module>java-collection</module>
+        <module>java-juc</module>
     </modules>
 
     <properties>
@@ -65,38 +65,37 @@
         <version.net.json>2.4</version.net.json>
         <version.lombok>1.18.10</version.lombok>
     </properties>
-    <dependencies>
-        <!-- logback + slf4j start -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${version.slf4j}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${version.logback}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${version.lombok}</version>
-        </dependency>
-        <!-- logback + slf4j end -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.vsersion}</version>
-        </dependency>
-    </dependencies>
+
     <dependencyManagement>
         <dependencies>
+            <!-- logback + slf4j start -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${version.logback}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${version.lombok}</version>
+            </dependency>
+            <!-- logback + slf4j end -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.vsersion}</version>
+            </dependency>
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
@@ -146,11 +145,6 @@
                         <artifactId>slf4j-log4j12</artifactId>
                     </exclusion>
                 </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.hsy.java</groupId>
-                <artifactId>java-thread</artifactId>
-                <version>${version.hsy.java}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
@@ -270,17 +264,17 @@
                 <version>${version.aspectj}</version>
             </dependency>
             <dependency>
-                <groupId>com.hsy.java</groupId>
+                <groupId>org.hsy</groupId>
                 <artifactId>java-base</artifactId>
                 <version>${version.hsy.java}</version>
             </dependency>
             <dependency>
-                <groupId>com.hsy.java</groupId>
+                <groupId>org.hsy</groupId>
                 <artifactId>java-util</artifactId>
                 <version>${version.hsy.java}</version>
             </dependency>
             <dependency>
-                <groupId>com.hsy.java</groupId>
+                <groupId>org.hsy</groupId>
                 <artifactId>java-exception</artifactId>
                 <version>${version.hsy.java}</version>
             </dependency>
@@ -300,12 +294,12 @@
                 <version>1.50</version>
             </dependency>
             <dependency>
-                <groupId>com.hsy.java</groupId>
+                <groupId>org.hsy</groupId>
                 <artifactId>java-enum</artifactId>
                 <version>${version.hsy.java}</version>
             </dependency>
             <dependency>
-                <groupId>com.hsy.java</groupId>
+                <groupId>org.hsy</groupId>
                 <artifactId>java-bean</artifactId>
                 <version>${version.hsy.java}</version>
             </dependency>
@@ -335,19 +329,18 @@
                 <version>${version.commons.dbutils}</version>
             </dependency>
             <dependency>
-                <groupId>com.hsy.java</groupId>
+                <groupId>org.hsy</groupId>
                 <artifactId>java-cache-base</artifactId>
                 <version>${version.hsy.java}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
-    <build>
+  <!-- <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <!--<version>3.8.1</version>-->
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.source}</target>
@@ -355,5 +348,5 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
+   </build>-->
 </project>

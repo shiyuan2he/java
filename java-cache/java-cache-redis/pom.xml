@@ -4,25 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>java-cache</artifactId>
-        <groupId>com.hsy.java</groupId>
+        <groupId>org.hsy</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>java-cache-redis</artifactId>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>14</source>
-                    <target>14</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
 
     <dependencies>
         <dependency>
@@ -30,7 +17,7 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.hsy.java</groupId>
+            <groupId>org.hsy</groupId>
             <artifactId>java-exception</artifactId>
         </dependency>
         <dependency>
@@ -39,7 +26,7 @@
             <version>1.5.9.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>com.hsy.java</groupId>
+            <groupId>org.hsy</groupId>
             <artifactId>java-cache-base</artifactId>
         </dependency>
     </dependencies>

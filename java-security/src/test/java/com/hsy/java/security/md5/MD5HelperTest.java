@@ -1,5 +1,6 @@
-package com.hsy.java.security.md5;
+package org.hsy.java.security.md5;
 
+import org.hsy.java.security.md5.MD5Helper;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +8,7 @@ import org.slf4j.LoggerFactory;
 /**
  * @author heshiyuan
  * @description <p></p>
- * @path java/com.hsy.java.util.secure
+ * @path java/org.hsy.java.util.secure
  * @date 2018/1/15 18:38
  * @github http://github.com/shiyuan2he
  * @email shiyuan4work@sina.com
