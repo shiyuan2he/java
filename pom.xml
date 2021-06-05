@@ -40,7 +40,7 @@
         <protostuff.version>1.0.8</protostuff.version>
         <version.commons.lang3>3.6</version.commons.lang3>
         <version.velocity>1.7</version.velocity>
-        <version.commons.io>2.5</version.commons.io>
+        <version.commons.io>2.7</version.commons.io>
         <version.commons.logging>1.2</version.commons.logging>
         <version.commons.codec>1.10</version.commons.codec>
         <version.mariadb>2.1.0</version.mariadb>
