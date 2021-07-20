@@ -1,7 +1,7 @@
 package org.hsy.java.thread.runnable;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.util.logging.Logger;
 
 /**
  * @author heshiyuan
@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * @price ¥5    微信：hewei1109
  */
 public final class LiftOffRunnable implements Runnable{
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
     protected int countDown = 10 ;
     private static int taskCount = 0;
     private final int id = taskCount ++ ;
@@ -28,7 +28,7 @@ public final class LiftOffRunnable implements Runnable{
     @Override
     public void run() {
         while (countDown --> 0){
-            logger.info("{}", getStatus());
+            logger.info(""+ getStatus());
             Thread.yield();
         }
     }

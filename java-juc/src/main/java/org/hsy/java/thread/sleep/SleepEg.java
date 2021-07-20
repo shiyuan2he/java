@@ -5,6 +5,7 @@ package org.hsy.java.thread.sleep;
  * @date 2021/6/5 14:10
  */
 public class SleepEg {
+    private Object lock = new Object();
     public int testSleep(){
         Thread t = new Thread(() -> {
             for (int i = 0; i < 100; i++) {
@@ -13,6 +14,13 @@ public class SleepEg {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                }
+                synchronized (lock){
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

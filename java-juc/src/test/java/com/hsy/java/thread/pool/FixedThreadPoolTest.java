@@ -2,8 +2,8 @@ package org.hsy.java.thread.pool;
 
 import org.hsy.java.thread.pool.FixedThreadPool;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.util.logging.Logger;
 
 /**
  * @author heshiyuan
@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * @price ¥5    微信：hewei1109
  */
 public class FixedThreadPoolTest {
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = Logger.getLogger(this.getClass().getName());
     @Test
     public void testFixedThreadPool(){
        /* String threadName = UUID.randomUUID().toString().replace("-", "");
@@ -25,10 +25,10 @@ public class FixedThreadPoolTest {
             FixedThreadPool.getInstince(3).getFixedThreadPool().submit(new Runnable() {
                 @Override
                 public void run() {
-                    logger.info("{}线程内部", Thread.currentThread().getName());
+                    logger.info("{"+Thread.currentThread().getName()+"}线程内部");
                 }
             });
         }
-        logger.info("{}线程外部", Thread.currentThread().getName());
+        logger.info("{"+Thread.currentThread().getName()+"}线程外部");
     }
 }

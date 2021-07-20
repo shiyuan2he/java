@@ -1,11 +1,9 @@
 package org.hsy.java.thread.pool;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.logging.Logger;
 
 /**
  * @author heshiyuan
@@ -21,7 +19,7 @@ import java.util.concurrent.ScheduledExecutorService;
  * @price ¥5    微信：hewei1109
  */
 public class ScheduledThreadPool {
-    private static final Logger _logger = LoggerFactory.getLogger(ScheduledThreadPool.class) ;
+    private final Logger _logger = Logger.getLogger(this.getClass().getName());
     volatile private static ScheduledThreadPool instance = null;
     volatile private ScheduledExecutorService scheduledThreadPool ;
     private final int poolSize = 50 ;
@@ -32,7 +30,7 @@ public class ScheduledThreadPool {
             synchronized (ScheduledExecutorService.class){
                 result = scheduledThreadPool ;
                 if(null == result){
-                    _logger.info("正在初始化一个({})线程数的线程池：", poolSize);
+                    _logger.info("正在初始化一个({"+poolSize+"})线程数的线程池：");
                     // 1个线程的固定数量线程池
                     this.scheduledThreadPool = Executors.newScheduledThreadPool(poolSize);
                 }
@@ -45,7 +43,7 @@ public class ScheduledThreadPool {
             synchronized (ScheduledExecutorService.class){
                 result = scheduledThreadPool ;
                 if(null == result){
-                    _logger.info("正在初始化ScheduledThreadPool的线程池：", poolSize);
+                    _logger.info("正在初始化ScheduledThreadPool的线程池");
                     // 1个线程的固定数量线程池
                     this.scheduledThreadPool = Executors.newScheduledThreadPool(poolSize);
                 }

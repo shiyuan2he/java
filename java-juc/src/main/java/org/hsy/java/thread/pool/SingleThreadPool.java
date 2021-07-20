@@ -1,7 +1,5 @@
 package org.hsy.java.thread.pool;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import java.util.concurrent.ExecutorService;
 /**
  * @author heshiyuan
@@ -17,7 +15,6 @@ import java.util.concurrent.ExecutorService;
  * @price ¥5    微信：hewei1109
  */
 public class SingleThreadPool {
-    private static final Logger _logger = LoggerFactory.getLogger(SingleThreadPool.class) ;
     volatile private static SingleThreadPool instance = null;
     volatile private ExecutorService singleThreadPool ;
 

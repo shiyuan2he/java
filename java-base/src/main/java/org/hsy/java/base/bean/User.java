@@ -1,9 +1,5 @@
 package org.hsy.java.base.bean;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 /**
  * @description <p>类文件描述</p>
  * @author heshiyuan @date 2017年3月11日 下午3:11:47
@@ -13,9 +9,6 @@ import lombok.NoArgsConstructor;
  * @email heshiyuan@chtwm.com
  * @callnumber 15910868535
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class User implements Comparable<User>{
 	private String username ;
 	private String password ;
@@ -26,6 +19,38 @@ public class User implements Comparable<User>{
 		this.username = username;
 		this.password = password;
 	}
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getTestNamePassword() {
+        return testNamePassword;
+    }
+
+    public void setTestNamePassword(String testNamePassword) {
+        this.testNamePassword = testNamePassword;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
     @Override
     public String toString() {

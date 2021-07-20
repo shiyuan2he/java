@@ -1,6 +1,9 @@
 package org.hsy.java.thread.yield;
 
+import java.util.concurrent.TimeUnit;
+
 /**
+ * yield() 让线程从 Running （执行状态）进入 Runnable 就绪状态
  * @author heshiyuan
  * @date 2021/6/5 14:00
  */
@@ -13,6 +16,11 @@ public class YieldEg {
                 if(i % 10 == 0){
                     Thread.yield();
                 }
+                try {
+                    TimeUnit.MILLISECONDS.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -21,6 +29,11 @@ public class YieldEg {
                 System.out.println("B -----" + i);
                 if(i % 10 == 0){
                     Thread.yield();
+                }
+                try {
+                    TimeUnit.MILLISECONDS.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         });

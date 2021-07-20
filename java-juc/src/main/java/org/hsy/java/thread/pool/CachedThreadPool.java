@@ -1,10 +1,9 @@
 package org.hsy.java.thread.pool;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
+
 /**
  * @author heshiyuan
  * @description <p>
@@ -20,7 +19,7 @@ import java.util.concurrent.Executors;
  * @price ¥5    微信：hewei1109
  */
 public class CachedThreadPool {
-    private static final Logger _logger = LoggerFactory.getLogger(CachedThreadPool.class) ;
+    private final Logger _logger = Logger.getLogger(this.getClass().getName());
     volatile private static CachedThreadPool instance = null;
     volatile private ExecutorService cachedThreadPool ;
 

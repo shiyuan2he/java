@@ -1,12 +1,10 @@
 package org.hsy.java.thread.pool;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Logger;
 
 /**
  * @author heshiyuan
@@ -30,7 +28,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @price ¥5    微信：hewei1109
  */
 public class FixedThreadPool {
-    private static final Logger _logger = LoggerFactory.getLogger(FixedThreadPool.class);
+    private final Logger _logger = Logger.getLogger(this.getClass().getName());
     volatile private static FixedThreadPool instance ;
 
     volatile private ExecutorService fixedThreadPool;
@@ -42,7 +40,7 @@ public class FixedThreadPool {
             synchronized (ExecutorService.class) {
                 result = fixedThreadPool;
                 if (null == result) {
-                    _logger.info("正在初始化一个({})线程数的线程池：", poolSize);
+                    _logger.info("正在初始化一个({"+poolSize+"})线程数的线程池：");
                     this.fixedThreadPool = Executors.newFixedThreadPool(poolSize, new ThreadFactory() {
 
                         SecurityManager s = System.getSecurityManager();
@@ -52,9 +50,9 @@ public class FixedThreadPool {
                         private final AtomicInteger poolNumber = new AtomicInteger(1);
                         private final AtomicInteger threadNumber = new AtomicInteger(1);
                         private final String namePrefix = "fixedPool-" + poolNumber.getAndIncrement() + "-thread-";
-
+                        @Override
                         public Thread newThread(Runnable runnable) {
-                            _logger.info("正在new一个线程，线程(ID:{})：", namePrefix + threadNumber.intValue());
+                            _logger.info("正在new一个线程，线程(ID:{"+namePrefix + threadNumber.intValue()+"})：");
                             // 线程池新线程
                             Thread thread = new Thread(group, runnable,namePrefix + threadNumber.getAndIncrement(), 0);
                             if (thread.isDaemon()) thread.setDaemon(false);
@@ -73,7 +71,7 @@ public class FixedThreadPool {
             synchronized (ExecutorService.class) {
                 result = fixedThreadPool;
                 if (null == result) {
-                    _logger.info("正在初始化一个({})线程数的线程池", threadPoolNum);
+                    _logger.info("正在初始化一个({"+threadPoolNum+"})线程数的线程池");
                     this.fixedThreadPool = Executors.newFixedThreadPool(threadPoolNum, new ThreadFactory() {
 
                         SecurityManager s = System.getSecurityManager();
@@ -83,7 +81,7 @@ public class FixedThreadPool {
                         private final AtomicInteger poolNumber = new AtomicInteger(1);
                         private final AtomicInteger threadNumber = new AtomicInteger(1);
                         private final String namePrefix = "fixedThreadPool-" + poolNumber.getAndIncrement() + "-thread-";
-
+                        @Override
                         public Thread newThread(Runnable runnable) {
                             // 线程池新线程
                             Thread thread = null;
@@ -92,7 +90,7 @@ public class FixedThreadPool {
                             }else{
                                 thread = new Thread(group, runnable,threadName, 0);
                             }
-                            _logger.info("正在new一个线程，线程(ThreadName:{})：", Thread.currentThread().getName());
+                            _logger.info("正在new一个线程，线程(ThreadName:{"+Thread.currentThread().getName()+"})：");
                             if (thread.isDaemon()) thread.setDaemon(false);
                             if (thread.getPriority() != Thread.NORM_PRIORITY) thread.setPriority(Thread.NORM_PRIORITY);
                             return thread ;
@@ -117,7 +115,6 @@ public class FixedThreadPool {
             synchronized (FixedThreadPool.class){
                 result = instance ;
                 if(null == result){
-                    _logger.info("正在new一个FixedThreadPool对象");
                     result = instance = new FixedThreadPool();
                 }
             }
@@ -134,7 +131,6 @@ public class FixedThreadPool {
             synchronized (FixedThreadPool.class){
                 result = instance ;
                 if(null == result){
-                    _logger.info("正在new一个FixedThreadPool对象，参数poolSize({})", poolSize);
                     result = instance = new FixedThreadPool(poolSize, null);
                 }
             }
@@ -151,7 +147,6 @@ public class FixedThreadPool {
             synchronized (FixedThreadPool.class){
                 result = instance ;
                 if(null == result){
-                    _logger.info("正在new一个FixedThreadPool对象，参数poolSize({})", poolSize);
                     result = instance = new FixedThreadPool(poolSize, threadName);
                 }
             }
