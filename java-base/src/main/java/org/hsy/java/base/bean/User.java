@@ -20,6 +20,15 @@ public class User implements Comparable<User>{
 		this.password = password;
 	}
 
+    public User() {}
+
+    public User(String username, String password, String testNamePassword, Integer age) {
+        this.username = username;
+        this.password = password;
+        this.testNamePassword = testNamePassword;
+        this.age = age;
+    }
+
     public String getUsername() {
         return username;
     }

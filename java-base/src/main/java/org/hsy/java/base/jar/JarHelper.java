@@ -1,13 +1,11 @@
 package org.hsy.java.base.jar;
-
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.sun.org.slf4j.internal.LoggerFactory;
 
 import java.io.*;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.logging.Logger;
 
 /**
  * @author heshiyuan
@@ -20,7 +18,7 @@ import java.util.jar.JarFile;
  * @price ¥5    微信：hewei1109
  */
 public class JarHelper {
-    private static final Logger _logger = LoggerFactory.getLogger(JarHelper.class) ;
+    private static final Logger _logger = Logger.getLogger(JarHelper.class.getName());
     /**
      * 解压jar文件到指定目录
      * @param fileName

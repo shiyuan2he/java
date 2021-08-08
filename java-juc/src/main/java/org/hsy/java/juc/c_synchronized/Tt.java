@@ -4,7 +4,7 @@ package org.hsy.java.juc.c_synchronized;
  * @author heshiyuan
  * @date 2021/6/5 14:43
  */
-public class Tt {
+public class Tt extends java.lang.Object{
 
     public synchronized int m1() {
         System.out.println(Thread.currentThread().getName() + " m1 start...");
